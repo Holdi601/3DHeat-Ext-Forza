@@ -1,8 +1,7 @@
 {
- "(AC Rally: + axis fit)": "(AC Rally: + axis fit)",
+ "(and the game's own route)": "(and the game's own route)",
  "--game, or the file says;": "--game, or the file says;",
  "--margin metres": "--margin metres",
- "--track / --install": "--track / --install",
  "A lap goes in, the track around it comes out": "A lap goes in, the track around it comes out",
  "Corridor": "Corridor",
  "Find the game": "Find the game",
@@ -20,6 +19,7 @@
  "either side of the lap": "either side of the lap",
  "lap.json: where you drove": "lap.json: where you drove",
  "one node": "one node",
+ "or --track FOLDER": "or --track FOLDER",
  "otherwise Forza": "otherwise Forza",
  "parts by kind,": "parts by kind,",
  "per part": "per part",
