@@ -3,7 +3,7 @@ title: ForzaTech
 nav_order: 7
 lang: "sk"
 source: reader-forzatech.md
-source_hash: "5b298baf30a0"
+source_hash: "d6c6780626c5"
 nav_exclude: true
 search_exclude: true
 ---
@@ -18,12 +18,12 @@ podľa názvov v `ChunkContentsMiniZip<n>.txt` vedľa neho alebo podľa čísla 
 
 | Formát | Modul |
 |---|---|
-| archívy `.minizip` a ich zoznamy názvov | [`minizip.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/minizip.py) |
-| modely a terén `.modelbin` | [`forzatech.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatech.py) |
-| textúrové vzorníky `.pb` | [`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py) |
-| súbory umiestnení `.pgeo` | [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py) |
-| `AssetManifest.xml` a hashe textúr materiálov | [`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py) |
-| dlaždice terénu podľa miesta | [`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py) |
+| archívy `.minizip` a ich zoznamy názvov | [`minizip.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/minizip.py) |
+| modely a terén `.modelbin` | [`forzatech.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatech.py) |
+| textúrové vzorníky `.pb` | [`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py) |
+| súbory umiestnení `.pgeo` | [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py) |
+| `AssetManifest.xml` a hashe textúr materiálov | [`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py) |
+| dlaždice terénu podľa miesta | [`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py) |
 
 Forza uchováva veľkú časť obsahu aj v obyčajných ZIP archívoch pod `media\`.
 Pythonov modul `zipfile` ich otvorí a `forzatech.models_in_archive()` vypíše ich

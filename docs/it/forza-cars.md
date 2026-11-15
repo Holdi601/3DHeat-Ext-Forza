@@ -21,13 +21,13 @@ viene disegnata con la sua forma e alla sua dimensione reale.
    `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Oppure indica la cartella del gioco:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<cartella Forza>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<cartella Forza>" -o forza.h3dcars
    ```
 
 2. **Caricalo nel visualizzatore**: **Carica file delle auto...** nel pannello Vista, oppure trascina il
@@ -54,7 +54,7 @@ l'anno dal nome dell'archivio, e le ruote e le luci posteriori. Le forme sono in
 l'auto. Un archivio senza un tale modello (un oggetto di traffico) viene nominato e lasciato fuori.
 
 Il file è fatto per il visualizzatore 3DHeat; la sua struttura, per chi lo legge altrove
-([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Parte | Struttura |
 |---|---|
@@ -71,4 +71,4 @@ Ogni voce `cars`: `key`, `ordinals` (i numeri dell'auto come li indica la teleme
 (scostamenti in byte dall'inizio dei dati, e conteggi).
 
 Il file contiene i contenuti del gioco: è fatto per la macchina su cui è stato creato, non
-per essere passato ad altri ([Regole e licenze](rules-and-licences.md)).
+per essere passato ad altri ([Regole e licenze](../terms.md)).

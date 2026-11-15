@@ -1,10 +1,10 @@
 ---
-title: Forza Horizon
+title: How a Forza course is made
 parent: Course export
 nav_order: 1
 ---
 
-# Course export: Forza Horizon
+# How a Forza course is made
 
 The Forza export reads the track straight out of the game's ForzaTech archives:
 terrain with road, verge and grass told apart, a ground texture baked from the
@@ -15,20 +15,20 @@ alone (its event layer: barriers, tents, gantries, stands, flags), and the
 ground of any venue the driving passes through, such as a stadium's floor.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Sources: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Sources: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 The container formats themselves are on [ForzaTech](reader-forzatech.md).
 
 ## Finding the installed game
@@ -48,7 +48,7 @@ Nobody should have to type a path like
    name nobody has seen is still found.
 
 If the game is somewhere else, pass the track folder with `--track`; see
-[Troubleshooting](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Troubleshooting](https://holdi601.github.io/3DHeat-GameFiles/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` skips all of this.
 
@@ -390,7 +390,7 @@ do not widen the cut.
 ### Detail and the budget
 
 Distance bands, budget, and which copies go when the budget is too small are on
-[Levels of detail and the budget](detail-budget.md).
+[Levels of detail and the budget](https://holdi601.github.io/3DHeat-GameFiles/detail-budget.html).
 
 ### Placement summary
 
@@ -464,7 +464,7 @@ Only copies inside the corridor are placed, as for everything else.
 Parts are written in this order: per tile `terrain`, `verge`, `road` (each with
 the tile's image), then `water`, `tyre marks`, `markings` (flat, the last two
 lifted), then every placed part sorted by name. Coordinates are the game's own
-(metres, Y up). See [Output format](output-format.md).
+(metres, Y up). See [Output format](https://holdi601.github.io/3DHeat-GameFiles/output-format.html).
 
 The file says what it holds in its glTF `asset.extras`:
 
@@ -497,7 +497,7 @@ source. They are not re-run by the tests unless the game is installed.
 - On the test circuit, the car sits about its ride height above the extracted ground (median under 0.2 m).
 - Every sampled tile lands inside the 512 m square its name predicts.
 - Consecutive guardrail placements are exactly 4 m apart, and most guardrail ends land within 5 cm of the next one's start.
-- Kerbs sit a few centimetres above the extracted ground, faces up, within 5 m of the driving (also an installed-game test, see [Development](development.md)).
+- Kerbs sit a few centimetres above the extracted ground, faces up, within 5 m of the driving (also an installed-game test, see [Maintaining](maintaining.md#tests)).
 
 ## Not drawn
 

@@ -12,20 +12,20 @@ search_exclude: true
 A exportação do Forza lê a pista diretamente dos ficheiros ForzaTech do jogo: o terreno com a estrada, a berma e a relva distinguidas, uma textura do chão cozida a partir dos próprios mapas de chão do jogo, e cada modelo colocado na sua própria textura (lancis, guardas de proteção, muros de pneus, sinais, adereços, edifícios). Também encontra qual das corridas do jogo a volta foi feita, e acrescenta o que o jogo põe para essa corrida apenas (a sua camada de evento: barreiras, tendas, pórticos, bancadas, bandeiras), e o chão de qualquer local por onde a condução passa, como o piso de um estádio.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<jogo>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<jogo>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Fontes: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Fontes: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Os próprios formatos de contentor estão em [ForzaTech](reader-forzatech.md).
 
 ## Encontrar o jogo instalado {#finding-the-installed-game}
@@ -38,7 +38,7 @@ Ninguém deve ter de escrever um caminho como
 3. Uma **pasta de jogo** é qualquer filho dessas pastas que tenha uma pasta `media\Tracks`, seja qual for o seu nome.
 4. Uma **pasta de pista** é qualquer pasta dentro de `media\Tracks` que tenha um `GeoChunk0.minizip`. Conta pelo seu conteúdo, não pelo nome, por isso uma pista com um nome que ninguém viu continua a ser encontrada.
 
-Se o jogo estiver noutro sítio, passe a pasta da pista com `--track`; veja [Resolução de problemas](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+Se o jogo estiver noutro sítio, passe a pasta da pista com `--track`; veja [Resolução de problemas](https://holdi601.github.io/3DHeat-GameFiles/pt/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <pasta>` salta tudo isto.
 
@@ -249,7 +249,7 @@ Alguns tipos de modelo não estão em nenhum ficheiro de colocação. As suas ma
 
 ### Detalhe e orçamento {#detail-and-the-budget}
 
-As faixas de distância, o orçamento e as cópias que saem quando o orçamento é pequeno estão em [Níveis de detalhe e o orçamento](detail-budget.md).
+As faixas de distância, o orçamento e as cópias que saem quando o orçamento é pequeno estão em [Níveis de detalhe e o orçamento](https://holdi601.github.io/3DHeat-GameFiles/pt/detail-budget.html).
 
 ### Resumo da colocação {#placement-summary}
 
@@ -298,13 +298,13 @@ Só as cópias dentro do corredor são colocadas, como para tudo o resto.
 
 ## Escrever o ficheiro {#writing-the-file}
 
-As partes são escritas nesta ordem: por tile `terrain`, `verge`, `road` (cada uma com a imagem do tile), depois `water`, `tyre marks`, `markings` (planas, as duas últimas elevadas), depois cada parte colocada ordenada pelo nome. As coordenadas são as do próprio jogo (metros, Y para cima). Veja [Formato de saída](output-format.md).
+As partes são escritas nesta ordem: por tile `terrain`, `verge`, `road` (cada uma com a imagem do tile), depois `water`, `tyre marks`, `markings` (planas, as duas últimas elevadas), depois cada parte colocada ordenada pelo nome. As coordenadas são as do próprio jogo (metros, Y para cima). Veja [Formato de saída](https://holdi601.github.io/3DHeat-GameFiles/pt/output-format.html).
 
 O ficheiro diz o que contém nos `asset.extras` do glTF:
 
 | Campo | Significado |
 |---|---|
-| `course_format` | `2`: a camada própria da corrida, os locais e os modelos em coordenadas do mundo estão lá. [`courses`](commands.md#courses) exporta de novo um ficheiro com um número inferior (ou sem número) |
+| `course_format` | `2`: a camada própria da corrida, os locais e os modelos em coordenadas do mundo estão lá. [`courses`](../commands.md#courses) exporta de novo um ficheiro com um número inferior (ou sem número) |
 | `route` | o id da rota correspondida, ou `null` |
 | `event_copies`, `event_kinds` | quantas cópias da camada própria da corrida foram colocadas, e os seus tipos |
 | `hidden` | cópias do mundo livre deixadas de fora porque a corrida as retira |
@@ -330,7 +330,7 @@ São medições feitas enquanto o leitor era escrito, como indicado no código-f
 - No circuito de teste, o carro fica cerca da sua altura de marcha acima do chão extraído (mediana abaixo de 0,2 m).
 - Cada tile amostrado cai dentro do quadrado de 512 m que o seu nome prevê.
 - Colocações consecutivas de guardas de proteção ficam exatamente a 4 m umas das outras, e a maioria das extremidades de guardas fica a menos de 5 cm do início da seguinte.
-- Os lancis ficam uns centímetros acima do chão extraído, com a face para cima, a menos de 5 m da condução (também um teste do jogo instalado, veja [Desenvolvimento](development.md)).
+- Os lancis ficam uns centímetros acima do chão extraído, com a face para cima, a menos de 5 m da condução (também um teste do jogo instalado, veja [Desenvolvimento](../maintaining.md)).
 
 ## Não desenhado {#not-drawn}
 

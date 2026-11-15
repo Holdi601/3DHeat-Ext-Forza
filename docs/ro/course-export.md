@@ -16,9 +16,9 @@ search_exclude: true
 `course` transformă un tur într-un circuit: solul dintr-o fâșie de o parte și de alta a locului unde a mers mașina și ce stă pe acel sol, ca un singur `.glb` pentru vizualizator. Această pagină descrie ce au în comun cele trei jocuri acceptate. Paginile de sub ea descriu ce deosebește:
 
 - [Forza Horizon](course-forza-horizon.md): arhive ForzaTech `.minizip`
-- [BeamNG.drive](course-beamng.md): arhive zip, un câmp de înălțimi al terenului, forme compilate
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, o etapă World Partition
-- [Niveluri de detaliu și buget](detail-budget.md): câte triunghiuri primesc modelele plasate și ce copii rămân
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): arhive zip, un câmp de înălțimi al terenului, forme compilate
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, o etapă World Partition
+- [Niveluri de detaliu și buget](https://holdi601.github.io/3DHeat-GameFiles/ro/detail-budget.html): câte triunghiuri primesc modelele plasate și ce copii rămân
 
 ![Pașii unui export de circuit](../assets/img/ro/course-steps.svg)
 
@@ -26,14 +26,14 @@ search_exclude: true
 
 Cuvinte folosite mai jos: un **cadru** este orientarea axelor; **coridorul** este fâșia de sol de o parte și de alta a turului; o **dală** este o bucată pătrată a terenului unui joc; un **LOD** (nivel de detaliu) este una dintre copiile mai simple ale unui model.
 
-1. **Citește turul.** Doar pozițiile, din oricare dintre formele din [Intrările de tur](lap-inputs.md). Viteza și comenzile nu sunt folosite. Un tur cu mai puțin de două eșantioane este refuzat (`holds no driving`).
-2. **Decide jocul.** `--game`, apoi `game` din fișierul de tur, apoi Forza (vezi [Comenzi](commands.md#which-game)).
+1. **Citește turul.** Doar pozițiile, din oricare dintre formele din [Intrările de tur](https://holdi601.github.io/3DHeat-GameFiles/ro/lap-inputs.html). Viteza și comenzile nu sunt folosite. Un tur cu mai puțin de două eșantioane este refuzat (`holds no driving`).
+2. **Decide jocul.** `--game`, apoi `game` din fișierul de tur, apoi Forza (vezi [Comenzi](../commands.md#which-game)).
 3. **Găsește jocul instalat.** Toate trei caută în fiecare bibliotecă Steam listată în `config\libraryfolders.vdf` al Steam. Forza caută și în `C:\XboxGames`. `--track` (Forza) sau `--install` (BeamNG, AC Rally) sare peste căutare.
 4. **Găsește unde a fost parcurs turul.** Aceasta nu se decide niciodată doar după o potrivire de nume. Forza alege traseul ale cărui dale de teren acoperă turul. BeamNG alege nivelul pe al cărui teren (sau drumuri) stau eșantioanele turului. AC Rally încearcă fiecare etapă în opt orientări ale axelor și o alege pe cea care pune cele mai multe din tur pe drum.
 5. **Taie un coridor** de `--margin` metri de o parte și de alta a parcursului (mai jos).
 6. **Construiește solul** din coridor, clasat ca drum, acostament, pietriș și pământ, teren, marcaje, urme de anvelope sau apă, și coace o textură de sol pentru fiecare pătrat de 512 m.
 7. **Plasează modelele** care stau în coridor, pe categorii, la un nivel de detaliu ales după distanță și după un buget de triunghiuri.
-8. **Scrie `.glb`**: un nod numit pentru fiecare piesă. Vezi [Formatul de ieșire](output-format.md).
+8. **Scrie `.glb`**: un nod numit pentru fiecare piesă. Vezi [Formatul de ieșire](https://holdi601.github.io/3DHeat-GameFiles/ro/output-format.html).
 
 Ce afișează o rulare, aici pe o instalare sintetică BeamNG.drive pe care o construiesc testele, un tur de 50 m pe o bandă de drum:
 
@@ -97,7 +97,7 @@ Modelele plasate sunt scrise în piese numite `structure:<category>`, sau `groun
 | copaci | cu `--trees` | cu `--trees` | cu `--trees` |
 | obiecte sfărâmabile | cu `--trees` | - | - |
 
-Împărțirea detaliului este aceeași în toate trei. Copiile aflate la cel mult 25 m de parcurs pornesc la detaliu complet, cele la 25-60 m un nivel mai grosier, iar cele mai îndepărtate la cel mai grosier nivel. Apoi cele mai costisitoare modele coboară până când încape un buget de triunghiuri, iar acolo unde nici cele mai grosiere niveluri nu încap în bugetul pe care îl dați, copiile sunt lăsate afară. Bordurile nu sunt niciodată simplificate sau lăsate afară. Vezi [Niveluri de detaliu și buget](detail-budget.md).
+Împărțirea detaliului este aceeași în toate trei. Copiile aflate la cel mult 25 m de parcurs pornesc la detaliu complet, cele la 25-60 m un nivel mai grosier, iar cele mai îndepărtate la cel mai grosier nivel. Apoi cele mai costisitoare modele coboară până când încape un buget de triunghiuri, iar acolo unde nici cele mai grosiere niveluri nu încap în bugetul pe care îl dați, copiile sunt lăsate afară. Bordurile nu sunt niciodată simplificate sau lăsate afară. Vezi [Niveluri de detaliu și buget](https://holdi601.github.io/3DHeat-GameFiles/ro/detail-budget.html).
 
 ## Opțiuni care modelează rezultatul {#options-that-shape-the-result}
 
@@ -120,4 +120,4 @@ Fiecare export scrie metri, cu Y în sus, într-un cadru în care un tur înregi
 | BeamNG | `(x, z, -y)` din lumea BeamNG cu Z în sus, adică rotația pe care o aplică înregistratorul de telemetrie |
 | AC Rally | cadrul turului, aflat prin potrivire: centimetrii Unreal devin metri, iar X și Y Unreal devin x și z ai turului, în care dintre cele opt orientări se potrivește |
 
-Vezi [Formatul de ieșire](output-format.md).
+Vezi [Formatul de ieșire](https://holdi601.github.io/3DHeat-GameFiles/ro/output-format.html).

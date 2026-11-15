@@ -12,19 +12,19 @@ search_exclude: true
 La exportación de Forza lee el circuito directamente de los archivos ForzaTech del juego: el terreno con la carretera, el arcén y la hierba separados, una textura del suelo horneada a partir de los propios mapas de suelo del juego, y cada modelo colocado con su propia textura (bordillos, guardarraíles, muros de neumáticos, señales, objetos, edificios).
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Fuentes: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py).
+Fuentes: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py).
 Los propios formatos de contenedor están en [ForzaTech](reader-forzatech.md).
 
 ## Cómo se encuentra el juego instalado {#finding-the-installed-game}
@@ -37,7 +37,7 @@ Nadie debería tener que escribir una ruta como
 3. Una **carpeta de juego** es cualquier subcarpeta de esas que tenga una carpeta `media\Tracks`, sea cual sea su nombre.
 4. Una **carpeta de circuito** es cualquier carpeta bajo `media\Tracks` que contenga un `GeoChunk0.minizip`. Se reconoce por su contenido, no por su nombre, así que un circuito con un nombre que nadie ha visto antes también se encuentra.
 
-Si el juego está en otro sitio, pasa la carpeta del circuito con `--track`; mira [Solución de problemas](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+Si el juego está en otro sitio, pasa la carpeta del circuito con `--track`; mira [Solución de problemas](https://holdi601.github.io/3DHeat-GameFiles/es/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` se salta todo esto.
 
@@ -201,7 +201,7 @@ Una ciudad construye sus edificios con piezas modulares: cientos de miles alrede
 
 ### Detalle y presupuesto {#detail-and-the-budget}
 
-Las bandas de distancia, el presupuesto y las copias que se van cuando el presupuesto es demasiado pequeño están en [Niveles de detalle y presupuesto](detail-budget.md).
+Las bandas de distancia, el presupuesto y las copias que se van cuando el presupuesto es demasiado pequeño están en [Niveles de detalle y presupuesto](https://holdi601.github.io/3DHeat-GameFiles/es/detail-budget.html).
 
 ### Resumen de colocación {#placement-summary}
 
@@ -218,7 +218,7 @@ Las bandas de distancia, el presupuesto y las copias que se van cuando el presup
 
 ## Escritura del archivo {#writing-the-file}
 
-Las partes se escriben en este orden: por loseta `terrain`, `verge`, `road` (cada una con la imagen de la loseta); luego `water`, `tyre marks`, `markings` (planas, las dos últimas levantadas), y después cada parte colocada ordenada por nombre. Las coordenadas son las propias del juego (metros, Y hacia arriba). Mira [Formato de salida](output-format.md).
+Las partes se escriben en este orden: por loseta `terrain`, `verge`, `road` (cada una con la imagen de la loseta); luego `water`, `tyre marks`, `markings` (planas, las dos últimas levantadas), y después cada parte colocada ordenada por nombre. Las coordenadas son las propias del juego (metros, Y hacia arriba). Mira [Formato de salida](https://holdi601.github.io/3DHeat-GameFiles/es/output-format.html).
 
 ## Lo que cuesta {#what-it-costs}
 
@@ -239,7 +239,7 @@ Son medidas hechas mientras se escribía el lector, según se indica en el códi
 - En el circuito de prueba, el coche está aproximadamente a su altura de marcha sobre el suelo extraído (mediana por debajo de 0,2 m).
 - Cada loseta muestreada cae dentro del cuadrado de 512 m que predice su nombre.
 - Las colocaciones consecutivas de guardarraíles están exactamente a 4 m, y la mayoría de los extremos de guardarraíl caen a menos de 5 cm del inicio del siguiente.
-- Los bordillos quedan a unos centímetros por encima del suelo extraído, con la cara hacia arriba, a menos de 5 m de la conducción (también una prueba con el juego instalado, mira [Desarrollo](development.md)).
+- Los bordillos quedan a unos centímetros por encima del suelo extraído, con la cara hacia arriba, a menos de 5 m de la conducción (también una prueba con el juego instalado, mira [Desarrollo](../maintaining.md)).
 
 ## Lo que no se dibuja {#not-drawn}
 

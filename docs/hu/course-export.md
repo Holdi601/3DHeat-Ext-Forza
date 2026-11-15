@@ -20,9 +20,9 @@ A `course` egy kört pályává alakít: a talajt a kocsi útvonalának mindkét
 különbözik:
 
 - [Forza Horizon](course-forza-horizon.md): ForzaTech `.minizip` archívumok
-- [BeamNG.drive](course-beamng.md): zip-archívumok, terep magassági mezője, fordított alakzatok
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, World Partition szakasz
-- [Részletességi szintek és a keret](detail-budget.md): hány háromszöget kapnak az elhelyezett modellek, és mely példányok maradnak meg
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): zip-archívumok, terep magassági mezője, fordított alakzatok
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, World Partition szakasz
+- [Részletességi szintek és a keret](https://holdi601.github.io/3DHeat-GameFiles/hu/detail-budget.html): hány háromszöget kapnak az elhelyezett modellek, és mely példányok maradnak meg
 
 ![A pályaexport lépései](../assets/img/hu/course-steps.svg)
 
@@ -32,11 +32,11 @@ Az alábbi szavak jelentése: a **tengelyrendszer** azt mutatja, merre néznek a
 **sáv** a talaj sávja a kör két oldalán; egy **csempe** a játék terepének egy négyzet alakú
 darabja; egy **LOD** (részletességi szint) egy modell egyszerűbb másolata.
 
-1. **Olvasd be a kört.** Csak a pozíciók, bármelyik alak a [Körbemenetek](lap-inputs.md)
+1. **Olvasd be a kört.** Csak a pozíciók, bármelyik alak a [Körbemenetek](https://holdi601.github.io/3DHeat-GameFiles/hu/lap-inputs.html)
    oldalról. A sebességet és a bemeneteket nem használjuk. Ha a körnek két mintánál kevesebb
    van, az eszköz megáll („holds no driving").
 2. **Döntsd el a játékot.** Először a `--game`, aztán a körfájl saját `game` mezője, végül a
-   Forza (lásd: [Parancsok](commands.md#which-game)).
+   Forza (lásd: [Parancsok](../commands.md#which-game)).
 3. **Keresd meg a telepített játékot.** Mindhárom átnézi a Steam `config\libraryfolders.vdf`
    fájljában felsorolt Steam-könyvtárakat. A Forza emellett a `C:\XboxGames` mappát is
    átnézi. A `--track` (Forza) vagy `--install` (BeamNG, AC Rally) kihagyja a keresést.
@@ -50,7 +50,7 @@ darabja; egy **LOD** (részletességi szint) egy modell egyszerűbb másolata.
    512 m-es négyzethez.
 7. **Helyezd el a modelleket** a sávban álló elemeket, kategóriánként, távolság és
    háromszögkeret szerinti részletességi szinten.
-8. **Írd ki a `.glb`-t**: egy nevesített csomópont minden részhez. Lásd: [Kimeneti formátum](output-format.md).
+8. **Írd ki a `.glb`-t**: egy nevesített csomópont minden részhez. Lásd: [Kimeneti formátum](https://holdi601.github.io/3DHeat-GameFiles/hu/output-format.html).
 
 Egy futás kimenete – itt egy szintetikus BeamNG.drive telepítésen, amelyet a tesztek építenek,
 egy 50 m-es kör egy úti csíkon –:
@@ -143,7 +143,7 @@ teljes részletességgel indulnak, a 25–60 m-re lévők eggyel durvább szinte
 legdurvábban. Ezután a legköltségesebb modellek lejjebb lépnek, amíg egy háromszögkeret bele
 nem fér. Ahol még a legdurvább szintek sem férnek bele egy megadott kerethez, példányokat
 hagyunk ki. A szegélykövek soha nincsenek egyszerűsítve vagy kihagyva. Lásd:
-[Részletességi szintek és a keret](detail-budget.md).
+[Részletességi szintek és a keret](https://holdi601.github.io/3DHeat-GameFiles/hu/detail-budget.html).
 
 ## Kimenetet alakító beállítások {#options-that-shape-the-result}
 
@@ -167,4 +167,4 @@ illeszkedik:
 | BeamNG | a BeamNG Z-felfelé világának `(x, z, -y)` értéke, ez az a forgatás, amelyet a telemetria-rögzítő alkalmaz |
 | AC Rally | a kör keretét illesztéssel találjuk meg: az Unreal-centiméterek métert lesznek, az Unreal X és Y pedig a kör x és z értéke lesz a nyolc irány közül abban, amelyik illeszkedik |
 
-Lásd: [Kimeneti formátum](output-format.md).
+Lásd: [Kimeneti formátum](https://holdi601.github.io/3DHeat-GameFiles/hu/output-format.html).

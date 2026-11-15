@@ -21,9 +21,9 @@ popisuje, čo majú spoločné všetky tri podporované hry. Stránky pod ňou p
 sa líšia:
 
 - [Forza Horizon](course-forza-horizon.md): archívy ForzaTech `.minizip`
-- [BeamNG.drive](course-beamng.md): zip archívy, výškové pole terénu, skompilované tvary
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, etapa World Partition
-- [Úrovne detailu a rozpočet](detail-budget.md): koľko trojuholníkov dostanú umiestnené modely a ktoré kópie zostanú
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): zip archívy, výškové pole terénu, skompilované tvary
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, etapa World Partition
+- [Úrovne detailu a rozpočet](https://holdi601.github.io/3DHeat-GameFiles/sk/detail-budget.html): koľko trojuholníkov dostanú umiestnené modely a ktoré kópie zostanú
 
 ![Kroky exportu trate](../assets/img/sk/course-steps.svg)
 
@@ -34,10 +34,10 @@ na oboch stranách kola; **dlaždica** je jeden štvorcový kus terénu hry; **L
 (úroveň detailu) je jedna z jednoduchších kópií modelu.
 
 1. **Prečítať kolo.** Len pozície, z ktoréhokoľvek tvaru v
-   [Vstupy kola](lap-inputs.md). Rýchlosť a vstupy sa nepoužívajú. Kolo s menej ako
+   [Vstupy kola](https://holdi601.github.io/3DHeat-GameFiles/sk/lap-inputs.html). Rýchlosť a vstupy sa nepoužívajú. Kolo s menej ako
    dvoma vzorkami sa odmietne („holds no driving“).
 2. **Určiť hru.** `--game`, potom pole `game` v súbore kola, potom Forza (pozri
-   [Príkazy](commands.md#which-game)).
+   [Príkazy](../commands.md#which-game)).
 3. **Nájsť nainštalovanú hru.** Všetky tri prehľadajú každú knižnicu Steam uvedenú
    v `config\libraryfolders.vdf`. Forza prehľadá aj `C:\XboxGames`. `--track` (Forza)
    alebo `--install` (BeamNG, AC Rally) hľadanie preskočí.
@@ -52,7 +52,7 @@ na oboch stranách kola; **dlaždica** je jeden štvorcový kus terénu hry; **L
 7. **Umiestniť modely** stojace v koridore, podľa kategórie, na úrovni detailu zvolenej
    podľa vzdialenosti a rozpočtu trojuholníkov.
 8. **Zapísať `.glb`**: jeden pomenovaný uzol na každú časť. Pozri
-   [Formát výstupu](output-format.md).
+   [Formát výstupu](https://holdi601.github.io/3DHeat-GameFiles/sk/output-format.html).
 
 Čo vypíše jeden beh – tu na syntetickej inštalácii BeamNG.drive, ktorú vytvárajú
 testy, 50 m kolo po pruhu cesty:
@@ -145,7 +145,7 @@ v plnom detaile, kópie 25-60 m ďaleko majú o úroveň hrubší detail a ďale
 kópie najhrubšiu úroveň. Potom sa najdrahšie modely znížia, až kým nevyjde rozpočet
 trojuholníkov, a ak ani najhrubšie úrovne nevychádzajú do rozpočtu, ktorý zadáte,
 kópie sa vynechajú. Obrubníky sa nikdy nezjednodušia ani nevynechajú. Pozri
-[Úrovne detailu a rozpočet](detail-budget.md).
+[Úrovne detailu a rozpočet](https://holdi601.github.io/3DHeat-GameFiles/sk/detail-budget.html).
 
 ## Možnosti, ktoré určujú výsledok {#options-that-shape-the-result}
 
@@ -169,4 +169,4 @@ istej hry zarovná:
 | BeamNG | `(x, z, -y)` svetových súradníc BeamNG so Z hore, čo je rotácia, ktorú použije zapisovač telemetrie |
 | AC Rally | rámec kola, zistený fitovaním: centimetre Unreal sa stanú metrami a osi X a Y Unreal sa stanú x a z kola v tej z ôsmich orientácií, ktorá sedí |
 
-Pozri [Formát výstupu](output-format.md).
+Pozri [Formát výstupu](https://holdi601.github.io/3DHeat-GameFiles/sk/output-format.html).

@@ -16,9 +16,9 @@ search_exclude: true
 `course` zamienia okrążenie w trasę: podłoże w pasie po obu stronach miejsca, gdzie jechał samochód, i to, co na tym podłożu stoi, jako jeden plik `.glb` dla przeglądarki. Ta strona opisuje to, co wspólne dla wszystkich trzech obsługiwanych gier. Strony pod nią opisują, czym się różnią:
 
 - [Forza Horizon](course-forza-horizon.md): archiwa ForzaTech `.minizip`
-- [BeamNG.drive](course-beamng.md): archiwa zip, mapa wysokości terenu, skompilowane kształty
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, etap World Partition
-- [Poziomy szczegółowości i budżet](detail-budget.md): ile trójkątów dostają umieszczone modele i które kopie zostają
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): archiwa zip, mapa wysokości terenu, skompilowane kształty
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, etap World Partition
+- [Poziomy szczegółowości i budżet](https://holdi601.github.io/3DHeat-GameFiles/pl/detail-budget.html): ile trójkątów dostają umieszczone modele i które kopie zostają
 
 ![Kroki eksportu trasy](../assets/img/pl/course-steps.svg)
 
@@ -26,14 +26,14 @@ search_exclude: true
 
 Słowa użyte niżej: **klatka** to to, w którą stronę wskazują osie; **korytarz** to pas podłoża po obu stronach okrążenia; **kafelek** to jeden kwadratowy fragment terenu gry; **LOD** (poziom szczegółowości) to jedna z uproszczonych kopii modelu.
 
-1. **Odczytaj okrążenie.** Same pozycje, z dowolnego z kształtów opisanych w [Dane okrążenia](lap-inputs.md). Prędkość i sterowanie nie są używane. Okrążenie z mniej niż dwiema próbkami jest odrzucane ("holds no driving").
-2. **Ustal grę.** Najpierw `--game`, potem pole `game` w pliku okrążenia, a w ostateczności Forza (zob. [Polecenia](commands.md#which-game)).
+1. **Odczytaj okrążenie.** Same pozycje, z dowolnego z kształtów opisanych w [Dane okrążenia](https://holdi601.github.io/3DHeat-GameFiles/pl/lap-inputs.html). Prędkość i sterowanie nie są używane. Okrążenie z mniej niż dwiema próbkami jest odrzucane ("holds no driving").
+2. **Ustal grę.** Najpierw `--game`, potem pole `game` w pliku okrążenia, a w ostateczności Forza (zob. [Polecenia](../commands.md#which-game)).
 3. **Znajdź zainstalowaną grę.** Wszystkie trzy przeszukują każdą bibliotekę Steam wymienioną w `config\libraryfolders.vdf` Steama. Forza przeszukuje też `C:\XboxGames`. `--track` (Forza) albo `--install` (BeamNG, AC Rally) pomija szukanie.
 4. **Znajdź, gdzie jechano.** Nigdy nie rozstrzyga się tego samym dopasowaniem nazwy. Forza wybiera tor, którego kafelki terenu pokrywają okrążenie. BeamNG wybiera poziom, na którego terenie (albo drogach) leżą próbki okrążenia. AC Rally sprawdza każdy etap w ośmiu orientacjach osi i wybiera tę, która kładzie na drodze najwięcej okrążenia.
 5. **Wytnij korytarz** o szerokości `--margin` metrów po obu stronach jazdy (niżej).
 6. **Zbuduj podłoże** wewnątrz korytarza, sklasyfikowane jako droga, pobocze, żwir i ziemia, teren, oznaczenia, ślady opon albo woda. Dla każdego kwadratu 512 m zapiekasz teksturę podłoża.
 7. **Umieść modele** stojące w korytarzu, według kategorii, na poziomie szczegółowości wybranym według odległości i budżetu trójkątów.
-8. **Zapisz `.glb`**: jeden nazwany węzeł na część. Zobacz [Format wyjściowy](output-format.md).
+8. **Zapisz `.glb`**: jeden nazwany węzeł na część. Zobacz [Format wyjściowy](https://holdi601.github.io/3DHeat-GameFiles/pl/output-format.html).
 
 Co wypisuje uruchomienie, tu na syntetycznej instalacji BeamNG.drive, którą budują testy, z 50-metrowym okrążeniem po pasie drogi:
 
@@ -97,7 +97,7 @@ Umieszczone modele zapisuje się w częściach `structure:<category>`, albo w `g
 | drzewa | z `--trees` | z `--trees` | z `--trees` |
 | elementy do rozbicia | z `--trees` | - | - |
 
-Podział szczegółowości jest we wszystkich trzech grach taki sam. Kopie w odległości do 25 m od jazdy mają pełny szczegół, kopie w odległości 25-60 m mają o jeden poziom mniej, a dalsze mają najgrubszy poziom. Potem najbardziej kosztowne modele schodzą w dół, aż zmieści się budżet trójkątów. Gdy nawet najgrubsze poziomy nie mieszczą się w podanym przez ciebie budżecie, kopie są pomijane. Krawężniki nigdy nie są upraszczane ani pomijane. Zobacz [Poziomy szczegółowości i budżet](detail-budget.md).
+Podział szczegółowości jest we wszystkich trzech grach taki sam. Kopie w odległości do 25 m od jazdy mają pełny szczegół, kopie w odległości 25-60 m mają o jeden poziom mniej, a dalsze mają najgrubszy poziom. Potem najbardziej kosztowne modele schodzą w dół, aż zmieści się budżet trójkątów. Gdy nawet najgrubsze poziomy nie mieszczą się w podanym przez ciebie budżecie, kopie są pomijane. Krawężniki nigdy nie są upraszczane ani pomijane. Zobacz [Poziomy szczegółowości i budżet](https://holdi601.github.io/3DHeat-GameFiles/pl/detail-budget.html).
 
 ## Opcje, które kształtują wynik {#options-that-shape-the-result}
 
@@ -120,4 +120,4 @@ Każdy eksport zapisuje metry z osią Y w górę, w ramce, w którą wpasowuje s
 | BeamNG | `(x, z, -y)` z świata BeamNG z osią Z w górę, czyli obrót, który stosuje rejestrator telemetrii |
 | AC Rally | ramka okrążenia, znaleziona dopasowaniem: centymetry Unreala stają się metrami, a osie X i Y Unreala stają się x i z okrążenia w tej z ośmiu orientacji, która pasuje |
 
-Zobacz [Format wyjściowy](output-format.md).
+Zobacz [Format wyjściowy](https://holdi601.github.io/3DHeat-GameFiles/pl/output-format.html).

@@ -18,13 +18,13 @@ Grava todos os carros de um Forza instalado, no nível de detalhe baixo do próp
 1. **Execute** com o jogo instalado (ele é encontrado nas bibliotecas do Steam e em `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Ou indique a pasta do jogo:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<pasta do Forza>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<pasta do Forza>" -o forza.h3dcars
    ```
 
 2. **Carregue-o no visualizador**: **Carregar ficheiro de carros…** nas definições de visualização, ou solte o ficheiro no separador Análise de corrida; ele fica nesse navegador. As voltas cujo número de carro está no ficheiro passam a ser desenhadas como esse próprio carro (veja a [documentação da repetição de corrida](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars) do visualizador).
@@ -42,7 +42,7 @@ Grava todos os carros de um Forza instalado, no nível de detalhe baixo do próp
 
 Para cada ficheiro de carro em `media/Cars`: o modelo `ProxyLOD` que ele traz (cerca de 900 triângulos), o número do carro tal como a telemetria o indica, a marca, a etiqueta do modelo e o ano a partir do nome do ficheiro, e as rodas e as luzes traseiras. As formas estão em metros, na escala 1:1 do carro. Um ficheiro sem tal modelo (um adereço de tráfego) é identificado e deixado de fora.
 
-O ficheiro é feito para o visualizador 3DHeat; o seu formato, para quem o quiser ler noutro lugar ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+O ficheiro é feito para o visualizador 3DHeat; o seu formato, para quem o quiser ler noutro lugar ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Parte | Formato |
 |---|---|
@@ -55,4 +55,4 @@ O ficheiro é feito para o visualizador 3DHeat; o seu formato, para quem o quise
 
 Cada entrada de `cars`: `key`, `ordinals` (os números do carro tal como a telemetria os indica), `make`, `model`, `year`, `height` e `length` (m), `wheels` (por executa `[x, y, z, radius]`, m), `lights` (pontos das luzes traseiras `[x, y, z]`, m), e `vertexAt`, `vertices`, `faceAt`, `faces` (deslocamentos em bytes a partir do início dos dados, e contagens).
 
-O ficheiro contém conteúdo do jogo: serve para a máquina onde foi feito, não para ser passado a outros ([Regras e licenças](rules-and-licences.md)).
+O ficheiro contém conteúdo do jogo: serve para a máquina onde foi feito, não para ser passado a outros ([Regras e licenças](../terms.md)).

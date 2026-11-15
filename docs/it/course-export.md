@@ -19,9 +19,9 @@ passata l'auto, e ciò che sta su quel suolo, in un unico `.glb` per il visualiz
 descrive ciò che hanno in comune i tre giochi supportati. Le pagine sotto descrivono ciò che cambia:
 
 - [Forza Horizon](course-forza-horizon.md): archivi `.minizip` di ForzaTech
-- [BeamNG.drive](course-beamng.md): archivi zip, una mappa dell'altezza del terreno, forme compilate
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, una tappa World Partition
-- [Livelli di dettaglio e budget](detail-budget.md): quanti triangoli ricevono i modelli collocati, e quali copie restano
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): archivi zip, una mappa dell'altezza del terreno, forme compilate
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, una tappa World Partition
+- [Livelli di dettaglio e budget](https://holdi601.github.io/3DHeat-GameFiles/it/detail-budget.html): quanti triangoli ricevono i modelli collocati, e quali copie restano
 
 ![I passaggi di un'esportazione del percorso](../assets/img/it/course-steps.svg)
 
@@ -32,10 +32,10 @@ su entrambi i lati del giro; una **tessera** è un pezzo quadrato del terreno di
 (livello di dettaglio) è una delle copie più semplici di un modello.
 
 1. **Leggi il giro.** Solo le posizioni, da una qualsiasi delle forme in
-   [Input dei giri](lap-inputs.md). Velocità e comandi non vengono usati. Un giro con meno di due campioni
+   [Input dei giri](https://holdi601.github.io/3DHeat-GameFiles/it/lap-inputs.html). Velocità e comandi non vengono usati. Un giro con meno di due campioni
    viene rifiutato ("holds no driving").
 2. **Decidi il gioco.** `--game`, poi il campo `game` del file del giro, poi Forza (vedi
-   [Comandi](commands.md#which-game)).
+   [Comandi](../commands.md#which-game)).
 3. **Trova il gioco installato.** Tutti e tre cercano in ogni libreria Steam elencata nel file
    `config\libraryfolders.vdf` di Steam. Forza cerca anche in `C:\XboxGames`. `--track` (Forza) o
    `--install` (BeamNG, AC Rally) salta la ricerca.
@@ -49,7 +49,7 @@ su entrambi i lati del giro; una **tessera** è un pezzo quadrato del terreno di
    512 m.
 7. **Colloca i modelli** che stanno nel corridoio, per categoria, a un livello di dettaglio scelto in base
    alla distanza e a un budget di triangoli.
-8. **Scrivi il `.glb`**: un nodo con nome per parte. Vedi [Formato di output](output-format.md).
+8. **Scrivi il `.glb`**: un nodo con nome per parte. Vedi [Formato di output](https://holdi601.github.io/3DHeat-GameFiles/it/output-format.html).
 
 Cosa stampa un'esecuzione: qui su un'installazione sintetica di BeamNG.drive che i test costruiscono, un
 giro di 50 m su una striscia di strada.
@@ -138,7 +138,7 @@ La ripartizione del dettaglio è la stessa nei tre giochi. Le copie entro 25 m d
 dettaglio, le copie a 25-60 m un livello più grossolane, e quelle più lontane al livello più grossolano.
 Poi i modelli più costosi scendono di livello finché non rientra un budget di triangoli, e dove anche i
 livelli più grossolani non rientrano in un budget che dai tu, le copie vengono escluse. I cordoli non
-vengono mai semplificati né esclusi. Vedi [Livelli di dettaglio e budget](detail-budget.md).
+vengono mai semplificati né esclusi. Vedi [Livelli di dettaglio e budget](https://holdi601.github.io/3DHeat-GameFiles/it/detail-budget.html).
 
 ## Opzioni che modificano il risultato {#options-that-shape-the-result}
 
@@ -162,4 +162,4 @@ registrato dello stesso gioco:
 | BeamNG | `(x, z, -y)` del mondo di BeamNG con Z in alto, che è la rotazione applicata dal registratore di telemetria |
 | AC Rally | il sistema di riferimento del giro, trovato per adattamento: i centimetri di Unreal diventano metri, e X e Y di Unreal diventano la x e la z del giro nell'orientamento tra gli otto che si adatta |
 
-Vedi [Formato di output](output-format.md).
+Vedi [Formato di output](https://holdi601.github.io/3DHeat-GameFiles/it/output-format.html).

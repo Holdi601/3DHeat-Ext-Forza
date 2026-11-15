@@ -16,9 +16,9 @@ search_exclude: true
 `course` convierte una vuelta en un circuito: el suelo en una franja a cada lado de por dónde fue el coche, y lo que está sobre ese suelo, todo en un único `.glb` para el visor. Esta página cubre lo que comparten los tres juegos compatibles. Las páginas que cuelgan de ella cubren lo que se diferencia:
 
 - [Forza Horizon](course-forza-horizon.md): archivos `.minizip` de ForzaTech
-- [BeamNG.drive](course-beamng.md): archivos zip, un campo de alturas del terreno, formas compiladas
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, una etapa World Partition
-- [Niveles de detalle y presupuesto](detail-budget.md): cuántos triángulos reciben los modelos colocados, y qué copias se quedan
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): archivos zip, un campo de alturas del terreno, formas compiladas
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, una etapa World Partition
+- [Niveles de detalle y presupuesto](https://holdi601.github.io/3DHeat-GameFiles/es/detail-budget.html): cuántos triángulos reciben los modelos colocados, y qué copias se quedan
 
 ![Los pasos de una exportación de circuito](../assets/img/es/course-steps.svg)
 
@@ -26,14 +26,14 @@ search_exclude: true
 
 Palabras que se usan abajo: un **marco** es hacia dónde apuntan los ejes; el **corredor** es la franja de suelo a cada lado de la vuelta; una **loseta** es una pieza cuadrada del terreno de un juego; un **LOD** (nivel de detalle) es una de las copias más simples de un modelo.
 
-1. **Leer la vuelta.** Solo posiciones, de cualquiera de las formas de [Entradas de vuelta](lap-inputs.md). La velocidad y los controles no se usan. Una vuelta con menos de dos muestras se rechaza (`holds no driving`).
-2. **Decidir el juego.** `--game`, luego el campo `game` del archivo de la vuelta, luego Forza (ver [Comandos](commands.md#which-game)).
+1. **Leer la vuelta.** Solo posiciones, de cualquiera de las formas de [Entradas de vuelta](https://holdi601.github.io/3DHeat-GameFiles/es/lap-inputs.html). La velocidad y los controles no se usan. Una vuelta con menos de dos muestras se rechaza (`holds no driving`).
+2. **Decidir el juego.** `--game`, luego el campo `game` del archivo de la vuelta, luego Forza (ver [Comandos](../commands.md#which-game)).
 3. **Encontrar el juego instalado.** Los tres buscan en cada biblioteca de Steam que aparece en `config\libraryfolders.vdf` de Steam. Forza también busca en `C:\XboxGames`. `--track` (Forza) o `--install` (BeamNG, AC Rally) saltan la búsqueda.
 4. **Encontrar dónde se condujo la vuelta.** Esto nunca se decide solo por el nombre. Forza elige el circuito cuyas losetas de terreno cubren la vuelta. BeamNG elige el nivel sobre cuyo terreno (o carreteras) caen las muestras de la vuelta. AC Rally prueba cada etapa en ocho orientaciones de ejes y elige la que pone más parte de la vuelta sobre la carretera.
 5. **Cortar un corredor** de `--margin` metros a cada lado de la conducción (abajo).
 6. **Construir el suelo** dentro del corredor, clasificado como carretera, arcén, grava y tierra, terreno, marcas, huellas de neumáticos o agua, y hornear una textura de suelo para cada cuadrado de 512 m.
 7. **Colocar los modelos** que están en el corredor, por categoría, con un nivel de detalle elegido por distancia y un presupuesto de triángulos.
-8. **Escribir el `.glb`**: un nodo con nombre por parte. Ver [Formato de salida](output-format.md).
+8. **Escribir el `.glb`**: un nodo con nombre por parte. Ver [Formato de salida](https://holdi601.github.io/3DHeat-GameFiles/es/output-format.html).
 
 Lo que imprime una ejecución (aquí, sobre una instalación sintética de BeamNG.drive que crean las pruebas, una vuelta de 50 m por una franja de carretera):
 
@@ -99,7 +99,7 @@ Los modelos colocados se escriben en partes llamadas `structure:<category>`, o `
 | árboles | con `--trees` | con `--trees` | con `--trees` |
 | objetos destrozables | con `--trees` | - | - |
 
-El reparto del detalle es igual en los tres. Las copias a 25 m o menos de la conducción empiezan con el detalle completo, las copias a 25-60 m un nivel más grosero, y las que están más lejos, en el nivel más grosero. Luego los modelos más costosos bajan de nivel hasta que encaja un presupuesto de triángulos, y donde ni los niveles más gruesos encajan en un presupuesto que tú das, se dejan fuera copias. Los bordillos nunca se simplifican ni se dejan fuera. Ver [Niveles de detalle y presupuesto](detail-budget.md).
+El reparto del detalle es igual en los tres. Las copias a 25 m o menos de la conducción empiezan con el detalle completo, las copias a 25-60 m un nivel más grosero, y las que están más lejos, en el nivel más grosero. Luego los modelos más costosos bajan de nivel hasta que encaja un presupuesto de triángulos, y donde ni los niveles más gruesos encajan en un presupuesto que tú das, se dejan fuera copias. Los bordillos nunca se simplifican ni se dejan fuera. Ver [Niveles de detalle y presupuesto](https://holdi601.github.io/3DHeat-GameFiles/es/detail-budget.html).
 
 ## Opciones que cambian el resultado {#options-that-shape-the-result}
 
@@ -122,4 +122,4 @@ Cada exportación escribe metros con Y hacia arriba, en un marco con el que se a
 | BeamNG | `(x, z, -y)` del mundo de BeamNG con Z hacia arriba, que es la rotación que aplica el grabador de telemetría |
 | AC Rally | el marco de la vuelta, hallado por ajuste: los centímetros de Unreal pasan a metros, y las X e Y de Unreal pasan a ser la x y la z de la vuelta, en la de las ocho orientaciones que encaje |
 
-Ver [Formato de salida](output-format.md).
+Ver [Formato de salida](https://holdi601.github.io/3DHeat-GameFiles/es/output-format.html).

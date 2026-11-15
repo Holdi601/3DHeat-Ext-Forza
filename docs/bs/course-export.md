@@ -21,9 +21,9 @@ pokriva ono što dijele sve tri podržane igre. Stranice ispod nje pokrivaju ono
 što se razlikuje:
 
 - [Forza Horizon](course-forza-horizon.md): ForzaTech `.minizip` arhive
-- [BeamNG.drive](course-beamng.md): zip arhive, visinsko polje terena, kompilirani oblici
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, etapa World Partition
-- [Nivoi detalja i budžet](detail-budget.md): koliko trouglova dobijaju postavljeni modeli i koje kopije ostaju
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): zip arhive, visinsko polje terena, kompilirani oblici
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, etapa World Partition
+- [Nivoi detalja i budžet](https://holdi601.github.io/3DHeat-GameFiles/bs/detail-budget.html): koliko trouglova dobijaju postavljeni modeli i koje kopije ostaju
 
 ![Koraci izvoza staze](../assets/img/bs/course-steps.svg)
 
@@ -35,10 +35,10 @@ kvadratni komad terena igre; **LOD** (nivo detalja) je jedna od jednostavnijih
 kopija modela.
 
 1. **Pročitajte krug.** Samo pozicije, iz bilo kojeg oblika navedenog u
-   [Ulazi kruga](lap-inputs.md). Brzina i komande se ne koriste. Krug s manje od
+   [Ulazi kruga](https://holdi601.github.io/3DHeat-GameFiles/bs/lap-inputs.html). Brzina i komande se ne koriste. Krug s manje od
    dva uzorka se odbija ("holds no driving").
 2. **Odlučite o igri.** `--game`, zatim vlastito polje `game` datoteke kruga, zatim
-   Forza (pogledajte [Komande](commands.md#which-game)).
+   Forza (pogledajte [Komande](../commands.md#which-game)).
 3. **Pronađite instaliranu igru.** Sve tri pretražuju svaku Steam biblioteku
    navedenu u Steamovom `config\libraryfolders.vdf`. Forza pretražuje i
    `C:\XboxGames`. `--track` (Forza) ili `--install` (BeamNG, AC Rally) preskače
@@ -53,7 +53,7 @@ kopija modela.
    kvadrat od 512 m.
 7. **Postavite modele** koji stoje u koridoru, po kategorijama, na nivou detalja
    odabranom po udaljenosti i budžetu trouglova.
-8. **Napišite `.glb`**: jedan imenovani čvor po dijelu. Pogledajte [Format izlaza](output-format.md).
+8. **Napišite `.glb`**: jedan imenovani čvor po dijelu. Pogledajte [Format izlaza](https://holdi601.github.io/3DHeat-GameFiles/bs/output-format.html).
 
 Šta ispisuje jedno pokretanje - ovdje na sintetičkoj BeamNG.drive instalaciji
 koju grade testovi, krug od 50 m niz traku ceste:
@@ -148,7 +148,7 @@ s punim detaljem, kopije 25-60 m udaljene jedan nivo grublje, a dalje kopije na
 najgrubljem nivou. Zatim najskuplji modeli silaze nivo niže dok budžet trouglova
 ne stane, a gdje ni najgrublji nivoi ne stanu u budžet koji date, kopije se
 izostavljaju. Ivičnjaci se nikad ne pojednostavljuju niti izostavljaju.
-Pogledajte [Nivoi detalja i budžet](detail-budget.md).
+Pogledajte [Nivoi detalja i budžet](https://holdi601.github.io/3DHeat-GameFiles/bs/detail-budget.html).
 
 ## Opcije koje oblikuju rezultat {#options-that-shape-the-result}
 
@@ -172,4 +172,4 @@ krug iste igre:
 | BeamNG | `(x, z, -y)` BeamNG-ovog svijeta sa Z prema gore, što je rotacija koju primjenjuje snimač telemetrije |
 | AC Rally | okvir kruga, pronađen fitovanjem: Unreal centimetri postaju metri, a Unreal X i Y postaju x i z kruga u onoj od osam orijentacija koja se uklapa |
 
-Pogledajte [Format izlaza](output-format.md).
+Pogledajte [Format izlaza](https://holdi601.github.io/3DHeat-GameFiles/bs/output-format.html).

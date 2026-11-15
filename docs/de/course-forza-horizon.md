@@ -15,19 +15,19 @@ des Spiels eingebacken wird, und jedes platzierte Modell mit seiner eigenen Text
 Leitplanken, Reifenwände, Schilder, Requisiten, Gebäude).
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Quellen: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py).
+Quellen: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py).
 Die Containerformate selbst stehen auf [ForzaTech](reader-forzatech.md).
 
 ## Das installierte Spiel finden {#finding-the-installed-game}
@@ -48,7 +48,7 @@ selbst ermittelt:
    einem Namen gefunden, den noch niemand gesehen hat.
 
 Liegt das Spiel woanders, gib den Streckenordner mit `--track` an; siehe
-[Fehlerbehebung](troubleshooting.md#finding-the-game) ("no installed Forza track found" - keine
+[Fehlerbehebung](https://holdi601.github.io/3DHeat-GameFiles/de/troubleshooting.html#finding-the-game) ("no installed Forza track found" - keine
 installierte Forza-Strecke gefunden).
 
 `--track <folder>` überspringt all das.
@@ -311,7 +311,7 @@ ein Mesh pro Gebäude (Stamm `hlod_tier_1_*`), das bereits in Weltkoordinaten li
 ### Detail und Budget {#detail-and-the-budget}
 
 Die Entfernungsbänder, das Budget und welche Kopien wegfallen, wenn das Budget zu klein ist, stehen unter
-[Detailstufen und Budget](detail-budget.md).
+[Detailstufen und Budget](https://holdi601.github.io/3DHeat-GameFiles/de/detail-budget.html).
 
 ### Zusammenfassung der Platzierung {#placement-summary}
 
@@ -331,7 +331,7 @@ Die Entfernungsbänder, das Budget und welche Kopien wegfallen, wenn das Budget 
 Die Teile werden in dieser Reihenfolge geschrieben: pro Kachel `terrain`, `verge`, `road` (jeweils mit
 dem Bild der Kachel), dann `water`, `tyre marks`, `markings` (flach, die letzten beiden angehoben), dann
 jeder platzierte Teil nach Name sortiert. Die Koordinaten sind die des Spiels (Meter, Y nach oben). Siehe
-[Ausgabeformat](output-format.md).
+[Ausgabeformat](https://holdi601.github.io/3DHeat-GameFiles/de/output-format.html).
 
 ## Was es kostet {#what-it-costs}
 
@@ -356,7 +356,7 @@ von den Tests nicht erneut ausgeführt, außer das Spiel ist installiert.
 - Aufeinanderfolgende Leitplankenplatzierungen liegen genau 4 m auseinander, und die meisten Enden einer
   Leitplanke liegen innerhalb von 5 cm vom Anfang der nächsten.
 - Bordsteine liegen wenige Zentimeter über dem extrahierten Boden, mit der Fläche nach oben, innerhalb von
-  5 m von der Fahrlinie (auch ein Test mit installiertem Spiel, siehe [Entwicklung](development.md)).
+  5 m von der Fahrlinie (auch ein Test mit installiertem Spiel, siehe [Entwicklung](../maintaining.md)).
 
 ## Nicht gezeichnet {#not-drawn}
 

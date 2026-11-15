@@ -18,13 +18,13 @@ Scrie fiecare mașină a unui Forza instalat, la nivelul de detaliu propriu al j
 1. **Rulează-l** cu jocul instalat (este găsit în bibliotecile Steam și în `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Sau numește folderul jocului:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Încarcă-l în vizualizator**: **Încarcă fișierul cu mașini…** din secțiunea Vizualizare, sau trage fișierul pe fila Analiză de cursă; rămâne în acel browser. Tururile al căror număr de mașină se află în fișier sunt desenate apoi ca mașina aceea (vezi [documentația despre redarea cursei](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars) a vizualizatorului).
@@ -42,7 +42,7 @@ Scrie fiecare mașină a unui Forza instalat, la nivelul de detaliu propriu al j
 
 Pentru fiecare arhivă de mașină din `media/Cars`: modelul `ProxyLOD` pe care îl conține (aproximativ 900 de triunghiuri), numărul mașinii așa cum îl spune telemetria, marca, eticheta modelului și anul din numele arhivei, precum și roțile și luminile din spate. Formele sunt în metri, 1:1 cu mașina. O arhivă fără un astfel de model (un obiect decorativ de trafic) este numită și lăsată afară.
 
-Fișierul este făcut pentru vizualizatorul 3DHeat. Structura lui, pentru cine îl citește în altă parte ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+Fișierul este făcut pentru vizualizatorul 3DHeat. Structura lui, pentru cine îl citește în altă parte ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Parte | Structură |
 |---|---|
@@ -55,4 +55,4 @@ Fișierul este făcut pentru vizualizatorul 3DHeat. Structura lui, pentru cine �
 
 Fiecare intrare `cars`: `key`, `ordinals` (numerele mașinii așa cum le spune telemetria), `make`, `model`, `year`, `height` și `length` (m), `wheels` (pentru fiecare roată `[x, y, z, radius]`, m), `lights` (punctele luminilor din spate `[x, y, z]`, m) și `vertexAt`, `vertices`, `faceAt`, `faces` (deplasări în octeți de la începutul datelor, și numărători).
 
-Fișierul conține conținutul jocului: este pentru mașina pe care a fost făcut, nu pentru a fi trimis mai departe ([Reguli și licențe](rules-and-licences.md)).
+Fișierul conține conținutul jocului: este pentru mașina pe care a fost făcut, nu pentru a fi trimis mai departe ([Reguli și licențe](../terms.md)).

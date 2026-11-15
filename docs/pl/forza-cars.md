@@ -22,13 +22,13 @@ i w prawdziwym rozmiarze.
    i w `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Albo podaj folder gry:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Wczytaj plik w przeglądarce 3DHeat**: **Wczytaj plik z samochodami...** w ustawieniach widoku
@@ -55,7 +55,7 @@ koła i światła tylne. Kształty są w metrach, w skali 1:1 z samochodem. Arch
 modelu (rekwizyt ruchu drogowego) jest nazwane i pominięte.
 
 Plik jest przygotowany dla przeglądarki 3DHeat; jego układ, dla każdego, kto czyta go gdzie indziej
-([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Część | Układ |
 |---|---|
@@ -72,4 +72,4 @@ Każdy wpis `cars` zawiera: `key`, `ordinals` (numery samochodu, tak jak podaje 
 (przesunięcia bajtowe od początku danych i liczby).
 
 Plik zawiera treści gry: jest przeznaczony dla komputera, na którym powstał, a nie do rozsyłania
-([Zasady i licencje](rules-and-licences.md)).
+([Zasady i licencje](../terms.md)).

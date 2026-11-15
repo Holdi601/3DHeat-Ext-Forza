@@ -12,20 +12,20 @@ search_exclude: true
 Exportul Forza citește traseul direct din arhivele ForzaTech ale jocului: terenul cu drumul, bordura și iarba deosebite una de alta, o textură de sol coaptă din hărțile de sol ale jocului, și fiecare model plasat în propria lui textură (borduri, parapete, ziduri de cauciucuri, indicatoare, recuzită, clădiri). Găsește și care dintre cursele jocului a fost parcursă în turul dat și adaugă ce scoate jocul pentru acea cursă singură (stratul ei de evenimente: bariere, corturi, portaluri, tribune, steaguri), plus solul oricărui loc prin care trece conducerea, precum podeaua unui stadion.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Surse: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Surse: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Formatele de containere în sine sunt descrise în [ForzaTech](reader-forzatech.md).
 
 ## Găsirea jocului instalat {#finding-the-installed-game}
@@ -38,7 +38,7 @@ Nimeni nu ar trebui să tasteze o cale ca
 3. Un **folder de joc** este orice copil al acestor foldere care are un folder `media\Tracks`, indiferent de nume.
 4. Un **folder de circuit** este orice folder sub `media\Tracks` care conține un `GeoChunk0.minizip`. Se recunoaște după conținut, nu după nume, deci un circuit sub un nume pe care nimeni nu l-a văzut încă tot se găsește.
 
-Dacă jocul se află în altă parte, dați folderul circuitului cu `--track`; vedeți [Depanarea](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+Dacă jocul se află în altă parte, dați folderul circuitului cu `--track`; vedeți [Depanarea](https://holdi601.github.io/3DHeat-GameFiles/ro/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` sare peste toate acestea.
 
@@ -249,7 +249,7 @@ Câteva feluri de modele nu sunt în niciun fișier de plasare. Meshurile lor po
 
 ### Detaliul și bugetul {#detail-and-the-budget}
 
-Benzile de distanță, bugetul și care copii pleacă atunci când bugetul e prea mic sunt în [Nivelurile de detaliu și bugetul](detail-budget.md).
+Benzile de distanță, bugetul și care copii pleacă atunci când bugetul e prea mic sunt în [Nivelurile de detaliu și bugetul](https://holdi601.github.io/3DHeat-GameFiles/ro/detail-budget.html).
 
 ### Rezumatul plasării {#placement-summary}
 
@@ -298,13 +298,13 @@ Doar copiile din interiorul coridorului se plasează, ca pentru orice altceva.
 
 ## Scrierea fișierului {#writing-the-file}
 
-Părțile se scriu în ordinea aceasta: pe placă `terrain`, `verge`, `road` (fiecare cu imaginea plăcii), apoi `water`, `tyre marks`, `markings` (plate, ultimele două ridicate), apoi fiecare parte plasată, sortată după nume. Coordonatele sunt ale jocului (metri, Y în sus). Vedeți [Formatul de ieșire](output-format.md).
+Părțile se scriu în ordinea aceasta: pe placă `terrain`, `verge`, `road` (fiecare cu imaginea plăcii), apoi `water`, `tyre marks`, `markings` (plate, ultimele două ridicate), apoi fiecare parte plasată, sortată după nume. Coordonatele sunt ale jocului (metri, Y în sus). Vedeți [Formatul de ieșire](https://holdi601.github.io/3DHeat-GameFiles/ro/output-format.html).
 
 Fișierul spune ce conține în `asset.extras` al glTF:
 
 | Câmp | Înseamnă |
 |---|---|
-| `course_format` | `2`: stratul propriu al cursei, locurile și modelele în coordonate lume sunt în el. [`courses`](commands.md#courses) exportă din nou un fișier cu un număr mai mic (sau fără) |
+| `course_format` | `2`: stratul propriu al cursei, locurile și modelele în coordonate lume sunt în el. [`courses`](../commands.md#courses) exportă din nou un fișier cu un număr mai mic (sau fără) |
 | `route` | id-ul rutei potrivite, sau `null` |
 | `event_copies`, `event_kinds` | câte copii ale stratului propriu al cursei s-au plasat și tipurile lor |
 | `hidden` | copii din lumea liberă lăsate afară pentru că cursa le elimină |
@@ -330,7 +330,7 @@ Acestea sunt măsurători făcute când a fost scris cititorul, cum spune sursa.
 - Pe circuitul de test, mașina stă aproximativ la înălțimea ei de mers deasupra solului extras (mediană sub 0,2 m).
 - Fiecare placă eșantionată cade în pătratul de 512 m prezis de numele ei.
 - Plasările consecutive de parapete sunt exact la 4 m distanță, iar majoritatea capetelor de parapet se află la 5 cm de începutul următoarei.
-- Bordurile stau cu câțiva centimetri deasupra solului extras, cu fețele în sus, la cel mult 5 m de conducere (și un test pe jocul instalat, vedeți [Dezvoltarea](development.md)).
+- Bordurile stau cu câțiva centimetri deasupra solului extras, cu fețele în sus, la cel mult 5 m de conducere (și un test pe jocul instalat, vedeți [Dezvoltarea](../maintaining.md)).
 
 ## Ce nu se desenează {#not-drawn}
 

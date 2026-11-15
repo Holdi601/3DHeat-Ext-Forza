@@ -20,9 +20,9 @@ para o visualizador. Esta página cobre o que os três jogos suportados têm em
 comum. As páginas abaixo dela cobrem o que muda:
 
 - [Forza Horizon](course-forza-horizon.md): ficheiros `.minizip` do ForzaTech
-- [BeamNG.drive](course-beamng.md): ficheiros zip, um heightfield de terreno, formas compiladas
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, uma etapa World Partition
-- [Níveis de detalhe e o orçamento](detail-budget.md): quantos triângulos os modelos colocados recebem, e quais cópias ficam
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): ficheiros zip, um heightfield de terreno, formas compiladas
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, uma etapa World Partition
+- [Níveis de detalhe e o orçamento](https://holdi601.github.io/3DHeat-GameFiles/pt/detail-budget.html): quantos triângulos os modelos colocados recebem, e quais cópias ficam
 
 ![As etapas de uma exportação de percurso](../assets/img/pt/course-steps.svg)
 
@@ -34,10 +34,10 @@ quadrada do terreno de um jogo; um **LOD** (nível de detalhe) é uma das cópia
 mais simples de um modelo.
 
 1. **Ler a volta.** Só as posições, de qualquer um dos formatos de
-   [Entradas de volta](lap-inputs.md). A velocidade e os controlos não são usados.
+   [Entradas de volta](https://holdi601.github.io/3DHeat-GameFiles/pt/lap-inputs.html). A velocidade e os controlos não são usados.
    Uma volta com menos de duas amostras é recusada ("holds no driving").
 2. **Decidir o jogo.** `--game`, depois o campo `game` do ficheiro da volta, e
-   então o Forza (veja [Comandos](commands.md#which-game)).
+   então o Forza (veja [Comandos](../commands.md#which-game)).
 3. **Achar o jogo instalado.** Os três procuram em todas as bibliotecas da Steam
    listadas no `config\libraryfolders.vdf` da Steam. O Forza também procura em
    `C:\XboxGames`. `--track` (Forza) ou `--install` (BeamNG, AC Rally) saltam a busca.
@@ -51,7 +51,7 @@ mais simples de um modelo.
    textura de solo para cada quadrado de 512 m.
 7. **Colocar os modelos** que estão no corredor, por categoria, num nível de
    detalhe escolhido pela distância e por um orçamento de triângulos.
-8. **Escrever o `.glb`**: um nó nomeado por parte. Veja [Formato de saída](output-format.md).
+8. **Escrever o `.glb`**: um nó nomeado por parte. Veja [Formato de saída](https://holdi601.github.io/3DHeat-GameFiles/pt/output-format.html).
 
 O que uma execução imprime. Aqui, num BeamNG.drive sintético que os testes
 montam, uma volta de 50 m por uma faixa de estrada:
@@ -146,7 +146,7 @@ no detalhe total, cópias a 25-60 m ficam um nível mais grosseiras, e cópias m
 longe ficam no nível mais grosseiro. Depois, os modelos mais caros descem de nível
 até que um orçamento de triângulos caiba, e onde nem os níveis mais grosseiros
 cabem num orçamento informado, cópias são deixadas de fora. Os lancis nunca
-são simplificados nem deixados de fora. Veja [Níveis de detalhe e o orçamento](detail-budget.md).
+são simplificados nem deixados de fora. Veja [Níveis de detalhe e o orçamento](https://holdi601.github.io/3DHeat-GameFiles/pt/detail-budget.html).
 
 ## Opções que mudam o resultado {#options-that-shape-the-result}
 
@@ -170,4 +170,4 @@ gravada do mesmo jogo se alinha:
 | BeamNG | `(x, z, -y)` do mundo de Z para cima do BeamNG, que é a rotação aplicada pelo gravador de telemetria |
 | AC Rally | o referencial da volta, achado por ajuste: centímetros do Unreal tornam-se metros, e X e Y do Unreal tornam-se x e z da volta na orientação das oito que encaixar |
 
-Veja [Formato de saída](output-format.md).
+Veja [Formato de saída](https://holdi601.github.io/3DHeat-GameFiles/pt/output-format.html).

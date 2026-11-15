@@ -18,13 +18,13 @@ Schrijft elke auto van een geïnstalleerde Forza op het eigen lage detailniveau 
 1. **Start het** met het spel geïnstalleerd (het wordt gevonden in de Steam-bibliotheken en in `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Of geef de map van het spel op:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Laad het in de viewer**: **Autobestand laden…** in de weergave-instellingen, of zet het bestand op het tabblad Race-analyse; het blijft in die browser. Ronden waarvan het autonummer in het bestand staat, worden dan getekend als precies die auto (zie de [race-replay-documentatie van de viewer](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars)).
@@ -42,7 +42,7 @@ Schrijft elke auto van een geïnstalleerde Forza op het eigen lage detailniveau 
 
 Voor elk autoarchief onder `media/Cars`: het `ProxyLOD`-model dat het bevat (ongeveer 900 driehoeken), het autonummer zoals de telemetrie het opgeeft, het merk, de modelaanduiding en het jaar uit de naam van het archief, en de wielen en achterlichten. De vormen staan in meters, 1:1 met de auto. Een archief zonder zo'n model (een verkeersobject) wordt benoemd en weggelaten.
 
-Het bestand is gemaakt voor de 3DHeat-viewer. De indeling, voor wie het elders leest ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+Het bestand is gemaakt voor de 3DHeat-viewer. De indeling, voor wie het elders leest ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Onderdeel | Indeling |
 |---|---|
@@ -55,4 +55,4 @@ Het bestand is gemaakt voor de 3DHeat-viewer. De indeling, voor wie het elders l
 
 Elk item in `cars`: `key`, `ordinals` (de autonummers zoals de telemetrie ze opgeeft), `make`, `model`, `year`, `height` en `length` (m), `wheels` (per wiel `[x, y, z, radius]`, m), `lights` (achterlichtpunten `[x, y, z]`, m), en `vertexAt`, `vertices`, `faceAt`, `faces` (bytepositie vanaf het begin van de data, en aantallen).
 
-Het bestand bevat de inhoud van het spel. Het is bedoeld voor de computer waarop het gemaakt is, niet om door te geven ([Regels en licenties](rules-and-licences.md)).
+Het bestand bevat de inhoud van het spel. Het is bedoeld voor de computer waarop het gemaakt is, niet om door te geven ([Regels en licenties](../terms.md)).

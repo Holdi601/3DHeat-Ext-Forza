@@ -3,7 +3,7 @@ title: "ForzaTech"
 nav_order: 7
 lang: "bg"
 source: reader-forzatech.md
-source_hash: "5b298baf30a0"
+source_hash: "d6c6780626c5"
 nav_exclude: true
 search_exclude: true
 ---
@@ -13,12 +13,12 @@ Forza Horizon работи на ForzaTech, собствения двигател
 
 | Формат | Модул |
 |---|---|
-| архиви `.minizip` и техните списъци с имена | [`minizip.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/minizip.py) |
-| модели и терен `.modelbin` | [`forzatech.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatech.py) |
-| образци на текстури `.pb` | [`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py) |
-| файлове за разполагане `.pgeo` | [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py) |
-| `AssetManifest.xml` и хешове на текстури на материали | [`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py) |
-| плочки от терена по място | [`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py) |
+| архиви `.minizip` и техните списъци с имена | [`minizip.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/minizip.py) |
+| модели и терен `.modelbin` | [`forzatech.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatech.py) |
+| образци на текстури `.pb` | [`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py) |
+| файлове за разполагане `.pgeo` | [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py) |
+| `AssetManifest.xml` и хешове на текстури на материали | [`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py) |
+| плочки от терена по място | [`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py) |
 
 Forza пази голяма част от съдържанието си и в обикновени ZIP архиви под `media\`. `zipfile` на Python ги отваря, а `forzatech.models_in_archive()` изброява техните записи `.modelbin`. Геометрията на трасетата е в архивите `.minizip`.
 

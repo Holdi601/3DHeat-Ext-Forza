@@ -16,9 +16,9 @@ import struct
 import numpy as np
 import pytest
 
-from heat3d_gamefiles.cli import main
-from heat3d_gamefiles.forzaterrain import NAME_STEP, TILE_METRES
-from heat3d_gamefiles.forzatech import SLOT_BASE_COLOUR
+from heat3d_ext_forza.cli import main
+from heat3d_ext_forza.forzaterrain import NAME_STEP, TILE_METRES
+from heat3d_ext_forza.forzatech import SLOT_BASE_COLOUR
 
 from .forza_fixtures import (
     build_contents,
@@ -30,7 +30,7 @@ from .forza_fixtures import (
 from .test_forza_geometry import grid
 from .test_forzamaterial import material
 from .test_forzaplacement import ONE, UP, pgeo
-from .test_glb import read_back
+from .glb_helpers import read_back
 
 GUID = "0123abcd-0000-4000-8000-000000000000"
 ARMCO_HASH = 777
@@ -199,3 +199,80 @@ def test_terrain_says_what_a_route_needs(tmp_path):
 
     with pytest.raises(SystemExit, match='"bounds"'):
         main(["terrain", str(track), "--route", str(lap), "-o", str(tmp_path / "x.glb")])
+
+
+# ---------------------------------------------------------------------------
+# Standalone: a lap and nothing else. The game is found where it is installed,
+# the track by which of its tracks covers the driving, the file named after
+# the course - no --track, no -o.
+
+
+def test_a_lap_alone_finds_the_installed_game_and_names_the_file(tmp_path, monkeypatch, capsys):
+    import heat3d_ext_forza.forzainstall as forzainstall
+
+    # A Microsoft Store install, the game one folder down in `Content`, and no
+    # Steam library: this machine's own installs stay out of the test.
+    store = tmp_path / "XboxGames"
+    write_track(store / "Some Forza" / "Content" / "media" / "Tracks" / "Test")
+    monkeypatch.setattr(forzainstall, "XBOX_DEFAULTS", (str(store),))
+    monkeypatch.setattr(forzainstall, "steam_libraries", lambda: [])
+    levels = tmp_path / "levels"
+    monkeypatch.setenv("HEAT3D_LEVELS", str(levels))
+    course = tmp_path / "laps" / "Test Circuit (course_650_150_to_650_150)"
+    course.mkdir(parents=True)
+    write_lap(course / "lap1.csv")
+
+    assert main(["course", str(course), "--margin", "40"]) == 0
+    report = capsys.readouterr().out
+    assert "on Test, in Some Forza" in report and "placed on it" in report
+
+    written = levels / "forza" / "courses" / "test_circuit.glb"
+    document, _binary = read_back(written)
+    names = [mesh.get("name", "") for mesh in document["meshes"]]
+    assert any(n.startswith("ground:terrain") for n in names), names
+    assert any(n.startswith("structure:barriers") for n in names), names
+
+
+def test_no_installed_forza_says_so(tmp_path, monkeypatch, capsys):
+    import heat3d_ext_forza.forzainstall as forzainstall
+
+    monkeypatch.setattr(forzainstall, "XBOX_DEFAULTS", (str(tmp_path / "none"),))
+    monkeypatch.setattr(forzainstall, "steam_libraries", lambda: [])
+    lap = write_lap(tmp_path / "lap.csv")
+
+    assert main(["course", str(lap), "-o", str(tmp_path / "x.glb")]) == 2
+    assert "no installed Forza track found" in capsys.readouterr().err
+    assert not (tmp_path / "x.glb").exists()
+
+
+@pytest.mark.parametrize("game, tool", [("beamng", "heat3d-beamng-maps"), ("assetto-corsa-rally", "heat3d-acrally-maps")])
+def test_another_games_lap_is_sent_to_its_own_tool(tmp_path, capsys, game, tool):
+    import json
+
+    lap = tmp_path / "lap.json"
+    xs = list(range(0, 100, 5))
+    lap.write_text(
+        json.dumps({"format": "heat3d-lap", "game": game, "channels": {"x": xs, "y": [0] * len(xs), "z": xs}}),
+        encoding="utf-8",
+    )
+    out = tmp_path / "out" / "x.glb"
+
+    assert main(["course", str(lap), "-o", str(out)]) == 2
+    err = capsys.readouterr().err
+    assert tool in err and len(err.strip().splitlines()) == 1
+    assert not out.parent.exists()
+
+
+def test_game_level_and_install_are_taken_and_a_named_game_wins(tmp_path, capsys):
+    """GameFiles' own command line, passed on unchanged."""
+    track = write_track(tmp_path / "Tracks" / "Test")
+    lap = write_lap(tmp_path / "lap.csv")
+
+    assert main(["course", str(lap), "--game", "beamng", "-o", str(tmp_path / "x.glb")]) == 2
+    assert "heat3d-beamng-maps" in capsys.readouterr().err
+    out = tmp_path / "course.glb"
+    assert main([
+        "course", str(lap), "--game", "forza", "--level", "anything", "--install", str(tmp_path),
+        "--track", str(track), "-o", str(out), "--no-placed", "--no-textures",
+    ]) == 0
+    assert out.exists()

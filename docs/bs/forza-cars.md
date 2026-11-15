@@ -21,13 +21,13 @@ u svojoj stvarnoj veličini.
    `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Ili navedite folder igre:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Učitajte je u preglednik**: **Učitajte datoteku s automobilima…** u postavkama prikaza, ili spustite
@@ -54,7 +54,7 @@ su u metrima, 1:1 s automobilom. Arhiva bez takvog modela (rekvizit prometa) se
 navede i izostavi.
 
 Datoteka je napravljena za 3DHeat preglednik; njen raspored, za sve koji je čitaju
-negdje drugdje ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+negdje drugdje ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Dio | Raspored |
 |---|---|
@@ -72,4 +72,4 @@ te `vertexAt`, `vertices`, `faceAt`, `faces` (pomaci u bajtima od početka
 podataka, i brojevi).
 
 Datoteka sadrži sadržaj igre: namijenjena je računaru na kojem je napravljena, a ne
-za prosljeđivanje ([Pravila i licence](rules-and-licences.md)).
+za prosljeđivanje ([Pravila i licence](../terms.md)).

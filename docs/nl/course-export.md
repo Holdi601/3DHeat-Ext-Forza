@@ -16,9 +16,9 @@ search_exclude: true
 `course` maakt van een ronde een baan: de grond in een strook aan beide kanten van waar de auto reed, en wat er op die grond staat, samen in één `.glb` voor de viewer. Deze pagina behandelt wat alle drie de ondersteunde spellen gemeen hebben. De pagina's eronder behandelen wat verschilt:
 
 - [Forza Horizon](course-forza-horizon.md): ForzaTech `.minizip`-archieven
-- [BeamNG.drive](course-beamng.md): zip-archieven, een terrein-hoogteveld, gecompileerde vormen
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, een World Partition-etappe
-- [Detailniveaus en het budget](detail-budget.md): hoeveel driehoeken de geplaatste modellen krijgen, en welke kopieën blijven
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): zip-archieven, een terrein-hoogteveld, gecompileerde vormen
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, een World Partition-etappe
+- [Detailniveaus en het budget](https://holdi601.github.io/3DHeat-GameFiles/nl/detail-budget.html): hoeveel driehoeken de geplaatste modellen krijgen, en welke kopieën blijven
 
 ![De stappen van een baan-export](../assets/img/nl/course-steps.svg)
 
@@ -26,14 +26,14 @@ search_exclude: true
 
 Woorden die hieronder gebruikt worden: een **frame** is de richting waarin de assen wijzen; de **corridor** is de strook grond aan beide kanten van de ronde; een **tegel** is één vierkant stuk van het terrein van een spel; een **LOD** (detailniveau) is een van de eenvoudigere kopieën van een model.
 
-1. **Lees de ronde.** Alleen posities, uit een van de vormen in [Rondebestanden](lap-inputs.md). Snelheid en bediening worden niet gebruikt. Een ronde met minder dan twee punten wordt geweigerd (`holds no driving`).
-2. **Bepaal het spel.** Eerst `--game`, dan het veld `game` van het lapbestand, dan Forza (zie [Commando's](commands.md#which-game)).
+1. **Lees de ronde.** Alleen posities, uit een van de vormen in [Rondebestanden](https://holdi601.github.io/3DHeat-GameFiles/nl/lap-inputs.html). Snelheid en bediening worden niet gebruikt. Een ronde met minder dan twee punten wordt geweigerd (`holds no driving`).
+2. **Bepaal het spel.** Eerst `--game`, dan het veld `game` van het lapbestand, dan Forza (zie [Commando's](../commands.md#which-game)).
 3. **Vind het geïnstalleerde spel.** Alle drie zoeken in elke Steam-bibliotheek die in `config\libraryfolders.vdf` van Steam staat. Forza zoekt ook in `C:\XboxGames`. `--track` (Forza) of `--install` (BeamNG, AC Rally) slaat de zoektocht over.
 4. **Vind waar de ronde is gereden.** Dit wordt nooit alleen op naam bepaald. Forza kiest de baan waarvan de terreintegels de ronde bedekken. BeamNG kiest het level waarop de punten van de ronde liggen (het terrein of de wegen). AC Rally probeert elke etappe in acht richtingen van de assen en kiest de richting die het meeste van de ronde op de weg legt.
 5. **Snijd een corridor** van `--margin` meter aan beide kanten van de rijlijn (hieronder).
 6. **Bouw de grond** binnen de corridor, ingedeeld als weg, berm, grind en zand, terrein, markeringen, bandensporen of water, en bak een grondtextuur voor elk vierkant van 512 m.
 7. **Plaats de modellen** die in de corridor staan, per categorie, op een detailniveau dat wordt gekozen op afstand en een driehoeksbudget.
-8. **Schrijf de `.glb`**: één benoemd knooppunt per deel. Zie [Uitvoerformaat](output-format.md).
+8. **Schrijf de `.glb`**: één benoemd knooppunt per deel. Zie [Uitvoerformaat](https://holdi601.github.io/3DHeat-GameFiles/nl/output-format.html).
 
 Wat een run afdrukt, hier op een nagebootste BeamNG.drive-installatie uit de tests, een ronde van 50 m over een strook weg:
 
@@ -97,7 +97,7 @@ Geplaatste modellen worden geschreven in delen met de naam `structure:<categorie
 | bomen | met `--trees` | met `--trees` | met `--trees` |
 | breekbare objecten | met `--trees` | - | - |
 
-De verdeling van detail is in alle drie gelijk. Kopieën binnen 25 m van de rijlijn beginnen op volledig detail, kopieën op 25-60 m één niveau grover, en verdere kopieën op het grofste niveau. Daarna stappen de duurste modellen omlaag tot een driehoeksbudget past. Waar zelfs de grofste niveaus niet passen binnen een budget dat je opgeeft, worden kopieën weggelaten. Kantstenen worden nooit vereenvoudigd of weggelaten. Zie [Detailniveaus en het budget](detail-budget.md).
+De verdeling van detail is in alle drie gelijk. Kopieën binnen 25 m van de rijlijn beginnen op volledig detail, kopieën op 25-60 m één niveau grover, en verdere kopieën op het grofste niveau. Daarna stappen de duurste modellen omlaag tot een driehoeksbudget past. Waar zelfs de grofste niveaus niet passen binnen een budget dat je opgeeft, worden kopieën weggelaten. Kantstenen worden nooit vereenvoudigd of weggelaten. Zie [Detailniveaus en het budget](https://holdi601.github.io/3DHeat-GameFiles/nl/detail-budget.html).
 
 ## Opties die het resultaat bepalen {#options-that-shape-the-result}
 
@@ -120,4 +120,4 @@ Elke export schrijft meters met Y omhoog, in een stelsel waarin een opgenomen ro
 | BeamNG | `(x, z, -y)` van de Z-omhoog-wereld van BeamNG, de rotatie die de telemetrie-opnemer toepast |
 | AC Rally | het stelsel van de ronde, gevonden door te passen: Unreal-centimeters worden meters, en Unreal X en Y worden de x en z van de ronde, in welke van de acht richtingen ook past |
 
-Zie [Uitvoerformaat](output-format.md).
+Zie [Uitvoerformaat](https://holdi601.github.io/3DHeat-GameFiles/nl/output-format.html).

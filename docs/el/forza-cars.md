@@ -3,7 +3,7 @@ title: Αυτοκίνητα Forza
 nav_order: 6
 lang: "el"
 source: forza-cars.md
-source_hash: "e1b48f2525db"
+source_hash: "7f592f21659a"
 nav_exclude: true
 search_exclude: true
 ---
@@ -18,13 +18,13 @@ search_exclude: true
 1. **Τρέξτε το** με το παιχνίδι εγκατεστημένο (βρίσκεται στις βιβλιοθήκες του Steam και στο `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Ή δώστε τον φάκελο του παιχνιδιού:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Φορτώστε το στον προβολέα**: **Φόρτωση αρχείου αυτοκινήτων…** στις ρυθμίσεις προβολής, ή αφήστε το αρχείο πάνω στην καρτέλα Ανάλυση αγώνα. Μένει σε αυτόν τον περιηγητή. Οι γύροι των οποίων ο αριθμός αυτοκινήτου υπάρχει στο αρχείο σχεδιάζονται τότε ως εκείνο ακριβώς το αυτοκίνητο (δείτε [την τεκμηρίωση της επανάληψης αγώνα του προβολέα](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars)).
@@ -42,7 +42,7 @@ search_exclude: true
 
 Για κάθε αρχείο αυτοκινήτου κάτω από το `media/Cars`: το μοντέλο `ProxyLOD` που περιέχει (περίπου 900 τρίγωνα), ο αριθμός του αυτοκινήτου όπως τον δηλώνει η τηλεμετρία, η μάρκα, η ετικέτα μοντέλου και το έτος από το όνομα του αρχείου, και οι τροχοί και τα φώτα πίσω. Τα σχήματα είναι σε μέτρα, 1:1 με το αυτοκίνητο. Ένα αρχείο χωρίς τέτοιο μοντέλο (ένα αντικείμενο κυκλοφορίας) αναφέρεται με το όνομά του και μένει έξω.
 
-Το αρχείο φτιάχνεται για τον προβολέα του 3DHeat· η διάταξή του, για όποιον το διαβάζει αλλού ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+Το αρχείο φτιάχνεται για τον προβολέα του 3DHeat· η διάταξή του, για όποιον το διαβάζει αλλού ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Μέρος | Διάταξη |
 |---|---|
@@ -55,4 +55,4 @@ search_exclude: true
 
 Κάθε εγγραφή `cars` έχει: `key`, `ordinals` (οι αριθμοί του αυτοκινήτου όπως τους δηλώνει η τηλεμετρία), `make`, `model`, `year`, `height` και `length` (m), `wheels` (ανά τροχό `[x, y, z, radius]`, m), `lights` (σημεία φώτων πίσω `[x, y, z]`, m), και `vertexAt`, `vertices`, `faceAt`, `faces` (μετατοπίσεις bytes από την αρχή των δεδομένων, και πλήθη).
 
-Το αρχείο περιέχει περιεχόμενο του παιχνιδιού: προορίζεται για τον υπολογιστή όπου έγινε, και όχι για να το μοιράζεστε ([Κανόνες και άδειες](rules-and-licences.md)).
+Το αρχείο περιέχει περιεχόμενο του παιχνιδιού: προορίζεται για τον υπολογιστή όπου έγινε, και όχι για να το μοιράζεστε ([Κανόνες και άδειες](../terms.md)).

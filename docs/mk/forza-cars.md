@@ -21,13 +21,13 @@ search_exclude: true
    `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Или наведете ја папката на играта:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Вчитајте ја во прегледувачот**: **Вчитај датотека со автомобили…** во поставките за приказ, или спуштете
@@ -54,7 +54,7 @@ search_exclude: true
 и се изоставува.
 
 Датотеката е направена за прегледувачот 3DHeat; нејзиниот распоред, за оној што ја чита
-на друго место ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+на друго место ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Дел | Распоред |
 |---|---|
@@ -72,4 +72,4 @@ search_exclude: true
 податоците, и броеви).
 
 Датотеката ја содржи содржината на играта: е за машината на која е направена, а не
-за пренесување ([Правила и лиценци](rules-and-licences.md)).
+за пренесување ([Правила и лиценци](../terms.md)).

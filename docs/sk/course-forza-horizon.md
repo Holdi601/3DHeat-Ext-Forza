@@ -18,20 +18,20 @@ bariéry, stany, portály, tribúny, vlajky), a zem každého miesta konania, ce
 jazda prechádza, napríklad podlahu štadióna.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Zdroje: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Zdroje: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Samotné formáty kontajnerov sú na [ForzaTech](reader-forzatech.md).
 
 ## Hľadanie nainštalovanej hry {#finding-the-installed-game}
@@ -51,7 +51,7 @@ Nikto by nemal písať cestu ako
    názvom, ktorý nikto nevidel, sa tiež nájde.
 
 Ak je hra inde, zadajte priečinok trate cez `--track`; pozri
-[Riešenie problémov](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Riešenie problémov](https://holdi601.github.io/3DHeat-GameFiles/sk/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` preskočí všetko toto.
 
@@ -338,7 +338,7 @@ Podstavce koridor nerozširujú.
 ### Detail a rozpočet {#detail-and-the-budget}
 
 Pásma vzdialenosti, rozpočet a ktoré kópie idú prvé, keď je rozpočet príliš malý,
-sú na [Úrovne detailu a rozpočet](detail-budget.md).
+sú na [Úrovne detailu a rozpočet](https://holdi601.github.io/3DHeat-GameFiles/sk/detail-budget.html).
 
 ### Súhrn umiestnenia {#placement-summary}
 
@@ -394,13 +394,13 @@ Umiestnia sa len kópie vnútri koridora, ako pri všetkom ostatnom.
 Časti sa zapisujú v tomto poradí: pre každú dlaždicu `terrain`, `verge`, `road`
 (každá s obrázkom dlaždice), potom `water`, `tyre marks`, `markings` (ploché, posledné
 dve zdvihnuté), a potom každá umiestnená časť zoradená podľa názvu. Súradnice sú
-hry vlastné (metre, Y hore). Pozri [Výstupný formát](output-format.md).
+hry vlastné (metre, Y hore). Pozri [Výstupný formát](https://holdi601.github.io/3DHeat-GameFiles/sk/output-format.html).
 
 Súbor hovorí, čo obsahuje, vo svojom glTF `asset.extras`:
 
 | Pole | Význam |
 |---|---|
-| `course_format` | `2`: vrstva samotných pretekov, miesta konania a modely vo svetových súradniciach sú v ňom. [`courses`](commands.md#courses) exportuje súbor s nižším číslom (alebo bez neho) znova |
+| `course_format` | `2`: vrstva samotných pretekov, miesta konania a modely vo svetových súradniciach sú v ňom. [`courses`](../commands.md#courses) exportuje súbor s nižším číslom (alebo bez neho) znova |
 | `route` | priradené id trasy, alebo `null` |
 | `event_copies`, `event_kinds` | koľko kópií vrstvy samotných pretekov sa umiestnilo a ich druhy |
 | `hidden` | kópie voľnej jazdy vynechané, lebo ich preteky odstraňujú |
@@ -427,7 +427,7 @@ ich znova nespúšťajú, pokiaľ nie je hra nainštalovaná.
 - Na testovacom okruhu auto sedí asi na svojej výške jazdy nad extrahovanou zemou (medián pod 0,2 m).
 - Každá vzorkovaná dlaždica pristane vnútri štvorca 512 m, ktorý predpovedá jej názov.
 - Po sebe idúce umiestnenia zvodidiel sú presne 4 m od seba a väčšina koncov zvodidiel pristane do 5 cm od začiatku ďalšieho.
-- Obrubníky sú pár centimetrov nad extrahovanou zemou, čelom nahor, do 5 m od jazdy (tiež test s nainštalovanou hrou, pozri [Vývoj](development.md)).
+- Obrubníky sú pár centimetrov nad extrahovanou zemou, čelom nahor, do 5 m od jazdy (tiež test s nainštalovanou hrou, pozri [Vývoj](../maintaining.md)).
 
 ## Nevykresľuje sa {#not-drawn}
 

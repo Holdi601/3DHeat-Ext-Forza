@@ -18,13 +18,13 @@ Zapíše každé auto nainštalovanej Forzy vo východzom nízkom detaile hry do
 1. **Spustite ho**, keď je hra nainštalovaná (nájde sa v knižniciach Steamu a v `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Alebo uveďte priečinok hry:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Načítajte ho v prehliadači**: **Načítať súbor s autami…** v nastaveniach zobrazenia alebo pustite súbor na kartu Analýza pretekov; ostane v tomto prehliadači. Jazdy, ktorých číslo auta je v súbore, sa potom kreslia ako presne toto auto (pozri [dokumentáciu prehrávania pretekov v prehliadači](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars)).
@@ -42,7 +42,7 @@ Zapíše každé auto nainštalovanej Forzy vo východzom nízkom detaile hry do
 
 Pre každý archív auta pod `media/Cars`: model `ProxyLOD`, ktorý nesie (asi 900 trojuholníkov), číslo auta tak, ako ho uvádza telemetria, jeho značku, označenie modelu a rok z názvu archívu, a jeho kolesá a zadné svetlá. Tvary sú v metroch, 1:1 s autom. Archív bez takéhoto modelu (rekvizita premávky) sa pomenuje a vynechá.
 
-Súbor je vytvorený pre prehliadač 3DHeat; jeho rozloženie pre každého, kto ho číta inde ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+Súbor je vytvorený pre prehliadač 3DHeat; jeho rozloženie pre každého, kto ho číta inde ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Časť | Rozloženie |
 |---|---|
@@ -55,4 +55,4 @@ Súbor je vytvorený pre prehliadač 3DHeat; jeho rozloženie pre každého, kto
 
 Každá položka `cars`: `key`, `ordinals` (čísla auta tak, ako ich uvádza telemetria), `make`, `model`, `year`, `height` a `length` (m), `wheels` (pre každé koleso `[x, y, z, radius]`, m), `lights` (body zadných svetiel `[x, y, z]`, m) a `vertexAt`, `vertices`, `faceAt`, `faces` (posuny v bajtoch od začiatku údajov, a počty).
 
-Súbor obsahuje obsah hry: je určený pre počítač, na ktorom vznikol, nie na posielanie ďalej ([Pravidlá a licencie](rules-and-licences.md)).
+Súbor obsahuje obsah hry: je určený pre počítač, na ktorom vznikol, nie na posielanie ďalej ([Pravidlá a licencie](../terms.md)).

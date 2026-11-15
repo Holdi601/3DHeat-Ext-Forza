@@ -3,7 +3,7 @@ title: ForzaTech
 nav_order: 7
 lang: "de"
 source: reader-forzatech.md
-source_hash: "5b298baf30a0"
+source_hash: "d6c6780626c5"
 nav_exclude: true
 search_exclude: true
 ---
@@ -18,12 +18,12 @@ der `ChunkContentsMiniZip<n>.txt` daneben oder nach Eintragsnummer (`#12`).
 
 | Format | Modul |
 |---|---|
-| `.minizip`-Archive und ihre Namenslisten | [`minizip.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/minizip.py) |
-| `.modelbin`-Modelle und Gelände | [`forzatech.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatech.py) |
-| `.pb`-Texturmuster | [`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py) |
-| `.pgeo`-Platzierungsdateien | [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py) |
-| `AssetManifest.xml` und Hashes der Materialtexturen | [`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py) |
-| Geländekacheln nach Ort | [`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py) |
+| `.minizip`-Archive und ihre Namenslisten | [`minizip.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/minizip.py) |
+| `.modelbin`-Modelle und Gelände | [`forzatech.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatech.py) |
+| `.pb`-Texturmuster | [`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py) |
+| `.pgeo`-Platzierungsdateien | [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py) |
+| `AssetManifest.xml` und Hashes der Materialtexturen | [`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py) |
+| Geländekacheln nach Ort | [`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py) |
 
 Forza hält einen Teil seiner Inhalte auch in gewöhnlichen ZIP-Archiven unter `media\`.
 Pythons `zipfile` öffnet diese, und `forzatech.models_in_archive()` listet ihre

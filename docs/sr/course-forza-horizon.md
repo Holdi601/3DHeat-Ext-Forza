@@ -16,20 +16,20 @@ Forza извоз чита стазу право из ForzaTech архива иг
 портали, трибине, заставе), и тло било ког места кроз које вожња пролази, као подлога стадиона.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Извори: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Извори: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Сами формати контејнера су на [ForzaTech](reader-forzatech.md).
 
 ## Налажење инсталиране игре {#finding-the-installed-game}
@@ -47,7 +47,7 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
    садржају, а не по имену, па се стаза под именем које нико није видео ипак налази.
 
 Ако је игра негде другде, дајте фолдер стазе преко `--track`; видите
-[Решавање проблема](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Решавање проблема](https://holdi601.github.io/3DHeat-GameFiles/sr/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` прескаче све ово.
 
@@ -354,7 +354,7 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
 ### Детаљ и буџет {#detail-and-the-budget}
 
 Опсези удаљености, буџет и које копије иду кад је буџет премали су на
-[Нивои детаља и буџет](detail-budget.md).
+[Нивои детаља и буџет](https://holdi601.github.io/3DHeat-GameFiles/sr/detail-budget.html).
 
 ### Сажетак постављања {#placement-summary}
 
@@ -422,13 +422,13 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
 
 Делови се пишу овим редом: по плочици `terrain`, `verge`, `road` (сваки са сликом плочице), па `water`,
 `tyre marks`, `markings` (равни, последња два подигнута), па сваки постављени део сортиран по имену.
-Координате су игрине сопствене (метри, Y горе). Видите [Формат излаза](output-format.md).
+Координате су игрине сопствене (метри, Y горе). Видите [Формат излаза](https://holdi601.github.io/3DHeat-GameFiles/sr/output-format.html).
 
 Фајл каже шта садржи у свом glTF `asset.extras`:
 
 | Поље | Значење |
 |---|---|
-| `course_format` | `2`: сопствени слој трке, места и модели у светским координатама су у њему. [`courses`](commands.md#courses) извози поново фајл са мањим бројем (или без броја) |
+| `course_format` | `2`: сопствени слој трке, места и модели у светским координатама су у њему. [`courses`](../commands.md#courses) извози поново фајл са мањим бројем (или без броја) |
 | `route` | подударени идентификатор руте, или `null` |
 | `event_copies`, `event_kinds` | колико копија сопственог слоја трке је постављено, и њихове врсте |
 | `hidden` | копије слободног света изостављене јер их трка уклања |
@@ -455,7 +455,7 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
 - На тест стази, аутомобил је око своје висине вожње изнад извученог тла (медијана испод 0,2 m).
 - Свака узорковна плочица пада унутар квадрата од 512 m који њено име предвиђа.
 - Узастопна постављања ограде су тачно 4 m један од другог, а већина крајева ограде пада у 5 cm од почетка следеће.
-- Ивичњаци леже неколико центиметара изнад извученог тла, лицем нагоре, у 5 m од вожње (такође тест инсталиране игре, видите [Развој](development.md)).
+- Ивичњаци леже неколико центиметара изнад извученог тла, лицем нагоре, у 5 m од вожње (такође тест инсталиране игре, видите [Развој](../maintaining.md)).
 
 ## Не црта се {#not-drawn}
 

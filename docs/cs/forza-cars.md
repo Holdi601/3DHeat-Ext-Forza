@@ -18,13 +18,13 @@ Zapíše každé auto nainstalované Forzy v nízkém detailu, jaký používá 
 1. **Spusťte ho**, když je hra nainstalovaná (najde se v knihovnách Steamu a v `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Nebo zadejte složku hry:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Načtěte ho v prohlížeči**: **Načíst soubor s auty…** v nastavení zobrazení, nebo přetáhněte soubor na kartu Analýza závodu. Zůstane v tomto prohlížeči. Kola, jejichž číslo auta je v souboru, se potom vykreslí jako právě to auto (viz [dokumentace přehrávání závodu ve vieweru](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars)).
@@ -42,7 +42,7 @@ Zapíše každé auto nainstalované Forzy v nízkém detailu, jaký používá 
 
 Pro každý archiv auta v `media/Cars`: model `ProxyLOD`, který nese (asi 900 trojúhelníků), číslo auta podle telemetrie, značku, označení modelu a rok z názvu archivu a jeho kola a zadní světla. Tvary jsou v metrech, 1:1 s autem. Archiv bez takového modelu (dopravní rekvizita) se pojmenuje a vynechá.
 
-Soubor je určen pro prohlížeč 3DHeat. Jeho rozložení pro každého, kdo ho čte jinde ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+Soubor je určen pro prohlížeč 3DHeat. Jeho rozložení pro každého, kdo ho čte jinde ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Část | Rozložení |
 |---|---|
@@ -55,4 +55,4 @@ Soubor je určen pro prohlížeč 3DHeat. Jeho rozložení pro každého, kdo ho
 
 Každá položka `cars` obsahuje: `key`, `ordinals` (čísla auta tak, jak je uvádí telemetrie), `make`, `model`, `year`, `height` a `length` (m), `wheels` (pro každé kolo `[x, y, z, radius]`, m), `lights` (body zadních světel `[x, y, z]`, m) a `vertexAt`, `vertices`, `faceAt`, `faces` (posuny v bajtech od začátku dat a počty).
 
-Soubor obsahuje obsah hry: je určen pro počítač, na kterém vznikl, a ne k předávání dál ([Pravidla a licence](rules-and-licences.md)).
+Soubor obsahuje obsah hry: je určen pro počítač, na kterém vznikl, a ne k předávání dál ([Pravidla a licence](../terms.md)).

@@ -19,13 +19,13 @@ search_exclude: true
 1. **Покрените га** када је игра инсталирана (пронађе се у Steam библиотекама и у `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Или наведите фолдер игре:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Учитајте га у приказивач**: **Учитај датотеку са аутомобилима…** у подешавањима приказа, или превуците датотеку на картицу трке; остаје у том прегледачу. Кругови чији број аутомобила је у датотеци тада се црте као тај баш аутомобил (видите [документацију о реприз трке у приказивачу](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars)).
@@ -43,7 +43,7 @@ search_exclude: true
 
 За сваки архив аутомобила под `media/Cars`: `ProxyLOD` модел који носи (око 900 троуглова), број аутомобила онако како га телеметрија наводи, његов произвођач, ознака модела и година из имена архива, те његови точкови и задња светла. Облици су у метрима, 1:1 са аутомобилом. Архив без таквог модела (саобраћајни реквизит) се именује и изоставља.
 
-Датотека је направљена за 3DHeat приказивач; њен распоред, за све који је читају на другом месту ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+Датотека је направљена за 3DHeat приказивач; њен распоред, за све који је читају на другом месту ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Део | Распоред |
 |---|---|
@@ -56,4 +56,4 @@ search_exclude: true
 
 Сваки унос у `cars`: `key`, `ordinals` (бројеви аутомобила онако како их телеметрија наводи), `make`, `model`, `year`, `height` и `length` (m), `wheels` (по точку `[x, y, z, radius]`, m), `lights` (тачке задњих светала `[x, y, z]`, m), и `vertexAt`, `vertices`, `faceAt`, `faces` (помаци у бајтовима од почетка података, и бројеви).
 
-Датотека садржи игрину садржину: намењена је машини на којој је направљена, а не за слање даље ([Правила и лиценце](rules-and-licences.md)).
+Датотека садржи игрину садржину: намењена је машини на којој је направљена, а не за слање даље ([Правила и лиценце](../terms.md)).

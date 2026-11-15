@@ -17,13 +17,13 @@ at its true size.
    `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Or name the game's folder:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Load it in the viewer**: **Load car file...** in the view settings, or drop
@@ -50,7 +50,7 @@ shapes are in metres, 1:1 with the car. An archive without such a model (a
 traffic prop) is named and left out.
 
 The file is made for the 3DHeat viewer; its layout, for anyone reading it
-elsewhere ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+elsewhere ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Part | Layout |
 |---|---|
@@ -68,4 +68,4 @@ and `vertexAt`, `vertices`, `faceAt`, `faces` (byte offsets from the start of
 the data, and counts).
 
 The file holds the game's content: it is for the machine it was made on, not
-for passing around ([Rules and licences](rules-and-licences.md)).
+for passing around ([Terms and licence](terms.md)).

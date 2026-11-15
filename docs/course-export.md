@@ -14,13 +14,18 @@ the game's own files.
 
 `course` turns a lap into a course: the ground in a band either side of where the
 car went, and what stands on that ground, as one `.glb` for the viewer. This page
-covers what all three supported games share. The pages under it cover what
-differs:
+covers the steps; the page under it covers how each is done in the game's files:
 
-- [Forza Horizon](course-forza-horizon.md): ForzaTech `.minizip` archives
-- [BeamNG.drive](course-beamng.md): zip archives, a terrain heightfield, compiled shapes
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, a World Partition stage
-- [Levels of detail and the budget](detail-budget.md): how many triangles the placed models get, and which copies stay
+- [How a Forza course is made](course-forza-horizon.md): finding the game, the track and the race; terrain, ground texture, placed models
+- [Levels of detail and the budget](https://holdi601.github.io/3DHeat-GameFiles/detail-budget.html) (on the GameFiles site): how many triangles the placed models get, and which copies stay
+
+```
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o example.glb
+```
+
+The only thing it needs is the lap: where the game is installed, which track,
+which race and where to cut are all worked out from it.
 
 ![The steps of a course export](assets/img/course-steps.svg)
 
@@ -31,42 +36,45 @@ the band of ground either side of the lap; a **tile** is one square piece of a
 game's terrain; an **LOD** (level of detail) is one of a model's simpler copies.
 
 1. **Read the lap.** Positions only, from any of the shapes in
-   [Lap inputs](lap-inputs.md). Speed and inputs are not used. A lap with fewer
+   [Lap inputs](https://holdi601.github.io/3DHeat-GameFiles/lap-inputs.html). Speed and inputs are not used. A lap with fewer
    than two samples is refused ("holds no driving").
-2. **Decide the game.** `--game`, then the lap file's own `game`, then Forza (see
-   [Commands](commands.md#which-game)).
-3. **Find the installed game.** All three search every Steam library listed in
-   Steam's `config\libraryfolders.vdf`. Forza also searches `C:\XboxGames`.
-   `--track` (Forza) or `--install` (BeamNG, AC Rally) skips the search.
-4. **Find where the lap was driven.** This is never decided by a name match
-   alone. Forza picks the track whose terrain tiles cover the lap. BeamNG picks the
-   level whose terrain (or roads) the lap's samples lie on. AC Rally tries every
-   stage in eight axis orientations and picks the one that puts the most of the
-   lap on road.
-5. **Cut a corridor** `--margin` metres either side of the driving (below).
-6. **Build the ground** inside the corridor, classed as road, verge, gravel and
-   dirt, terrain, markings, tyre marks or water, and bake a ground texture for
-   each 512 m square.
-7. **Place the models** standing in the corridor, by category, at a level of
+2. **Check the game.** `--game`, then the lap file's own `game`, then Forza. A
+   BeamNG.drive or Assetto Corsa Rally lap is refused with the tool that exports
+   it (see [Commands](commands.md#which-game)).
+3. **Find the installed game.** Every Steam library listed in Steam's
+   `config\libraryfolders.vdf` is searched, and `C:\XboxGames` for the Microsoft
+   Store. `--track` skips the search.
+4. **Find where the lap was driven.** This is never decided by a name match:
+   the track whose terrain tiles cover the lap is the one.
+5. **Find the race.** The lap is matched against the AI line of every race the
+   game defines; the race it follows adds its own layer (barriers, tents,
+   gantries) and takes away what it hides.
+6. **Cut a corridor** `--margin` metres either side of the driving (below),
+   widened to the whole of any venue the driving passes through.
+7. **Build the ground** inside the corridor, classed as road, verge, terrain,
+   markings, tyre marks or water, and bake a ground texture for each 512 m tile.
+8. **Place the models** standing in the corridor, by category, at a level of
    detail chosen by distance and a triangle budget.
-8. **Write the `.glb`**: one named node per part. See [Output format](output-format.md).
+9. **Write the `.glb`**: one named node per part. See [Output format](https://holdi601.github.io/3DHeat-GameFiles/output-format.html).
 
-What a run prints - here on a synthetic BeamNG.drive install the tests build,
-a 50 m lap down a strip of road:
+What a run prints - here on a made-up track the tests build, a 30 m circle
+around one guardrail and one kerb:
 
-![course run on a synthetic BeamNG.drive level](assets/img/course-run.svg)
+![course run on a made-up track](assets/img/course-run.svg)
+
+On a real track it also says `on <track>, in <game folder>` and which race it
+found, and the counts run to hundreds of thousands of triangles.
 
 ## The corridor
 
 The cut is a band around the driven line, not the lap's bounding box. For a
 circuit the two are nearly the same. For a point-to-point sprint the box is mostly
 hillside nobody drives past, and the band can be a tenth of its area. Source:
-[`corridor.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/corridor.py).
+[`corridor.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/corridor.py) in 3DHeat GameFiles.
 
 How it is built:
 
-- The driving is projected to the ground plane: x and z of the lap
-  (BeamNG: x and y of the game's own frame).
+- The driving is projected to the ground plane: x and z of the lap.
 - It is rasterised on a grid of **4 m** cells (`CELL`). Each cell the driving
   touches is widened by a disc of radius `margin + 4 m` in every direction.
 - Consecutive samples less than **50 m** apart (`JOIN`) are joined by points every
@@ -83,67 +91,59 @@ How it is built:
 The console reports the corridor's area, for example
 `cutting 80 m either side of the driving: 1.53 km2 of a 6,000 by 3,600 m box`.
 
-BeamNG and AC Rally also build a wider **reach** corridor of `margin + 60 m`. A
-placed model is considered if its origin lies in the reach corridor, and drawn
-only if its footprint touches the real corridor. That way a long object whose
-origin is just outside the band is not lost. BeamNG also uses the reach corridor
-to choose which road decals to paint.
+Where the driving passes through a venue's own ground (a stadium's floor, a
+festival site), the corridor takes in the whole of that ground, so the stands
+and walls around it come too (see
+[A venue is cut whole](course-forza-horizon.md#models-already-in-world-coordinates)).
 
 ## What the ground is made of
 
 Every export classes its ground triangles into the same kinds, and each kind is
 written as its own part so the viewer can show or hide it:
 
-| Kind | Part name | Flat colour (linear RGB) | Forza | BeamNG | AC Rally |
-|---|---|---|---|---|---|
-| road | `ground:road` | 0.22, 0.22, 0.23 | road strips: asphalt part | `ASPHALT`-type layers, road decals, modelled road | track tiles (`/MeshesTrack/`) |
-| verge | `ground:verge` | 0.52, 0.47, 0.30 | road strips: the shoulder | sidewalks and verge models | - |
-| gravel and dirt | `ground:gravel and dirt` | 0.50, 0.42, 0.30 | - | dirt, gravel, sand, mud layers and decals | - |
-| terrain | `ground:terrain` | 0.30, 0.44, 0.18 | everything else | everything else | `_Terrain` tiles and far terrain |
-| kerbs | `ground:kerbs` | 0.60, 0.12, 0.10 (Forza) | `road_gen_rum*` props | kerb, curb and rumble models | kerb and curb models |
-| markings | `ground:markings` | 0.90, 0.90, 0.88 | decal submeshes, lifted 5 cm | painted into the texture | - |
-| tyre marks | `ground:tyre marks` | 0.20, 0.17, 0.16 | decal submeshes, lifted 5 cm | painted into the texture | - |
-| water | `water:water` | 0.16, 0.34, 0.48 | water materials | sea plane, water blocks, rivers | - |
+| Kind | Part name | Flat colour (linear RGB) | What it is |
+|---|---|---|---|
+| road | `ground:road` | 0.22, 0.22, 0.23 | road strips: the asphalt part |
+| verge | `ground:verge` | 0.52, 0.47, 0.30 | road strips: the shoulder |
+| terrain | `ground:terrain` | 0.30, 0.44, 0.18 | everything else |
+| kerbs | `ground:kerbs` | 0.60, 0.12, 0.10 | `road_gen_rum*` props |
+| venue | `ground:venue` | 0.33, 0.33, 0.34 | a venue's own ground: a stadium's floor, a festival site |
+| plinths | `ground:plinths` | 0.42, 0.41, 0.39 | ground a street is dressed with: planters, steps, paving |
+| markings | `ground:markings` | 0.90, 0.90, 0.88 | decal submeshes, lifted 5 cm |
+| tyre marks | `ground:tyre marks` | 0.20, 0.17, 0.16 | decal submeshes, lifted 5 cm |
+| water | `water:water` | 0.16, 0.34, 0.48 | water materials |
 
 The flat colours are chosen to read at a glance, not to match the game. They are
 used for parts without a texture and by viewers that ignore textures. Source:
 [`surfaces.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/surfaces.py).
 
-Ground parts are split per 512 m square, and each square carries its own baked
-image, so the part names carry the square:
-
-| Game | Ground part name | Square key |
-|---|---|---|
-| Forza | `ground:road x-2046 z1023` | the terrain tile's grid name (steps of 1023, see [Forza Horizon](course-forza-horizon.md)) |
-| BeamNG | `ground:road 3_-2` | `floor(x / 512)`, `floor(y / 512)` in BeamNG metres |
-| AC Rally | `ground:road 1_-4` | `floor(x / 51200)`, `floor(y / 51200)` in Unreal centimetres |
+Road, verge and terrain are split per 512 m terrain tile, and each tile carries
+its own baked image, so the part names carry the tile's grid name (steps of
+1023, see [How a Forza course is made](course-forza-horizon.md#terrain)), for
+example `ground:road x-2046 z1023`.
 
 ## What stands on it
 
 Placed models are written in parts named `structure:<category>`, or
-`ground:kerbs` for kerbs (in all three games). When a part has its own texture, the
+`ground:kerbs` for kerbs. When a part has its own texture, the
 texture or material name follows the category, for example
 `structure:barriers bar_armco_bclr`.
 
-| Category | Forza | BeamNG | AC Rally |
-|---|---|---|---|
-| barriers | yes | yes | yes |
-| props | yes | yes | yes |
-| signs | yes | yes | yes |
-| buildings | yes (whole-building stand-ins where the game has them) | yes | yes |
-| infrastructure | yes | yes | yes |
-| bridges | yes | yes | (classed as infrastructure) |
-| rocks | yes | yes | yes |
-| kerbs | yes, as ground | yes, as ground | yes, as ground |
-| trees | with `--trees` | with `--trees` | with `--trees` |
-| smashables | with `--trees` | - | - |
+| Category | Placed |
+|---|---|
+| barriers, props, signs, infrastructure, bridges, rocks | yes |
+| buildings | yes (whole-building stand-ins where the game has them) |
+| kerbs | yes, as ground |
+| trees, bushes, smashables | with `--trees` |
+| the race's own layer | `structure:event_<category>`, when the lap follows one of the game's races |
+| other switched-on layers | `structure:layer_<category>` |
 
-How detail is shared out is the same in all three. Copies within 25 m of the
+How detail is shared out: copies within 25 m of the
 driving start at full detail, copies 25-60 m away one level coarser, and copies
 further out at the coarsest level. Then the costliest models step down until a
 triangle budget fits, and where even the coarsest levels do not fit a budget you
 give, copies are left out. Kerbs are never simplified or left out. See
-[Levels of detail and the budget](detail-budget.md).
+[Levels of detail and the budget](https://holdi601.github.io/3DHeat-GameFiles/detail-budget.html).
 
 ## Options that shape the result
 
@@ -152,19 +152,12 @@ give, copies are left out. Kerbs are never simplified or left out. See
 | a smaller file | `--no-textures` (flat colours), `--texture-size 1024` or `512`, `--detail-budget N`, `--margin 40` |
 | just the ground | `--no-placed` |
 | the scenery too | `--trees` |
-| a different season (Forza) | `--season winter` |
-| a game outside Steam | `--track` (Forza) or `--install` (BeamNG, AC Rally) |
-| a lap the search does not place | `--level` (BeamNG, AC Rally), `--track` (Forza) |
+| a different season | `--season winter` |
+| a game installed where it is not searched | `--track` |
+| a lap the search does not place | `--track` |
 
 ## Coordinates
 
-Each export writes metres with Y up, in a frame a recorded lap of the same game
-lines up with:
-
-| Game | Frame written |
-|---|---|
-| Forza | the game's own world coordinates, unchanged |
-| BeamNG | `(x, z, -y)` of BeamNG's Z-up world, which is the rotation the telemetry recorder applies |
-| AC Rally | the lap's frame, found by fitting: Unreal centimetres become metres, and Unreal X and Y become the lap's x and z in whichever of eight orientations fits |
-
-See [Output format](output-format.md).
+The course is written in the game's own world coordinates, unchanged: metres,
+Y up, the frame the game's telemetry reports, so a recorded lap lies on it with
+no placing or scaling. See [Output format](https://holdi601.github.io/3DHeat-GameFiles/output-format.html).

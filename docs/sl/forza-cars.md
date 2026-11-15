@@ -18,13 +18,13 @@ Zapiše vsak avtomobil nameščene igre Forza v eno datoteko, v nizki podrobnost
 1. **Zaženite ga**, ko je igra nameščena (najde se v knjižnicah Steam in v `C:\XboxGames`):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Ali pa navedite mapo igre:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza folder>" -o forza.h3dcars
    ```
 
 2. **Naložite ga v pregledovalnik**: **Naloži datoteko z avtomobili…** v nastavitvah pogleda ali pa datoteko spustite na zavihek Analiza dirke. Ostane v tem brskalniku. Krogi, katerih številka avtomobila je v datoteki, se nato narišejo s prav tem avtomobilom (glejte [dokumentacijo o ponovitvi dirke v pregledovalniku](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars)).
@@ -42,7 +42,7 @@ Zapiše vsak avtomobil nameščene igre Forza v eno datoteko, v nizki podrobnost
 
 Za vsak arhiv avtomobila v `media/Cars`: model `ProxyLOD`, ki ga vsebuje (okoli 900 trikotnikov), številka avtomobila, kot jo navaja telemetrija, njegova znamka, oznaka modela in letnik iz imena arhiva ter njegova kolesa in zadnje luči. Oblike so v metrih, v razmerju 1:1 z avtomobilom. Arhiv brez takega modela (rekvizit prometa) je poimenovan in izpuščen.
 
-Datoteka je narejena za pregledovalnik 3DHeat. Njena postavitev, za vsakogar, ki jo bere drugje ([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+Datoteka je narejena za pregledovalnik 3DHeat. Njena postavitev, za vsakogar, ki jo bere drugje ([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Del | Postavitev |
 |---|---|
@@ -55,4 +55,4 @@ Datoteka je narejena za pregledovalnik 3DHeat. Njena postavitev, za vsakogar, ki
 
 Vsak vnos v `cars` ima: `key`, `ordinals` (številke avtomobila, kot jih navaja telemetrija), `make`, `model`, `year`, `height` in `length` (m), `wheels` (za vsako kolo `[x, y, z, radius]`, m), `lights` (točke zadnjih luči `[x, y, z]`, m) ter `vertexAt`, `vertices`, `faceAt`, `faces` (zamiki v bajtih od začetka podatkov, in števila).
 
-Datoteka vsebuje vsebino igre. Namenjena je stroju, na katerem je bila narejena, ne za posredovanje ([Pravila in licence](rules-and-licences.md)).
+Datoteka vsebuje vsebino igre. Namenjena je stroju, na katerem je bila narejena, ne za posredovanje ([Pravila in licence](../terms.md)).

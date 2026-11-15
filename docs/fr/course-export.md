@@ -21,9 +21,9 @@ visionneuse. Cette page décrit ce que les trois jeux pris en charge ont en comm
 pages qui suivent décrivent ce qui diffère :
 
 - [Forza Horizon](course-forza-horizon.md) : archives ForzaTech `.minizip`
-- [BeamNG.drive](course-beamng.md) : archives zip, champ de hauteurs du terrain, formes compilées
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md) : Unreal 5 IoStore, une étape World Partition
-- [Niveaux de détail et budget](detail-budget.md) : combien de triangles reçoivent les modèles placés, et quelles copies restent
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/) : archives zip, champ de hauteurs du terrain, formes compilées
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/) : Unreal 5 IoStore, une étape World Partition
+- [Niveaux de détail et budget](https://holdi601.github.io/3DHeat-GameFiles/fr/detail-budget.html) : combien de triangles reçoivent les modèles placés, et quelles copies restent
 
 ![Les étapes d'un export de parcours](../assets/img/fr/course-steps.svg)
 
@@ -35,10 +35,10 @@ carré du terrain d'un jeu ; un **LOD** (niveau de détail) est une des copies p
 d'un modèle.
 
 1. **Lire le tour.** Positions seulement, dans l'une des formes décrites dans
-   [Entrées de tour](lap-inputs.md). La vitesse et les commandes ne sont pas utilisées.
+   [Entrées de tour](https://holdi601.github.io/3DHeat-GameFiles/fr/lap-inputs.html). La vitesse et les commandes ne sont pas utilisées.
    Un tour de moins de deux points est refusé (« holds no driving »).
 2. **Déterminer le jeu.** `--game`, puis le champ `game` du fichier de tour, puis Forza
-   (voir [Commandes](commands.md#which-game)).
+   (voir [Commandes](../commands.md#which-game)).
 3. **Trouver le jeu installé.** Les trois parcourent toutes les bibliothèques Steam listées
    dans `config\libraryfolders.vdf` de Steam. Forza cherche aussi dans `C:\XboxGames`.
    `--track` (Forza) ou `--install` (BeamNG, AC Rally) évite cette recherche.
@@ -53,7 +53,7 @@ d'un modèle.
    de 512 m.
 7. **Placer les modèles** qui se trouvent dans le couloir, par catégorie, à un niveau de
    détail choisi selon la distance et un budget de triangles.
-8. **Écrire le `.glb`** : un nœud nommé par partie. Voir [Format de sortie](output-format.md).
+8. **Écrire le `.glb`** : un nœud nommé par partie. Voir [Format de sortie](https://holdi601.github.io/3DHeat-GameFiles/fr/output-format.html).
 
 Ce qu'affiche une exécution — ici sur une installation synthétique de BeamNG.drive que
 les tests construisent, un tour de 50 m sur une bande de route :
@@ -149,7 +149,7 @@ copies plus loin passent au niveau le plus grossier. Ensuite, les modèles les p
 descendent jusqu'à ce qu'un budget de triangles tienne, et là où même les niveaux les plus
 grossiers ne tiennent pas dans un budget que vous donnez, des copies sont laissées de côté.
 Les bordures ne sont jamais simplifiées ni laissées de côté. Voir
-[Niveaux de détail et budget](detail-budget.md).
+[Niveaux de détail et budget](https://holdi601.github.io/3DHeat-GameFiles/fr/detail-budget.html).
 
 ## Les options qui changent le résultat {#options-that-shape-the-result}
 
@@ -173,4 +173,4 @@ enregistré du même jeu s'aligne :
 | BeamNG | `(x, z, -y)` du monde de BeamNG en Z vers le haut, soit la rotation qu'applique l'enregistreur de télémétrie |
 | AC Rally | le repère du tour, trouvé par ajustement : les centimètres Unreal deviennent des mètres, et les X et Y Unreal deviennent les x et z du tour, dans l'une des huit orientations qui convient |
 
-Voir [Format de sortie](output-format.md).
+Voir [Format de sortie](https://holdi601.github.io/3DHeat-GameFiles/fr/output-format.html).

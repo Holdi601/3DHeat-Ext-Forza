@@ -1,0 +1,11 @@
+# The English pages' hashes; written by tools/docs_i18n.py hashes. Do not edit.
+before-you-start.md: "df38b4a84aaa"
+commands.md: "32f5e35285be"
+course-export.md: "6c3a42c63a39"
+course-forza-horizon.md: "ce7adab4b167"
+forza-cars.md: "7f592f21659a"
+index.md: "cb205c0ade2d"
+inspecting-files.md: "e6cee3695640"
+maintaining.md: "5a5a685c8282"
+reader-forzatech.md: "d6c6780626c5"
+terms.md: "6c61ae2ba60f"

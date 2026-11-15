@@ -17,20 +17,20 @@ igra izpusti samo za to dirko (njen dogodkovni sloj: ovire, šotore, portale, tr
 zastave), ter tla vsakega prizorišča, skozi katero vožnja gre, na primer tla stadiona.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Viri: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Viri: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Sami formati vsebnikov so na [ForzaTech](reader-forzatech.md).
 
 ## Iskanje nameščene igre {#finding-the-installed-game}
@@ -49,7 +49,7 @@ Nihče ne bi smel vpisovati poti, kot je
    nihče ni videl.
 
 Če je igra drugje, podajte mapo steze z `--track`; glejte
-[Odpravljanje težav](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Odpravljanje težav](https://holdi601.github.io/3DHeat-GameFiles/sl/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` preskoči vse to.
 
@@ -382,7 +382,7 @@ Ploščadi ne razširijo reza.
 ### Podrobnost in proračun {#detail-and-the-budget}
 
 Pasovi razdalje, proračun in kopije, ki odidejo, če je proračun premajhen, so v
-[Stopnje podrobnosti in proračun](detail-budget.md).
+[Stopnje podrobnosti in proračun](https://holdi601.github.io/3DHeat-GameFiles/sl/detail-budget.html).
 
 ### Povzetek postavitve {#placement-summary}
 
@@ -451,13 +451,13 @@ Postavljene so samo kopije znotraj koridorja, kakor pri vsem drugem.
 Deli se zapisujejo v tem vrstnem redu: za vsako ploščico `terrain`, `verge`, `road` (vsak s
 sliko ploščice), nato `water`, `tyre marks`, `markings` (ploski, zadnja dva dvignjena), nato
 vsak postavljen del, razvrščen po imenu. Koordinate so igrine lastne (metri, y navzgor).
-Glejte [Oblika izhoda](output-format.md).
+Glejte [Oblika izhoda](https://holdi601.github.io/3DHeat-GameFiles/sl/output-format.html).
 
 Datoteka pove, kaj vsebuje, v svojih podatkih glTF `asset.extras`:
 
 | Polje | Pomen |
 |---|---|
-| `course_format` | `2`: lastni sloj dirke, prizorišča in modeli v svetovnih koordinatah so v njej. [`courses`](commands.md#courses) izvozi datoteko z nižjo številko (ali brez nje) znova |
+| `course_format` | `2`: lastni sloj dirke, prizorišča in modeli v svetovnih koordinatah so v njej. [`courses`](../commands.md#courses) izvozi datoteko z nižjo številko (ali brez nje) znova |
 | `route` | ujemajoči se ID poti ali `null` |
 | `event_copies`, `event_kinds` | koliko kopij lastnega sloja dirke je bilo postavljenih in njihove vrste |
 | `hidden` | kopije svetovne proste vožnje, ki so izpuščene, ker jih dirka odstrani |
@@ -487,7 +487,7 @@ ponovijo, razen če je igra nameščena.
 - Zaporedne postavitve varovalnih ograj so točno 4 m narazen, in večina koncev ograje pristane
   znotraj 5 cm od začetka naslednje.
 - Robniki sedijo nekaj centimetrov nad izvlečenimi tlemi, obrazi navzgor, znotraj 5 m od
-  vožnje (tudi test nameščene igre, glejte [Razvoj](development.md)).
+  vožnje (tudi test nameščene igre, glejte [Razvoj](../maintaining.md)).
 
 ## Ni narisano {#not-drawn}
 

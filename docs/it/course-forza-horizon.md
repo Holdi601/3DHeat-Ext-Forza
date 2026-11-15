@@ -16,19 +16,19 @@ propria texture (cordoli, guardrail, muri di pneumatici, cartelli, oggetti di sc
 edifici).
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<gioco>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<gioco>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Fonti: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py).
+Fonti: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py).
 I formati dei contenitori stessi sono su [ForzaTech](reader-forzatech.md).
 
 ## Trovare il gioco installato {#finding-the-installed-game}
@@ -49,7 +49,7 @@ ricavato automaticamente:
    con un nome che nessuno ha mai visto viene comunque trovato.
 
 Se il gioco si trova altrove, passa la cartella del tracciato con `--track`; vedi
-[Risoluzione dei problemi](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Risoluzione dei problemi](https://holdi601.github.io/3DHeat-GameFiles/it/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <cartella>` salta tutto questo.
 
@@ -324,7 +324,7 @@ per edificio (radice `hlod_tier_1_*`), già in coordinate del mondo come il terr
 ### Dettaglio e budget {#detail-and-the-budget}
 
 Le fasce di distanza, il budget e quali copie vengono tolte quando il budget è troppo
-piccolo sono descritti in [Livelli di dettaglio e budget](detail-budget.md).
+piccolo sono descritti in [Livelli di dettaglio e budget](https://holdi601.github.io/3DHeat-GameFiles/it/detail-budget.html).
 
 ### Riepilogo del posizionamento {#placement-summary}
 
@@ -344,7 +344,7 @@ piccolo sono descritti in [Livelli di dettaglio e budget](detail-budget.md).
 Le parti vengono scritte in quest'ordine: per tassello `terrain`, `verge`, `road` (ciascuna
 con l'immagine del tassello), poi `water`, `tyre marks`, `markings` (piatte, le ultime due
 sollevate), poi ogni parte collocata in ordine di nome. Le coordinate sono quelle del gioco
-(metri, Y in alto). Vedi [Formato del file](output-format.md).
+(metri, Y in alto). Vedi [Formato del file](https://holdi601.github.io/3DHeat-GameFiles/it/output-format.html).
 
 ## Quanto costa {#what-it-costs}
 
@@ -369,7 +369,7 @@ Non vengono rieseguite dai test, a meno che il gioco non sia installato.
 - Posizionamenti consecutivi di guardrail distano esattamente 4 m, e la maggior parte delle
   estremità dei guardrail cade entro 5 cm dall'inizio del successivo.
 - I cordoli si trovano pochi centimetri sopra il suolo estratto, con la faccia verso l'alto,
-  entro 5 m dalla guida (anche un test sul gioco installato, vedi [Sviluppo](development.md)).
+  entro 5 m dalla guida (anche un test sul gioco installato, vedi [Sviluppo](../maintaining.md)).
 
 ## Non disegnato {#not-drawn}
 

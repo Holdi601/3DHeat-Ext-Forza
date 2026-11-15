@@ -19,20 +19,20 @@ portálok, lelátók, zászlók), valamint annak a helyszínnek a talaját, amel
 verseny áthalad, például egy stadion padlóját.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Források: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Források: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 A tárolóformátumok maguk a [ForzaTech](reader-forzatech.md) oldalon vannak.
 
 ## A telepített játék megtalálása {#finding-the-installed-game}
@@ -54,7 +54,7 @@ kitalálja:
    olyan pálya is megtalálható, amelynek neve még senki nem látott.
 
 Ha a játék máshol van, add meg a pályamappát a `--track` kapcsolóval; lásd:
-[Hibaelhárítás](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Hibaelhárítás](https://holdi601.github.io/3DHeat-GameFiles/hu/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 A `--track <folder>` mindezt kihagyja.
 
@@ -405,7 +405,7 @@ szélesítik a kivágást.
 ### Részletesség és a keret {#detail-and-the-budget}
 
 A távolsági sávok, a keret és az, hogy a keret túl kicsi esetén melyik példány megy
-el először, a [Részletességi szintek és a keret](detail-budget.md) oldalon van.
+el először, a [Részletességi szintek és a keret](https://holdi601.github.io/3DHeat-GameFiles/hu/detail-budget.html) oldalon van.
 
 ### Elhelyezési összesítés {#placement-summary}
 
@@ -479,13 +479,13 @@ Csak a folyosón belüli másolatok kerülnek elhelyezésre, akárcsak mindennek
 A részek ebben a sorrendben íródnak: csempénként `terrain`, `verge`, `road` (mind
 a csempe képével), majd `water`, `tyre marks`, `markings` (lapos, az utolsó kettő
 megemelve), majd minden elhelyezett rész név szerint rendezve. A koordináták a
-játéké (méter, Y felfelé). Lásd: [Kimeneti formátum](output-format.md).
+játéké (méter, Y felfelé). Lásd: [Kimeneti formátum](https://holdi601.github.io/3DHeat-GameFiles/hu/output-format.html).
 
 A fájl a glTF `asset.extras` mezőjében mondja meg, mit tartalmaz:
 
 | Mező | Jelentés |
 |---|---|
-| `course_format` | `2`: benne van a verseny saját rétege, a helyszínek és a világi koordinátájú modellek. A [`courses`](commands.md#courses) egy kisebb (vagy hiányzó) számú fájlt újra exportál |
+| `course_format` | `2`: benne van a verseny saját rétege, a helyszínek és a világi koordinátájú modellek. A [`courses`](../commands.md#courses) egy kisebb (vagy hiányzó) számú fájlt újra exportál |
 | `route` | az illesztett útvonal azonosítója, vagy `null` |
 | `event_copies`, `event_kinds` | hány másolat került a verseny saját rétegéből elhelyezésre, és azok típusai |
 | `hidden` | a szabad mozgású másolatok, amelyek kimaradtak, mert a verseny eltávolítja őket |
@@ -514,7 +514,7 @@ nem futtatják újra, hacsak a játék nincs telepítve.
 - A szomszédos korlát-elhelyezések pontosan 4 m-re vannak egymástól, és a legtöbb
   korlátvég 5 cm-en belül van a következő kezdetétől.
 - A szegélyek néhány centiméterrel a kinyert talaj fölött ülnek, a lapjukkal felfelé,
-  a vezetéstől 5 m-en belül (ez egy telepített játékon végzett teszt is, lásd: [Fejlesztés](development.md)).
+  a vezetéstől 5 m-en belül (ez egy telepített játékon végzett teszt is, lásd: [Fejlesztés](../maintaining.md)).
 
 ## Nem rajzolódik {#not-drawn}
 

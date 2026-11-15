@@ -16,9 +16,9 @@ search_exclude: true
 `course` spremeni krog v progo: tla v pasu na vsaki strani mesta, kjer je avto vozil, in to, kar stoji na teh tleh, kot eno datoteko `.glb` za pregledovalnik. Ta stran zajema, kar si delijo vse tri podprte igre. Strani pod njo zajemajo, v čem se razlikujejo:
 
 - [Forza Horizon](course-forza-horizon.md): arhivi ForzaTech `.minizip`
-- [BeamNG.drive](course-beamng.md): zip arhivi, višinska mreža terena, sestavljene oblike
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, etapa World Partition
-- [Stopnje podrobnosti in proračun](detail-budget.md): koliko trikotnikov dobijo postavljeni modeli in kateri primerki ostanejo
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): zip arhivi, višinska mreža terena, sestavljene oblike
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, etapa World Partition
+- [Stopnje podrobnosti in proračun](https://holdi601.github.io/3DHeat-GameFiles/sl/detail-budget.html): koliko trikotnikov dobijo postavljeni modeli in kateri primerki ostanejo
 
 ![Koraki izvoza proge](../assets/img/sl/course-steps.svg)
 
@@ -26,14 +26,14 @@ search_exclude: true
 
 Pojmi, uporabljeni spodaj: **koordinatni sistem** (frame) pove, kam kažejo osi; **pas** (corridor) je pas tal na vsaki strani kroga; **ploščica** (tile) je en kvadratni kos terena igre; **LOD** (stopnja podrobnosti, level of detail) je ena izmed enostavnejših kopij modela.
 
-1. **Preberite krog.** Samo položaji, iz katerekoli oblike iz [Vhodi za krog](lap-inputs.md). Hitrost in vnosi se ne uporabljajo. Krog z manj kot dvema vzorcema je zavrnjen ("holds no driving").
-2. **Odloči igro.** `--game`, nato polje `game` v datoteki kroga, nato Forza (glejte [Ukazi](commands.md#which-game)).
+1. **Preberite krog.** Samo položaji, iz katerekoli oblike iz [Vhodi za krog](https://holdi601.github.io/3DHeat-GameFiles/sl/lap-inputs.html). Hitrost in vnosi se ne uporabljajo. Krog z manj kot dvema vzorcema je zavrnjen ("holds no driving").
+2. **Odloči igro.** `--game`, nato polje `game` v datoteki kroga, nato Forza (glejte [Ukazi](../commands.md#which-game)).
 3. **Poiščite nameščeno igro.** Vse tri preiščejo vsako knjižnico Steam, navedeno v `config\libraryfolders.vdf` na Steamu. Forza poleg tega preišče `C:\XboxGames`. `--track` (Forza) ali `--install` (BeamNG, AC Rally) preskoči iskanje.
 4. **Poiščite, kje je bil krog voden.** To se nikoli ne odloči samo z ujemanjem imena. Forza izbere progo, katere ploščice terena pokrivajo krog. BeamNG izbere nivo, na katerem (ali na katerih cestah) ležijo vzorci kroga. AC Rally preizkusi vsako etapo v osmih usmeritvah osi in izbere tisto, ki na cesto postavi največ kroga.
 5. **Izreži pas** `--margin` metrov na vsako stran vožnje (spodaj).
 6. **Zgradi tla** znotraj pasu, razvrščena kot cesta, bankina, gramoz in zemlja, teren, označbe, sledi gum ali voda, in zapeci talno teksturo za vsak kvadrat 512 m.
 7. **Postavi modele**, ki stojijo v pasu, po kategorijah, na stopnji podrobnosti, izbrani glede na razdaljo in proračun trikotnikov.
-8. **Zapišite `.glb`**: eno imenovano vozlišče za vsak del. Glejte [Oblika izhoda](output-format.md).
+8. **Zapišite `.glb`**: eno imenovano vozlišče za vsak del. Glejte [Oblika izhoda](https://holdi601.github.io/3DHeat-GameFiles/sl/output-format.html).
 
 Kaj izpiše zagon – tukaj na sintetični namestitvi BeamNG.drive, ki jo gradijo testi, 50 m kroga po ozki cesti:
 
@@ -97,7 +97,7 @@ Postavljeni modeli so zapisani v dele z imenom `structure:<kategorija>`, za robn
 | drevesa | z `--trees` | z `--trees` | z `--trees` |
 | razbijajoči se predmeti | z `--trees` | - | - |
 
-Razdelitev podrobnosti je pri vseh treh enaka. Kopije, oddaljene do 25 m od vožnje, začnejo na polni podrobnosti, kopije od 25 do 60 m ena stopnja nižje, dlje od tega pa na najgrobljši stopnji. Nato se najdražji modeli znižajo, dokler se ne prilega proračun trikotnikov, in kjer tudi najgrobljše stopnje ne ustrezajo proračunu, ki ga podate, se kopije izpustijo. Robniki se nikoli ne poenostavijo ali izpustijo. Glejte [Stopnje podrobnosti in proračun](detail-budget.md).
+Razdelitev podrobnosti je pri vseh treh enaka. Kopije, oddaljene do 25 m od vožnje, začnejo na polni podrobnosti, kopije od 25 do 60 m ena stopnja nižje, dlje od tega pa na najgrobljši stopnji. Nato se najdražji modeli znižajo, dokler se ne prilega proračun trikotnikov, in kjer tudi najgrobljše stopnje ne ustrezajo proračunu, ki ga podate, se kopije izpustijo. Robniki se nikoli ne poenostavijo ali izpustijo. Glejte [Stopnje podrobnosti in proračun](https://holdi601.github.io/3DHeat-GameFiles/sl/detail-budget.html).
 
 ## Možnosti, ki oblikujejo rezultat {#options-that-shape-the-result}
 
@@ -120,4 +120,4 @@ Vsak izvoz zapiše metre z Y navzgor, v koordinatnem sistemu, v katerem se posne
 | BeamNG | `(x, z, -y)` svetovnega sistema BeamNG z Z navzgor, to je rotacija, ki jo uporablja snemalnik telemetrije |
 | AC Rally | koordinatni sistem kroga, najden z prilagajanjem: centimetri Unreal postanejo metri, Unrealova X in Y pa postaneta x in z kroga v tisti od osmih usmeritev, ki ustreza |
 
-Glejte [Oblika izhoda](output-format.md).
+Glejte [Oblika izhoda](https://holdi601.github.io/3DHeat-GameFiles/sl/output-format.html).

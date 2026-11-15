@@ -12,20 +12,20 @@ search_exclude: true
 Export Forzy čte trať přímo z archivů ForzaTech ve hře: terén, kde jsou silnice, krajnice a tráva odlišeny, zemi zapečenou z mapy země samotné hry a každý umístěný model ve vlastní textuře (obrubníky, svodidla, zábrany z pneumatik, značky, rekvizity, budovy). Také zjistí, na kterém ze závodů hry bylo kolo najeto, a přidá to, co hra pro ten závod vykresluje sama (jeho vrstvu událostí: bariéry, stany, portály, tribuny, vlajky), a zemi každého místa konání, přes které jízda vede, například podlahu stadionu.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Zdroje: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Zdroje: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Samotné formáty kontejnerů jsou na [ForzaTech](reader-forzatech.md).
 
 ## Hledání nainstalované hry {#finding-the-installed-game}
@@ -38,7 +38,7 @@ Nikdo by neměl psát cestu jako
 3. **Složka hry** je každý podřízený prvek těchto složek, který má složku `media\Tracks`, ať se jmenuje jakkoli.
 4. **Složka tratě** je každá složka pod `media\Tracks`, která obsahuje `GeoChunk0.minizip`. Počítá se podle obsahu, ne podle názvu, takže se najde i trať pod názvem, který nikdo neviděl.
 
-Pokud je hra jinde, předejte složku tratě přes `--track`. Viz [Řešení potíží](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+Pokud je hra jinde, předejte složku tratě přes `--track`. Viz [Řešení potíží](https://holdi601.github.io/3DHeat-GameFiles/cs/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` všechno to přeskočí.
 
@@ -248,7 +248,7 @@ Některé druhy modelů nejsou v žádném souboru umístění. Jejich meshe nes
 
 ### Podrobnosti a rozpočet {#detail-and-the-budget}
 
-Pásy vzdálenosti, rozpočet a které kopie odejdou, když je rozpočet příliš malý, jsou na [Úrovně detailu a rozpočet](detail-budget.md).
+Pásy vzdálenosti, rozpočet a které kopie odejdou, když je rozpočet příliš malý, jsou na [Úrovně detailu a rozpočet](https://holdi601.github.io/3DHeat-GameFiles/cs/detail-budget.html).
 
 ### Souhrn umístění {#placement-summary}
 
@@ -297,13 +297,13 @@ Umísťují se jen kopie uvnitř koridoru, jako u všeho ostatního.
 
 ## Zápis souboru {#writing-the-file}
 
-Části se zapisují v tomto pořadí: pro každou dlaždici `terrain`, `verge`, `road` (každá s obrázkem dlaždice), pak `water`, `tyre marks`, `markings` (naplocho, poslední dvě zvednuté), pak každá umístěná část seřazená podle názvu. Souřadnice jsou hry vlastní (metry, Y nahoru). Viz [Výstupní formát](output-format.md).
+Části se zapisují v tomto pořadí: pro každou dlaždici `terrain`, `verge`, `road` (každá s obrázkem dlaždice), pak `water`, `tyre marks`, `markings` (naplocho, poslední dvě zvednuté), pak každá umístěná část seřazená podle názvu. Souřadnice jsou hry vlastní (metry, Y nahoru). Viz [Výstupní formát](https://holdi601.github.io/3DHeat-GameFiles/cs/output-format.html).
 
 Soubor říká, co obsahuje, ve svém `asset.extras` glTF:
 
 | Pole | Význam |
 |---|---|
-| `course_format` | `2`: vlastní vrstva závodu, místa konání a modely ve světových souřadnicích jsou v něm. [`courses`](commands.md#courses) exportuje soubor s nižším číslem (nebo bez něj) znovu |
+| `course_format` | `2`: vlastní vrstva závodu, místa konání a modely ve světových souřadnicích jsou v něm. [`courses`](../commands.md#courses) exportuje soubor s nižším číslem (nebo bez něj) znovu |
 | `route` | id odpovídající trasy, nebo `null` |
 | `event_copies`, `event_kinds` | kolik kopií vlastní vrstvy závodu se umístilo, a jejich druhy |
 | `hidden` | volné kopie, které se vynechají, protože je závod odebírá |
@@ -329,7 +329,7 @@ Toto jsou měření provedená při psaní čtečky, jak je uvedeno ve zdrojové
 - Na testovacím okruhu sedí auto asi na své jízdní výšce nad extrahovanou zemí (medián pod 0.2 m).
 - Každá vzorkovaná dlaždice přistane uvnitř čtverce 512 m, který předpovídá její název.
 - Po sobě jdoucí umístění svodidel jsou přesně 4 m od sebe a většina konců svodidel leží do 5 cm od začátku dalšího.
-- Obrubníky sedí několik centimetrů nad extrahovanou zemí, čelem nahoru, do 5 m od jízdy (také test na nainstalované hře, viz [Vývoj](development.md)).
+- Obrubníky sedí několik centimetrů nad extrahovanou zemí, čelem nahoru, do 5 m od jízdy (také test na nainstalované hře, viz [Vývoj](../maintaining.md)).
 
 ## Nekresleno {#not-drawn}
 

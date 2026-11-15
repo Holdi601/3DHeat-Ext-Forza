@@ -15,19 +15,19 @@ du jeu lui-même, et chaque modèle placé dans sa propre texture (bordures, gli
 pneus, panneaux, accessoires, bâtiments).
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Sources : [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py).
+Sources : [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py).
 Les formats de conteneurs eux-mêmes sont décrits sur [ForzaTech](reader-forzatech.md).
 
 ## Trouver le jeu installé {#finding-the-installed-game}
@@ -48,7 +48,7 @@ automatiquement :
    nom que personne n'a encore vu est tout de même trouvée.
 
 Si le jeu est ailleurs, donnez le dossier de piste avec `--track` ; voir
-[Dépannage](troubleshooting.md#finding-the-game) (« no installed Forza track found »).
+[Dépannage](https://holdi601.github.io/3DHeat-GameFiles/fr/troubleshooting.html#finding-the-game) (« no installed Forza track found »).
 
 `--track <dossier>` saute toute cette recherche.
 
@@ -276,7 +276,7 @@ substituts de bâtiment entier dans `scene\hlod_tier_1\`, un maillage par bâtim
 ### Détail et budget {#detail-and-the-budget}
 
 Les bandes de distance, le budget, et les copies qui partent quand le budget est trop petit sont
-décrits dans [Niveaux de détail et budget](detail-budget.md).
+décrits dans [Niveaux de détail et budget](https://holdi601.github.io/3DHeat-GameFiles/fr/detail-budget.html).
 
 ### Résumé du placement {#placement-summary}
 
@@ -296,7 +296,7 @@ décrits dans [Niveaux de détail et budget](detail-budget.md).
 Les parties sont écrites dans cet ordre : par tuile `terrain`, `verge`, `road` (chacune avec
 l'image de la tuile), puis `water`, `tyre marks`, `markings` (à plat, les deux dernières relevées),
 puis chaque partie placée triée par nom. Les coordonnées sont celles du jeu (mètres, Y vers le
-haut). Voir [Format de sortie](output-format.md).
+haut). Voir [Format de sortie](https://holdi601.github.io/3DHeat-GameFiles/fr/output-format.html).
 
 ## Ce que cela coûte {#what-it-costs}
 
@@ -318,7 +318,7 @@ sont pas relancées par les tests, sauf si le jeu est installé.
 - Sur le circuit d'essai, la voiture se trouve à peu près à sa hauteur de roulage au-dessus du sol extrait (médiane inférieure à 0,2 m).
 - Chaque tuile échantillonnée tombe dans le carré de 512 m que son nom annonce.
 - Des placements de glissière consécutifs sont exactement à 4 m l'un de l'autre, et la plupart des extrémités de glissière tombent à moins de 5 cm du début de la suivante.
-- Les bordures reposent à quelques centimètres au-dessus du sol extrait, face vers le haut, à moins de 5 m de la conduite (aussi un test sur jeu installé, voir [Développement](development.md)).
+- Les bordures reposent à quelques centimètres au-dessus du sol extrait, face vers le haut, à moins de 5 m de la conduite (aussi un test sur jeu installé, voir [Développement](../maintaining.md)).
 
 ## Non dessiné {#not-drawn}
 

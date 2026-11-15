@@ -18,20 +18,20 @@ search_exclude: true
 теренот на секое место низ кое минува возењето, на пример подот на стадион.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Извори: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Извори: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Самите формати на контејнерите се на [ForzaTech](reader-forzatech.md).
 
 ## Наоѓање на инсталираната игра {#finding-the-installed-game}
@@ -51,7 +51,7 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
    име што никој не го видел сепак се наоѓа.
 
 Ако играта е на друго место, дајте ја папката на патеката со `--track`; видете
-[Отстранување проблеми](troubleshooting.md#finding-the-game) („no installed Forza track found“).
+[Отстранување проблеми](https://holdi601.github.io/3DHeat-GameFiles/mk/troubleshooting.html#finding-the-game) („no installed Forza track found“).
 
 `--track <folder>` го прескокнува сето ова.
 
@@ -391,7 +391,7 @@ RGB (255, 64, 0) за површини што шејдерот на зграда
 ### Детаљ и буџет {#detail-and-the-budget}
 
 Појасите на растојание, буџетот и кои копии одат кога буџетот е премал се на
-[Нивоа на детали и буџетот](detail-budget.md).
+[Нивоа на детали и буџетот](https://holdi601.github.io/3DHeat-GameFiles/mk/detail-budget.html).
 
 ### Резиме на поставувањето {#placement-summary}
 
@@ -465,13 +465,13 @@ RGB (255, 64, 0) за површини што шејдерот на зграда
 Деловите се пишуваат по овој редослед: по плочка `terrain`, `verge`, `road` (секој со
 сликата на плочката), потоа `water`, `tyre marks`, `markings` (рамни, последните две
 подигнати), па секој поставен дел подреден по име. Координатите се на самата игра
-(метри, Y нагоре). Видете [Формат на излезот](output-format.md).
+(метри, Y нагоре). Видете [Формат на излезот](https://holdi601.github.io/3DHeat-GameFiles/mk/output-format.html).
 
 Датотеката кажува што содржи во својот glTF `asset.extras`:
 
 | Поле | Значење |
 |---|---|
-| `course_format` | `2`: во неа се сопствениот слој на трката, местата и моделите во светски простор. [`courses`](commands.md#courses) повторно извезува датотека со понизок број (или без) |
+| `course_format` | `2`: во неа се сопствениот слој на трката, местата и моделите во светски простор. [`courses`](../commands.md#courses) повторно извезува датотека со понизок број (или без) |
 | `route` | идентификаторот на совпадната рута, или `null` |
 | `event_copies`, `event_kinds` | колку копии од сопствениот слој на трката се поставени, и нивните видови |
 | `hidden` | копии од слободното возење изоставени бидејќи трката ги отстранува |
@@ -498,7 +498,7 @@ RGB (255, 64, 0) за површини што шејдерот на зграда
 - На пробната патека, автомобилот седи на околу својата висина на возење над извлечениот терен (медијана под 0,2 m).
 - Секоја семплирана плочка паѓа во квадратот од 512 m што го предвидува нејзиното име.
 - Последователните поставувања на ограда се точно на 4 m едно од друго, а повеќето краеви на оградата паѓаат во рамки од 5 cm од почетокот на следната.
-- Рабниците седат неколку сантиметри над извлечениот терен, со лицето нагоре, во рамки од 5 m од возењето (исто така тест на инсталирана игра, видете [Развој](development.md)).
+- Рабниците седат неколку сантиметри над извлечениот терен, со лицето нагоре, во рамки од 5 m од возењето (исто така тест на инсталирана игра, видете [Развој](../maintaining.md)).
 
 ## Не се црта {#not-drawn}
 

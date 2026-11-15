@@ -3,7 +3,7 @@ title: "ForzaTech"
 nav_order: 7
 lang: "el"
 source: reader-forzatech.md
-source_hash: "5b298baf30a0"
+source_hash: "d6c6780626c5"
 nav_exclude: true
 search_exclude: true
 ---
@@ -13,12 +13,12 @@ search_exclude: true
 
 | Μορφή | Ενότητα |
 |---|---|
-| αρχεία `.minizip` και οι λίστες ονομάτων τους | [`minizip.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/minizip.py) |
-| μοντέλα και έδαφος `.modelbin` | [`forzatech.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatech.py) |
-| δείγματα υφών `.pb` | [`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py) |
-| αρχεία τοποθέτησης `.pgeo` | [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py) |
-| `AssetManifest.xml` και hashes υφών υλικού | [`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py) |
-| πλακίδια εδάφους κατά θέση | [`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py) |
+| αρχεία `.minizip` και οι λίστες ονομάτων τους | [`minizip.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/minizip.py) |
+| μοντέλα και έδαφος `.modelbin` | [`forzatech.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatech.py) |
+| δείγματα υφών `.pb` | [`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py) |
+| αρχεία τοποθέτησης `.pgeo` | [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py) |
+| `AssetManifest.xml` και hashes υφών υλικού | [`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py) |
+| πλακίδια εδάφους κατά θέση | [`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py) |
 
 Το Forza κρατά επίσης μεγάλο μέρος του περιεχομένου του σε συνηθισμένα αρχεία ZIP κάτω από το `media\`. Το `zipfile` της Python τα ανοίγει, και το `forzatech.models_in_archive()` απαριθμεί τις καταχωρίσεις `.modelbin` τους. Η γεωμετρία της πίστας βρίσκεται στα αρχεία `.minizip`.
 

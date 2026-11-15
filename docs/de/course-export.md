@@ -21,9 +21,9 @@ für den Viewer. Diese Seite behandelt, was alle drei unterstützten Spiele geme
 haben. Die Seiten darunter behandeln, was sich unterscheidet:
 
 - [Forza Horizon](course-forza-horizon.md): ForzaTech-`.minizip`-Archive
-- [BeamNG.drive](course-beamng.md): Zip-Archive, ein Höhenfeld des Geländes, kompilierte Formen
-- [Assetto Corsa Rally](course-assetto-corsa-rally.md): Unreal 5 IoStore, eine World-Partition-Etappe
-- [Detailstufen und Budget](detail-budget.md): wie viele Dreiecke die platzierten Modelle bekommen und welche Kopien bleiben
+- [BeamNG.drive](https://holdi601.github.io/3DHeat-Ext-BeamNG/): Zip-Archive, ein Höhenfeld des Geländes, kompilierte Formen
+- [Assetto Corsa Rally](https://holdi601.github.io/3DHeat-Ext-ACRally/): Unreal 5 IoStore, eine World-Partition-Etappe
+- [Detailstufen und Budget](https://holdi601.github.io/3DHeat-GameFiles/de/detail-budget.html): wie viele Dreiecke die platzierten Modelle bekommen und welche Kopien bleiben
 
 ![Die Schritte eines Streckenexports](../assets/img/de/course-steps.svg)
 
@@ -35,10 +35,10 @@ ein quadratisches Stück des Geländes eines Spiels; eine **LOD** (Detailstufe) 
 eine vereinfachte Kopie eines Modells.
 
 1. **Die Runde lesen.** Nur Positionen, aus jeder der Formen in
-   [Rundeneingaben](lap-inputs.md). Geschwindigkeit und Eingaben werden nicht
+   [Rundeneingaben](https://holdi601.github.io/3DHeat-GameFiles/de/lap-inputs.html). Geschwindigkeit und Eingaben werden nicht
    verwendet. Eine Runde mit weniger als zwei Punkten wird abgelehnt ("holds no driving").
 2. **Das Spiel bestimmen.** Zuerst `--game`, dann das Feld `game` der Rundendatei,
-   sonst Forza (siehe [Befehle](commands.md#which-game)).
+   sonst Forza (siehe [Befehle](../commands.md#which-game)).
 3. **Das installierte Spiel finden.** Alle drei durchsuchen jede Steam-Bibliothek,
    die in `config\libraryfolders.vdf` von Steam steht. Forza durchsucht außerdem
    `C:\XboxGames`. Mit `--track` (Forza) oder `--install` (BeamNG, AC Rally) entfällt
@@ -56,7 +56,7 @@ eine vereinfachte Kopie eines Modells.
    512-m-Quadrat eine Bodentextur backen.
 7. **Die Modelle platzieren**, die im Korridor stehen, nach Kategorie, mit einer
    Detailstufe, die nach Entfernung und einem Dreiecksbudget gewählt wird.
-8. **Die `.glb` schreiben**: ein benannter Knoten je Teil. Siehe [Ausgabeformat](output-format.md).
+8. **Die `.glb` schreiben**: ein benannter Knoten je Teil. Siehe [Ausgabeformat](https://holdi601.github.io/3DHeat-GameFiles/de/output-format.html).
 
 Was ein Lauf ausgibt, hier an einem synthetischen BeamNG.drive-Install, den die
 Tests bauen, einer 50-m-Runde auf einem Straßenstreifen:
@@ -156,7 +156,7 @@ gröber, und weiter entfernte Kopien in der gröbsten Stufe. Danach werden die
 teuersten Modelle herabgestuft, bis ein Dreiecksbudget passt. Reicht selbst die
 gröbste Stufe für ein Budget, das du vorgibst, nicht aus, werden Kopien
 weggelassen. Randsteine werden nie vereinfacht oder weggelassen. Siehe
-[Detailstufen und Budget](detail-budget.md).
+[Detailstufen und Budget](https://holdi601.github.io/3DHeat-GameFiles/de/detail-budget.html).
 
 ## Optionen, die das Ergebnis formen {#options-that-shape-the-result}
 
@@ -180,4 +180,4 @@ aufgezeichnete Runde desselben Spiels übereinstimmt:
 | BeamNG | `(x, z, -y)` des Z-nach-oben-Weltsystems von BeamNG, also die Drehung, die der Telemetrie-Recorder anwendet |
 | AC Rally | das Bezugssystem der Runde, durch Anpassung gefunden: Unreal-Zentimeter werden zu Metern, und Unreal-X und -Y werden zu x und z der Runde in einer von acht passenden Ausrichtungen |
 
-Siehe [Ausgabeformat](output-format.md).
+Siehe [Ausgabeformat](https://holdi601.github.io/3DHeat-GameFiles/de/output-format.html).

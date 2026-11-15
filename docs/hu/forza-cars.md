@@ -3,7 +3,7 @@ title: "Forza autók"
 nav_order: 6
 lang: "hu"
 source: forza-cars.md
-source_hash: "e1b48f2525db"
+source_hash: "7f592f21659a"
 nav_exclude: true
 search_exclude: true
 ---
@@ -21,13 +21,13 @@ rögzített autó a saját alakjában, valódi méretében jelenik meg.
    `C:\XboxGames` mappában található):
 
    ```
-   python -m heat3d_gamefiles cars -o forza.h3dcars
+   heat3d-forza-maps cars -o forza.h3dcars
    ```
 
    Vagy add meg a játék mappáját:
 
    ```
-   python -m heat3d_gamefiles cars --game "D:\Games\<Forza mappa>" -o forza.h3dcars
+   heat3d-forza-maps cars --game "D:\Games\<Forza mappa>" -o forza.h3dcars
    ```
 
 2. **Töltsd be a megtekintőbe**: a nézetbeállításokban a **Autófájl betöltése...** gombot, vagy húzd a
@@ -53,7 +53,7 @@ autóval. Az olyan archívumot, amelyben nincs ilyen modell (például forgalmi 
 megnevezi és kihagyja.
 
 A fájl a 3DHeat megtekintőnek készült; elrendezése annak, aki máshol olvassa
-([`forzacars.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzacars.py)):
+([`forzacars.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzacars.py)):
 
 | Rész | Elrendezés |
 |---|---|
@@ -70,4 +70,4 @@ Minden `cars` bejegyzés: `key`, `ordinals` (az autó számai a telemetria szeri
 az adat elejétől, és darabszámok).
 
 A fájl a játék tartalmát hordozza: ahhoz a géphez készült, amelyen létrejött, nem arra, hogy
-továbbadják ([Szabályok és licencek](rules-and-licences.md)).
+továbbadják ([Szabályok és licencek](../terms.md)).

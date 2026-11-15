@@ -18,20 +18,20 @@ search_exclude: true
 което минава шофирането, като например подът на стадион.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Източници: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Източници: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Самите контейнерни формати са описани в [ForzaTech](reader-forzatech.md).
 
 ## Намиране на инсталираната игра {#finding-the-installed-game}
@@ -51,7 +51,7 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
    виждал, пак се намира.
 
 Ако играта е на друго място, подайте папката на трасето с `--track`; вижте
-[Отстраняване на проблеми](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Отстраняване на проблеми](https://holdi601.github.io/3DHeat-GameFiles/bg/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <папка>` пропуска всичко това.
 
@@ -380,7 +380,7 @@ GUID (`..._xsummerx_bclr` към `..._xwinterx_bclr`, или `..._bclr` към `
 ### Детайлност и бюджет {#detail-and-the-budget}
 
 Разстоянията на нивата, бюджетът и кои копия отпадат, когато бюджетът е твърде малък, са в
-[Нива на детайлност и бюджетът](detail-budget.md).
+[Нива на детайлност и бюджетът](https://holdi601.github.io/3DHeat-GameFiles/bg/detail-budget.html).
 
 ### Обобщение на поставянията {#placement-summary}
 
@@ -450,13 +450,13 @@ GUID (`..._xsummerx_bclr` към `..._xwinterx_bclr`, или `..._bclr` към `
 Частите се записват в този ред: за всяка плочка `terrain`, `verge`, `road` (всяка с изображението
 на плочката), после `water`, `tyre marks`, `markings` (плоски, последните две повдигнати), после
 всяка поставена част, сортирана по име. Координатите са на самата игра (метри, Y нагоре). Вижте
-[Формат на изхода](output-format.md).
+[Формат на изхода](https://holdi601.github.io/3DHeat-GameFiles/bg/output-format.html).
 
 Файлът казва какво съдържа в `asset.extras` на glTF:
 
 | Поле | Значение |
 |---|---|
-| `course_format` | `2`: собственият слой на състезанието, местата и моделите в световни координати са в него. [`courses`](commands.md#courses) експортира наново файл с по-нисък номер (или без такъв) |
+| `course_format` | `2`: собственият слой на състезанието, местата и моделите в световни координати са в него. [`courses`](../commands.md#courses) експортира наново файл с по-нисък номер (или без такъв) |
 | `route` | идентификаторът на съвпадналия маршрут или `null` |
 | `event_copies`, `event_kinds` | колко копия от собствения слой на състезанието са поставени и техните видове |
 | `hidden` | копия от свободния свят, които са пропуснати, защото състезанието ги премахва |
@@ -485,7 +485,7 @@ GUID (`..._xsummerx_bclr` към `..._xwinterx_bclr`, или `..._bclr` към `
 - Последователните поставяния на предпазни огради са точно на 4 m едно от друго, а повечето краища на
   огради попадат до 5 см от началото на следващата.
 - Бордюрите стоят на няколко сантиметра над извлечената земя, с лице нагоре, на до 5 m от шофирането
-  (и тест с инсталирана игра, вижте [Разработка](development.md)).
+  (и тест с инсталирана игра, вижте [Разработка](../maintaining.md)).
 
 ## Не се рисува {#not-drawn}
 

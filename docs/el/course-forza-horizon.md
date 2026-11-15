@@ -16,20 +16,20 @@ search_exclude: true
 και το έδαφος κάθε χώρου από τον οποίο περνά η οδήγηση, όπως το δάπεδο ενός σταδίου.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Πηγές: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Πηγές: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Τα ίδια τα κοντέινερ των αρχείων είναι στο [ForzaTech](reader-forzatech.md).
 
 ## Εύρεση του εγκατεστημένου παιχνιδιού {#finding-the-installed-game}
@@ -44,7 +44,7 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
 4. Ένας **φάκελος διαδρομής** είναι κάθε φάκελος κάτω από το `media\Tracks` που έχει ένα `GeoChunk0.minizip`. Μετράει από το περιεχόμενό του, όχι από το όνομά του, οπότε μια διαδρομή με όνομα που κανείς δεν έχει ξαναδεί βρίσκεται κι αυτή.
 
 Αν το παιχνίδι είναι κάπου αλλού, δώστε τον φάκελο διαδρομής με `--track`· δείτε
-[Αντιμετώπιση προβλημάτων](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Αντιμετώπιση προβλημάτων](https://holdi601.github.io/3DHeat-GameFiles/el/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 Το `--track <folder>` παρακάμπτει όλα αυτά.
 
@@ -259,7 +259,7 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
 
 ### Λεπτομέρεια και προϋπολογισμός {#detail-and-the-budget}
 
-Οι ζώνες απόστασης, ο προϋπολογισμός και το ποια αντίγραφα φεύγουν όταν ο προϋπολογισμός είναι μικρός είναι στο [Επίπεδα λεπτομέρειας και προϋπολογισμός](detail-budget.md).
+Οι ζώνες απόστασης, ο προϋπολογισμός και το ποια αντίγραφα φεύγουν όταν ο προϋπολογισμός είναι μικρός είναι στο [Επίπεδα λεπτομέρειας και προϋπολογισμός](https://holdi601.github.io/3DHeat-GameFiles/el/detail-budget.html).
 
 ### Σύνοψη τοποθέτησης {#placement-summary}
 
@@ -310,13 +310,13 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
 
 ## Γράφοντας το αρχείο {#writing-the-file}
 
-Τα τμήματα γράφονται με αυτή τη σειρά: ανά πλακίδιο `terrain`, `verge`, `road` (καθένα με την εικόνα του πλακιδίου), μετά `water`, `tyre marks`, `markings` (επίπεδα, τα δύο τελευταία ανυψωμένα), και μετά κάθε τοποθετημένο τμήμα ταξινομημένο κατά όνομα. Οι συντεταγμένες είναι του ίδιου του παιχνιδιού (μέτρα, Y προς τα πάνω). Δείτε [Μορφή αρχείου](output-format.md).
+Τα τμήματα γράφονται με αυτή τη σειρά: ανά πλακίδιο `terrain`, `verge`, `road` (καθένα με την εικόνα του πλακιδίου), μετά `water`, `tyre marks`, `markings` (επίπεδα, τα δύο τελευταία ανυψωμένα), και μετά κάθε τοποθετημένο τμήμα ταξινομημένο κατά όνομα. Οι συντεταγμένες είναι του ίδιου του παιχνιδιού (μέτρα, Y προς τα πάνω). Δείτε [Μορφή αρχείου](https://holdi601.github.io/3DHeat-GameFiles/el/output-format.html).
 
 Το αρχείο λέει τι περιέχει στο `asset.extras` του glTF:
 
 | Πεδίο | Σημασία |
 |---|---|
-| `course_format` | `2`: το δικό επίπεδο του αγώνα, οι χώροι και τα μοντέλα σε συντεταγμένες κόσμου βρίσκονται μέσα του. Το [`courses`](commands.md#courses) ξαναεξάγει αρχείο με μικρότερο αριθμό (ή χωρίς) |
+| `course_format` | `2`: το δικό επίπεδο του αγώνα, οι χώροι και τα μοντέλα σε συντεταγμένες κόσμου βρίσκονται μέσα του. Το [`courses`](../commands.md#courses) ξαναεξάγει αρχείο με μικρότερο αριθμό (ή χωρίς) |
 | `route` | το id της ταιριασμένης διαδρομής, ή `null` |
 | `event_copies`, `event_kinds` | πόσα αντίγραφα του δικού επιπέδου του αγώνα τοποθετήθηκαν, και τα είδη τους |
 | `hidden` | αντίγραφα του ελεύθερου κόσμου που αφέθηκαν έξω επειδή ο αγώνας τα αφαιρεί |
@@ -342,7 +342,7 @@ python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json 
 - Στην πίστα δοκιμής, το αυτοκίνητο στέκεται περίπου στο ύψος της οδήγησής του πάνω από το εξαγόμενο έδαφος (διάμεσος κάτω από 0,2 m).
 - Κάθε δειγματισμένο πλακίδιο προσγειώνεται μέσα στο τετράγωνο 512 m που προβλέπει το όνομά του.
 - Οι συνεχόμενες τοποθετήσεις μπαριέρας απέχουν ακριβώς 4 m, και τα περισσότερα άκρα μπαριέρας προσγειώνονται μέσα σε 5 cm από την αρχή της επόμενης.
-- Τα κράσπεδα κάθονται λίγα εκατοστά πάνω από το εξαγόμενο έδαφος, με τις όψεις προς τα πάνω, μέσα σε 5 m από την οδήγηση (επίσης τεστ εγκατεστημένου παιχνιδιού, δείτε [Ανάπτυξη](development.md)).
+- Τα κράσπεδα κάθονται λίγα εκατοστά πάνω από το εξαγόμενο έδαφος, με τις όψεις προς τα πάνω, μέσα σε 5 m από την οδήγηση (επίσης τεστ εγκατεστημένου παιχνιδιού, δείτε [Ανάπτυξη](../maintaining.md)).
 
 ## Δεν σχεδιάζεται {#not-drawn}
 

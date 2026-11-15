@@ -12,20 +12,20 @@ search_exclude: true
 Izvoz Forze čita stazu izravno iz ForzaTech arhiva igre: teren s razdvojenom cestom, rubom i travom, teksturu tla pečenu iz igrinih vlastitih karata tla, i svaki postavljeni model u vlastitoj teksturi (rubnjaci, zaštitne ograde, zidovi od guma, znakovi, rekviziti, zgrade). Također pronalazi koju je od igrinih utrka krug vožen i dodaje ono što igra stavlja za tu utrku sama (njezin sloj događaja: barijere, šatore, portale, tribine, zastave), te tlo svakog mjesta održavanja kroz koje vožnja prolazi, poput poda stadiona.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Izvori: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Izvori: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Sami formati spremnika opisani su na [ForzaTech](reader-forzatech.md).
 
 ## Pronalaženje instalirane igre {#finding-the-installed-game}
@@ -37,7 +37,7 @@ Nitko ne bi trebao upisivati put poput `D:\Games\steamapps\common\<Forza>\media\
 3. **Mapa igre** je svaka podmapa tih mapa koja ima mapu `media\Tracks`, bez obzira na ime.
 4. **Mapa staze** je svaka mapa pod `media\Tracks` koja ima `GeoChunk0.minizip`. Broji se po sadržaju, a ne po imenu, pa se staza pod imenom koje nitko nije vidio ipak nađe.
 
-Ako je igra negdje drugdje, zadajte mapu staze s `--track`; vidi [Rješavanje problema](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+Ako je igra negdje drugdje, zadajte mapu staze s `--track`; vidi [Rješavanje problema](https://holdi601.github.io/3DHeat-GameFiles/hr/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <mapa>` preskače sve ovo.
 
@@ -246,7 +246,7 @@ Nekoliko vrsta modela nije ni u jednoj datoteci postavljanja. Njihove mreže nos
 
 ### Detalj i proračun {#detail-and-the-budget}
 
-Pojasevi udaljenosti, proračun i koje kopije odlaze kada je proračun premali nalaze se na [Razine detalja i proračun](detail-budget.md).
+Pojasevi udaljenosti, proračun i koje kopije odlaze kada je proračun premali nalaze se na [Razine detalja i proračun](https://holdi601.github.io/3DHeat-GameFiles/hr/detail-budget.html).
 
 ### Sažetak postavljanja {#placement-summary}
 
@@ -295,13 +295,13 @@ Postavljaju se samo kopije unutar koridora, kao i za sve drugo.
 
 ## Pisanje datoteke {#writing-the-file}
 
-Dijelovi se pišu ovim redom: po pločici `terrain`, `verge`, `road` (svaki sa slikom pločice), zatim `water`, `tyre marks`, `markings` (ravni, zadnja dva podignuta), zatim svaki postavljeni dio sortiran po imenu. Koordinate su igrine vlastite (metri, Y gore). Vidi [Format izlaza](output-format.md).
+Dijelovi se pišu ovim redom: po pločici `terrain`, `verge`, `road` (svaki sa slikom pločice), zatim `water`, `tyre marks`, `markings` (ravni, zadnja dva podignuta), zatim svaki postavljeni dio sortiran po imenu. Koordinate su igrine vlastite (metri, Y gore). Vidi [Format izlaza](https://holdi601.github.io/3DHeat-GameFiles/hr/output-format.html).
 
 Datoteka u svojim `asset.extras` glTF-a kaže što sadrži:
 
 | Polje | Značenje |
 |---|---|
-| `course_format` | `2`: sloj vlastite utrke, mjesta i modeli u svjetskim koordinatama su u njoj. [`courses`](commands.md#courses) izvozi datoteku s nižim brojem (ili bez njega) ponovno |
+| `course_format` | `2`: sloj vlastite utrke, mjesta i modeli u svjetskim koordinatama su u njoj. [`courses`](../commands.md#courses) izvozi datoteku s nižim brojem (ili bez njega) ponovno |
 | `route` | id podudarene rute, ili `null` |
 | `event_copies`, `event_kinds` | koliko kopija sloja vlastite utrke je postavljeno, i njihove vrste |
 | `hidden` | kopije slobodne vožnje izostavljene jer ih utrka uklanja |
@@ -327,7 +327,7 @@ Ovo su mjerenja napravljena dok je čitač pisan, kako piše u izvoru. Testovi i
 - Na probnoj stazi automobil stoji otprilike na svojoj visini vožnje iznad izvučenog tla (medijan ispod 0.2 m).
 - Svaka uzorkovana pločica pada unutar kvadrata od 512 m koji njezino ime predviđa.
 - Uzastopna postavljanja zaštitnih ograda su točno 4 m razmaka, a većina krajeva ograde pada unutar 5 cm od početka sljedeće.
-- Rubnjaci stoje nekoliko centimetara iznad izvučenog tla, lica prema gore, unutar 5 m od vožnje (također test instalirane igre, vidi [Razvoj](development.md)).
+- Rubnjaci stoje nekoliko centimetara iznad izvučenog tla, lica prema gore, unutar 5 m od vožnje (također test instalirane igre, vidi [Razvoj](../maintaining.md)).
 
 ## Ne crta se {#not-drawn}
 

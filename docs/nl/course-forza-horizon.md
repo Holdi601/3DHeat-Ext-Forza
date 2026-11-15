@@ -18,20 +18,20 @@ tenten, portalen, tribunes, vlaggen), en de grond van elke locatie waar de rit d
 de vloer van een stadion.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Bronnen: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Bronnen: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 De containerformaten zelf staan op [ForzaTech](reader-forzatech.md).
 
 ## Het geïnstalleerde spel vinden {#finding-the-installed-game}
@@ -51,7 +51,7 @@ pad wordt zelf uitgezocht:
    gevonden.
 
 Staat het spel ergens anders, geef dan de banenmap op met `--track`; zie
-[Problemen oplossen](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Problemen oplossen](https://holdi601.github.io/3DHeat-GameFiles/nl/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` slaat dit allemaal over.
 
@@ -371,7 +371,7 @@ vangrails rond een stadion meekomen, niet alleen de strook die de ronden gebruik
 ### Detail en het budget {#detail-and-the-budget}
 
 Afstandsbanden, het budget, en welke kopieën weggaan als het budget te klein is, staan op
-[Detailniveaus en het budget](detail-budget.md).
+[Detailniveaus en het budget](https://holdi601.github.io/3DHeat-GameFiles/nl/detail-budget.html).
 
 ### Plaatsingssamenvatting {#placement-summary}
 
@@ -439,13 +439,13 @@ Alleen kopieën binnen de corridor worden geplaatst, zoals bij al het andere.
 De delen worden in deze volgorde geschreven: per tegel `terrain`, `verge`, `road` (elk met de afbeelding van de
 tegel), dan `water`, `tyre marks`, `markings` (vlak, de laatste twee opgetild), dan elk geplaatst deel
 gesorteerd op naam. De coördinaten zijn die van het spel zelf (meters, Y omhoog). Zie
-[Uitvoerformaat](output-format.md).
+[Uitvoerformaat](https://holdi601.github.io/3DHeat-GameFiles/nl/output-format.html).
 
 Het bestand zegt wat het bevat in zijn glTF-`asset.extras`:
 
 | Veld | Betekenis |
 |---|---|
-| `course_format` | `2`: de eigen laag van de race, locaties en modellen in wereldcoördinaten zitten erin. [`courses`](commands.md#courses) exporteert een bestand met een lager nummer (of geen) opnieuw |
+| `course_format` | `2`: de eigen laag van de race, locaties en modellen in wereldcoördinaten zitten erin. [`courses`](../commands.md#courses) exporteert een bestand met een lager nummer (of geen) opnieuw |
 | `route` | het gekoppelde route-id, of `null` |
 | `event_copies`, `event_kinds` | hoeveel kopieën van de eigen laag van de race zijn geplaatst, en hun soorten |
 | `hidden` | kopieën van de vrije rijmodus die zijn weggelaten omdat de race ze verwijdert |
@@ -474,7 +474,7 @@ opnieuw uitgevoerd door de tests, tenzij het spel is geïnstalleerd.
 - Opeenvolgende plaatsingen van vangrails liggen precies 4 m uit elkaar, en de meeste uiteinden van vangrails
   liggen binnen 5 cm van het begin van de volgende.
 - Stoepranden zitten een paar centimeter boven de geëxtraheerde grond, met de voorkant omhoog, binnen 5 m van
-  de rit (ook een test met het geïnstalleerde spel, zie [Ontwikkeling](development.md)).
+  de rit (ook een test met het geïnstalleerde spel, zie [Ontwikkeling](../maintaining.md)).
 
 ## Niet getekend {#not-drawn}
 

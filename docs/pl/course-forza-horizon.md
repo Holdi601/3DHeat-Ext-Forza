@@ -18,20 +18,20 @@ przejechano okrążenie, i dokłada to, co gra wystawia tylko dla tego wyścigu
 areny, przez którą przebiega jazda, na przykład podłogę stadionu.
 
 ```
-python -m heat3d_gamefiles course "Example Circuit"
-python -m heat3d_gamefiles course lap.json -o course.glb --season winter
-python -m heat3d_gamefiles courses -o courses
-python -m heat3d_gamefiles terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
+heat3d-forza-maps course "Example Circuit"
+heat3d-forza-maps course lap.json -o course.glb --season winter
+heat3d-forza-maps courses -o courses
+heat3d-forza-maps terrain "<game>\media\Tracks\<map>" --route lap.json -o map.glb
 ```
 
-Źródła: [`cli.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/cli.py) (`export_course`, `_write_course`),
-[`forzainstall.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzainstall.py),
-[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaterrain.py),
-[`forzatexture.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzatexture.py),
-[`courseexport.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/courseexport.py),
-[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzamaterial.py),
-[`forzaroute.py`](https://github.com/Holdi601/3DHeat-GameFiles/blob/main/heat3d_gamefiles/forzaroute.py).
+Źródła: [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/cli.py) (`export_course`, `_write_course`),
+[`forzainstall.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzainstall.py),
+[`forzaterrain.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaterrain.py),
+[`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
+[`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
+[`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Same formaty kontenerów są opisane na stronie [ForzaTech](reader-forzatech.md).
 
 ## Znajdowanie zainstalowanej gry {#finding-the-installed-game}
@@ -51,7 +51,7 @@ Nikt nie powinien wpisywać ścieżki w rodzaju
    też zostanie znaleziony.
 
 Jeśli gra jest gdzie indziej, podaj folder toru przez `--track`; zobacz
-[Rozwiązywanie problemów](troubleshooting.md#finding-the-game) ("no installed Forza track found").
+[Rozwiązywanie problemów](https://holdi601.github.io/3DHeat-GameFiles/pl/troubleshooting.html#finding-the-game) ("no installed Forza track found").
 
 `--track <folder>` pomija całe to szukanie.
 
@@ -332,7 +332,7 @@ Plinths nie poszerzają wycinka.
 ### Szczegółowość i budżet {#detail-and-the-budget}
 
 Pasma odległości, budżet i to, które kopie znikają, gdy budżet jest za mały, są opisane na
-stronie [Poziomy szczegółowości i budżet](detail-budget.md).
+stronie [Poziomy szczegółowości i budżet](https://holdi601.github.io/3DHeat-GameFiles/pl/detail-budget.html).
 
 ### Podsumowanie rozmieszczenia {#placement-summary}
 
@@ -386,13 +386,13 @@ Umieszczane są tylko kopie wewnątrz korytarza, tak jak dla wszystkiego innego.
 
 ## Zapisywanie pliku {#writing-the-file}
 
-Części są zapisywane w tej kolejności: dla każdego kafla `terrain`, `verge`, `road` (każdy z obrazem kafla), potem `water`, `tyre marks`, `markings` (płaskie, dwie ostatnie podniesione), a potem każda umieszczona część posortowana po nazwie. Współrzędne są grą własne (metry, Y w górę). Zobacz [Format pliku wyjściowego](output-format.md).
+Części są zapisywane w tej kolejności: dla każdego kafla `terrain`, `verge`, `road` (każdy z obrazem kafla), potem `water`, `tyre marks`, `markings` (płaskie, dwie ostatnie podniesione), a potem każda umieszczona część posortowana po nazwie. Współrzędne są grą własne (metry, Y w górę). Zobacz [Format pliku wyjściowego](https://holdi601.github.io/3DHeat-GameFiles/pl/output-format.html).
 
 Plik mówi, co zawiera, w `asset.extras` swojego glTF:
 
 | Pole | Znaczenie |
 |---|---|
-| `course_format` | `2`: warstwa własna wyścigu, areny i modele we współrzędnych świata są w nim. [`courses`](commands.md#courses) eksportuje ponownie plik z niższym numerem (albo bez niego) |
+| `course_format` | `2`: warstwa własna wyścigu, areny i modele we współrzędnych świata są w nim. [`courses`](../commands.md#courses) eksportuje ponownie plik z niższym numerem (albo bez niego) |
 | `route` | identyfikator dopasowanej trasy albo `null` |
 | `event_copies`, `event_kinds` | ile kopii warstwy własnej wyścigu umieszczono i ich rodzaje |
 | `hidden` | kopie wolnej jazdy pominięte, bo wyścig je usuwa |
@@ -419,7 +419,7 @@ powtarzają, chyba że gra jest zainstalowana.
 - Na torze testowym samochód stoi około swojej wysokości jazdy nad wyciągniętym gruntem (mediana poniżej 0,2 m).
 - Każdy próbkowany kafel leży w kwadracie 512 m, który przewiduje jego nazwa.
 - Kolejne umieszczenia barier są dokładnie 4 m od siebie, a większość końców barier leży w odległości 5 cm od początku następnej.
-- Krawężniki stoją kilka centymetrów nad wyciągniętym gruntem, twarzą do góry, w odległości 5 m od jazdy (także test w zainstalowanej grze, zobacz [Rozwój](development.md)).
+- Krawężniki stoją kilka centymetrów nad wyciągniętym gruntem, twarzą do góry, w odległości 5 m od jazdy (także test w zainstalowanej grze, zobacz [Rozwój](../maintaining.md)).
 
 ## Nie jest rysowane {#not-drawn}
 
