@@ -36,7 +36,7 @@ instance transform, and a lap of telemetry â€” which is world coordinates too â€
 picks out which tiles to read. Everything else in a track is placed by instance
 tables that are a separate problem; terrain is not.
 
-The archives themselves are `heat3d_gamefiles.minizip`.
+The archives themselves are `heat3d_ext_forza.minizip`.
 """
 
 from __future__ import annotations

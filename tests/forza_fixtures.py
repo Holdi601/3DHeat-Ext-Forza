@@ -17,7 +17,7 @@ from pathlib import Path
 
 import numpy as np
 
-from heat3d_gamefiles.minizip import DEFLATE, HEADER, LZ4, MAGIC, STORED
+from heat3d_ext_forza.minizip import DEFLATE, HEADER, LZ4, MAGIC, STORED
 
 
 def pack(payload: bytes, codec: int) -> bytes:

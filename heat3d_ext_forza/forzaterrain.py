@@ -137,7 +137,7 @@ def surface_keys(geometry: Geometry) -> np.ndarray:
     Markings and water still come from the material, because for those the
     material is specific: a decal submesh is nothing but the decal.
     """
-    from .surfaces import classify
+    from heat3d_gamefiles.surfaces import classify
 
     count = len(geometry.faces)
     keys = np.full(count, "terrain", dtype=object)

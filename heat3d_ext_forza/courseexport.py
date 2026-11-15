@@ -24,8 +24,8 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from .forzaterrain import NAME_STEP, TILE_METRES, Extraction
-from .glb import Part
-from .surfaces import BY_KEY, part_name
+from heat3d_gamefiles.glb import Part
+from heat3d_gamefiles.surfaces import BY_KEY, part_name
 
 
 def tile_origin(key: tuple[int, int]) -> tuple[float, float]:

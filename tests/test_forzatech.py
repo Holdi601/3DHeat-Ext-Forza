@@ -21,7 +21,7 @@ from pathlib import Path
 
 import pytest
 
-from heat3d_gamefiles.forzatech import (
+from heat3d_ext_forza.forzatech import (
     GEO_MAGIC,
     MODEL_HEADER,
     MODEL_MAGIC,

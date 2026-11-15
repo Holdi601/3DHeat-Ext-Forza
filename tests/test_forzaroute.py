@@ -11,8 +11,8 @@ from pathlib import Path
 
 import numpy as np
 
-from heat3d_gamefiles import forzaroute
-from heat3d_gamefiles.forzaplacement import (
+from heat3d_ext_forza import forzaroute
+from heat3d_ext_forza.forzaplacement import (
     EVENT_PART,
     LAYER_PART,
     VENUE_PART,
@@ -22,7 +22,7 @@ from heat3d_gamefiles.forzaplacement import (
     routes_of,
     world_part,
 )
-from heat3d_gamefiles.forzaroute import (
+from heat3d_ext_forza.forzaroute import (
     Route,
     defined_routes,
     instance_models,
@@ -215,7 +215,7 @@ class TestHidden:
 def test_course_files_name_two_courses_of_one_name_apart(tmp_path):
     import time
 
-    from heat3d_gamefiles.cli import _course_files
+    from heat3d_ext_forza.cli import _course_files
 
     first = tmp_path / "Ring (course_100_200_to_105_200)"
     later = tmp_path / "Ring (course_-300_-400_to_-300_-400)"
@@ -232,7 +232,7 @@ def test_course_files_name_two_courses_of_one_name_apart(tmp_path):
 
 
 def test_course_format_is_read_from_the_file(tmp_path):
-    from heat3d_gamefiles.cli import COURSE_FORMAT, course_format
+    from heat3d_ext_forza.cli import COURSE_FORMAT, course_format
     from heat3d_gamefiles.glb import write_glb
 
     positions = np.array([[0, 0, 0], [1, 0, 0], [0, 0, 1]], dtype=np.float32)

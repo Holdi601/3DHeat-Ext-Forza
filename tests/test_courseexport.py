@@ -13,14 +13,14 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from heat3d_gamefiles.courseexport import (
+from heat3d_ext_forza.courseexport import (
     Baked,
     planar_uvs,
     plan_parts,
     tile_origin,
     vertex_tiles,
 )
-from heat3d_gamefiles.forzaterrain import NAME_STEP, TILE_METRES, Extraction
+from heat3d_ext_forza.forzaterrain import NAME_STEP, TILE_METRES, Extraction
 
 #: The tile whose name says x=1023, z=2046: its corner is at 512 m, 1024 m.
 KEY = (NAME_STEP, 2 * NAME_STEP)
@@ -132,7 +132,7 @@ class TestThePlan:
 
 class TestPaint:
     def test_markings_get_their_own_vertices_lifted_off_the_road(self):
-        from heat3d_gamefiles.courseexport import DECAL_LIFT, lift_decals
+        from heat3d_ext_forza.courseexport import DECAL_LIFT, lift_decals
         from heat3d_gamefiles.glb import Part
 
         positions = np.array([[0, 0, 0], [1, 0, 0], [0, 0, 1], [1, 0, 1]], dtype=np.float32)
@@ -148,7 +148,7 @@ class TestPaint:
         assert np.allclose(extra_normals, [0, 1, 0])
 
     def test_nothing_to_lift_is_nothing_added(self):
-        from heat3d_gamefiles.courseexport import lift_decals
+        from heat3d_ext_forza.courseexport import lift_decals
         from heat3d_gamefiles.glb import Part
 
         road = Part(name="ground:road x0 z0", faces=np.array([[0, 1, 2]]))

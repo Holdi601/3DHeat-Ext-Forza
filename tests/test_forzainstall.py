@@ -18,13 +18,13 @@ from __future__ import annotations
 
 import pytest
 
-from heat3d_gamefiles.forzainstall import (
+from heat3d_ext_forza.forzainstall import (
     LIBRARY_PATH,
     find_track,
     track_covers,
     track_folders,
 )
-from heat3d_gamefiles.forzaterrain import NAME_STEP, TILE_METRES
+from heat3d_ext_forza.forzaterrain import NAME_STEP, TILE_METRES
 
 
 def make_track(root, name, tiles):

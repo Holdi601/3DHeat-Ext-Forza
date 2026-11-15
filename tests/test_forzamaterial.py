@@ -14,7 +14,7 @@ import struct
 
 import numpy as np
 
-from heat3d_gamefiles.forzamaterial import (
+from heat3d_ext_forza.forzamaterial import (
     Manifest,
     colour_texture,
     in_season,
@@ -22,7 +22,7 @@ from heat3d_gamefiles.forzamaterial import (
     season_of,
     strip_guid,
 )
-from heat3d_gamefiles.forzatech import SLOT_BASE_COLOUR, material_textures, read_model
+from heat3d_ext_forza.forzatech import SLOT_BASE_COLOUR, material_textures, read_model
 
 from .forza_fixtures import build_container
 

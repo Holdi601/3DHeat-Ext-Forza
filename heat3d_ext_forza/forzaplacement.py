@@ -83,7 +83,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .detail import DEFAULT_BUDGET, FAR, HEADROOM, NEAR, auto_budget, choose_levels, route_distance  # noqa: F401
+from heat3d_gamefiles.detail import DEFAULT_BUDGET, FAR, HEADROOM, NEAR, auto_budget, choose_levels, route_distance  # noqa: F401
 from .forzamaterial import Manifest, colour_texture, in_season, strip_guid
 from .forzatech import (
     UnsupportedForza,
@@ -736,7 +736,7 @@ class ModelShelf:
         return out
 
     def _level(self, parts, textures) -> Level | None:
-        from .glb import compute_normals
+        from heat3d_gamefiles.glb import compute_normals
 
         positions, normals, uvs, faces, texture = [], [], [], [], []
         offset = 0

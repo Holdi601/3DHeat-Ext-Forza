@@ -17,7 +17,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from heat3d_gamefiles.forzacars import (
+from heat3d_ext_forza.forzacars import (
     MAGIC,
     Car,
     cars_of_game,
@@ -28,7 +28,7 @@ from heat3d_gamefiles.forzacars import (
     wheel_radius,
     write_pack,
 )
-from heat3d_gamefiles.forzatech import INDEX_LONG
+from heat3d_ext_forza.forzatech import INDEX_LONG
 
 from .installed import installed
 

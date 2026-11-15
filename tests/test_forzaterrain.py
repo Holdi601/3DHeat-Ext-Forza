@@ -14,7 +14,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from heat3d_gamefiles.forzaterrain import (
+from heat3d_ext_forza.forzaterrain import (
     NAME_STEP,
     TILE_METRES,
     Tile,
@@ -23,8 +23,8 @@ from heat3d_gamefiles.forzaterrain import (
     extract,
     index_tiles,
 )
-from heat3d_gamefiles.forzatech import Geometry
-from heat3d_gamefiles.minizip import LZ4, Contents, MiniZip
+from heat3d_ext_forza.forzatech import Geometry
+from heat3d_ext_forza.minizip import LZ4, Contents, MiniZip
 
 from .forza_fixtures import build_contents, build_minizip, build_modelbin
 from .test_forza_geometry import grid

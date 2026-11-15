@@ -14,8 +14,8 @@ import struct
 import numpy as np
 import pytest
 
-from heat3d_gamefiles.forzatech import UnsupportedForza
-from heat3d_gamefiles.forzatexture import (
+from heat3d_ext_forza.forzatech import UnsupportedForza
+from heat3d_ext_forza.forzatexture import (
     TextureShelf,
     asphalt_weight,
     bake_ground,

@@ -20,7 +20,7 @@ import os
 import re
 from pathlib import Path
 
-from .steam import LIBRARY_PATH, STEAM_DEFAULTS, steam_libraries  # noqa: F401 - the shared finder
+from heat3d_gamefiles.steam import LIBRARY_PATH, STEAM_DEFAULTS, steam_libraries  # noqa: F401 - the shared finder
 
 #: Games install under here on the Microsoft Store, which is how Forza also
 #: ships. Read if present; it usually is not.

@@ -18,10 +18,10 @@ import struct
 import numpy as np
 import pytest
 
-import heat3d_gamefiles.forzaplacement as placement
-from heat3d_gamefiles.forzamaterial import Manifest
-from heat3d_gamefiles.forzatech import SLOT_BASE_COLOUR, Geometry
-from heat3d_gamefiles.forzaplacement import (
+import heat3d_ext_forza.forzaplacement as placement
+from heat3d_ext_forza.forzamaterial import Manifest
+from heat3d_ext_forza.forzatech import SLOT_BASE_COLOUR, Geometry
+from heat3d_ext_forza.forzaplacement import (
     KERB_PART,
     Level,
     ModelShelf,
@@ -360,7 +360,7 @@ class TestVariants:
             def close(self):
                 pass
 
-        monkeypatch.setattr("heat3d_gamefiles.forzatexture.TextureShelf", Shelf)
+        monkeypatch.setattr("heat3d_ext_forza.forzatexture.TextureShelf", Shelf)
         with Track(folder) as track:
             found = place_in_box(track, (0.0, 0.0), (50.0, 50.0))
         a = found.parts["structure:signs print_a_bclr"]
@@ -487,7 +487,7 @@ def _courses(limit: int = 4) -> list[str]:
 
 def _real_courses():
     """(driven, track, low, high) for each course that is installed as well as recorded."""
-    from heat3d_gamefiles.forzainstall import find_track
+    from heat3d_ext_forza.forzainstall import find_track
     from heat3d_gamefiles.lapinput import UnreadableLap, read
 
     found = []
@@ -514,7 +514,7 @@ def test_real_kerbs_lie_on_the_ground_beside_the_driven_line():
     A street circuit can have no kerb models at all, so the first of the most
     driven circuits that has any is the one checked; none having any is a fault.
     """
-    from heat3d_gamefiles.forzaterrain import extract_from_track
+    from heat3d_ext_forza.forzaterrain import extract_from_track
 
     for driven, track, low, high in REAL:
         placed = placement.place_in_track(track, low, high, textures=False)

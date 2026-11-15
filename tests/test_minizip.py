@@ -20,7 +20,7 @@ import struct
 
 import pytest
 
-from heat3d_gamefiles.minizip import (
+from heat3d_ext_forza.minizip import (
     DEFLATE,
     HEADER,
     LZ4,
