@@ -1061,9 +1061,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{PROG} {MISSING}", file=sys.stderr)
         return 2
     try:
-        import heat3d_update
+        from . import update
 
-        heat3d_update.startup("heat3d_ext_forza")
+        update.startup("heat3d_ext_forza")
     except Exception:  # an update check never stops an export
         pass
     args = _parser().parse_args(argv)

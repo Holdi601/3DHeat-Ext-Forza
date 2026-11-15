@@ -23,4 +23,4 @@ test = ["pytest>=8.0"]
 heat3d-forza-maps = "heat3d_ext_forza.cli:main"
 
 [tool.setuptools]
-packages = ["heat3d_ext_forza", "heat3d_update"]
+packages = ["heat3d_ext_forza"]
