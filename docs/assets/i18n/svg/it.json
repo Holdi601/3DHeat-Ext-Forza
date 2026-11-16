@@ -25,5 +25,7 @@
  "per part": "per parte",
  "positions only,": "solo posizioni,",
  "tiles or terrain under the lap": "tessere o terreno sotto il giro",
- "within --detail-budget": "entro --detail-budget"
+ "within --detail-budget": "entro --detail-budget",
+ "(and the game's own route)": "(e il percorso del gioco)",
+ "or --track FOLDER": "oppure --track FOLDER"
 }

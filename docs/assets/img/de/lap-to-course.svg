@@ -12,6 +12,6 @@
 <path d="M550,210 C580,90 660,80 690,140 S790,220 810,90" fill="none" stroke="#f1f1f1" stroke-width="1.5" stroke-dasharray="10 10"/>
 <path d="M548,110 C560,80 590,64 620,66" fill="none" stroke="#d9534f" stroke-width="5" stroke-dasharray="6 6"/>
 <path d="M700,215 C730,232 770,230 790,210" fill="none" stroke="#5f6670" stroke-width="5"/>
-<text x="675" y="280" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="15" font-weight="600" fill="#1f2328" text-anchor="middle">course.glb: Straße, Randstreifen, Bordsteine, Leitplanken</text>
+<text x="675" y="280" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="15" font-weight="600" fill="#1f2328" text-anchor="middle">course.glb: Straße, Rand, Bordsteine, Barrieren</text>
 <text x="20" y="312" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="14" font-weight="400" fill="#3d4450" text-anchor="start">Die Runde sagt nur, wohin man schauen soll; die Formen kommen aus den eigenen Dateien des Spiels.</text>
 </svg>

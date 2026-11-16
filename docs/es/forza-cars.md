@@ -1,9 +1,9 @@
 ---
-title: Coches de Forza
+title: "Coches de Forza"
 nav_order: 6
 lang: "es"
 source: forza-cars.md
-source_hash: "30d017479887"
+source_hash: "7f592f21659a"
 nav_exclude: true
 search_exclude: true
 ---
@@ -30,8 +30,8 @@ registrado se dibuja con su propia forma y a su tamaño real.
    heat3d-forza-maps cars --game "D:\Games\<carpeta de Forza>" -o forza.h3dcars
    ```
 
-2. **Cárgalo en el visor**: **Cargar archivo de coches...** en los ajustes de la vista, o suelta el
-   archivo en la pestaña de carreras; se queda en ese navegador. Las vueltas cuyo número de coche
+2. **Cárgalo en el visor**: **Cargar archivo de coches…** en los ajustes de la vista, o suelta el
+   archivo en la pestaña Análisis de carrera; se queda en ese navegador. Las vueltas cuyo número de coche
    esté en el archivo se dibujan entonces como ese mismo coche (ver la
    [documentación de la repetición de carreras del visor](https://holdi601.github.io/3DHeat/race-replay-and-scene.html#the-cars)).
 
@@ -40,9 +40,9 @@ registrado se dibuja con su propia forma y a su tamaño real.
 
 ## Opciones {#options}
 
-| Opción | Valor por defecto | Significado |
+| Opción | Por defecto | Significado |
 |---|---|---|
-| `-o`, `--out FILE` | `./forza.h3dcars` | el archivo que se escribe |
+| `-o`, `--out FILE` | `./forza.h3dcars`, o `$HEAT3D_LEVELS/forza/forza.h3dcars` si esa variable está definida | el archivo que se escribe |
 | `--game FOLDER` | el juego instalado que se encuentre | la carpeta del juego |
 
 ## Qué contiene el archivo {#what-is-in-the-file}
@@ -70,4 +70,4 @@ Cada entrada de `cars`: `key`, `ordinals` (los números del coche tal como los i
 (desplazamientos en bytes desde el inicio de los datos, y cantidades).
 
 El archivo contiene el contenido del juego: es para la máquina en la que se hizo, no para
-pasarlo a otros ([Reglas y licencias](../terms.md)).
+pasarlo a otros ([Términos y licencia](terms.md)).

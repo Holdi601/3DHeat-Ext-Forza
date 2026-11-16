@@ -1,5 +1,6 @@
 {
  "(AC Rally: + axis fit)": "(AC Rally: + ajuste de ejes)",
+ "(and the game's own route)": "(y la ruta propia del juego)",
  "--game, or the file says;": "--game, o lo que diga el archivo;",
  "--margin metres": "--margen en metros",
  "--track / --install": "--track / --install",
@@ -20,6 +21,7 @@
  "either side of the lap": "a cada lado de la vuelta",
  "lap.json: where you drove": "lap.json: por dónde condujiste",
  "one node": "un nodo",
+ "or --track FOLDER": "o --track FOLDER",
  "otherwise Forza": "si no, Forza",
  "parts by kind,": "partes por tipo,",
  "per part": "por parte",

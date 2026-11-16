@@ -1,18 +1,21 @@
 ---
-title: Forza Horizon
+title: "Comment un parcours Forza est fait"
 nav_order: 1
 lang: "fr"
 source: course-forza-horizon.md
-source_hash: "7b7eaaf2d8b9"
+source_hash: "ce7adab4b167"
 nav_exclude: true
 search_exclude: true
 ---
-# Export de parcours : Forza Horizon {#course-export-forza-horizon}
+# Comment un parcours Forza est fait {#how-a-forza-course-is-made}
 
 L'export Forza lit la piste directement dans les archives ForzaTech du jeu : du terrain où la
 route, le bord et l'herbe sont distingués, une texture de sol cuite à partir des cartes de sol
 du jeu lui-même, et chaque modèle placé dans sa propre texture (bordures, glissières, murs de
-pneus, panneaux, accessoires, bâtiments).
+pneus, panneaux, accessoires, bâtiments). Il trouve aussi laquelle des courses du jeu le tour a
+été roulé, et ajoute ce que le jeu fournit pour cette seule course (sa couche d'événement :
+barrières, tentes, portiques, tribunes, drapeaux), ainsi que le sol de tout lieu que la conduite
+traverse, comme le sol d'un stade.
 
 ```
 heat3d-forza-maps course "Example Circuit"
@@ -27,7 +30,8 @@ Sources : [`cli.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat
 [`forzatexture.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzatexture.py),
 [`courseexport.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/courseexport.py),
 [`forzaplacement.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaplacement.py),
-[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py).
+[`forzamaterial.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzamaterial.py),
+[`forzaroute.py`](https://github.com/Holdi601/3DHeat-Ext-Forza/blob/main/heat3d_ext_forza/forzaroute.py).
 Les formats de conteneurs eux-mêmes sont décrits sur [ForzaTech](reader-forzatech.md).
 
 ## Trouver le jeu installé {#finding-the-installed-game}
@@ -40,7 +44,7 @@ automatiquement :
    `C:\Program Files (x86)\Steam` ou `C:\Program Files\Steam`, et chaque entrée `"path"` y
    est une bibliothèque. Le dossier `steamapps\common` de chaque bibliothèque est cherché.
 2. **Microsoft Store.** `C:\XboxGames` est cherché s'il existe. Là, le jeu se trouve un
-   niveau plus bas, dans `<game>\Content`.
+   dossier plus bas, dans `<game>\Content`.
 3. Un **dossier de jeu** est tout enfant de ces dossiers qui possède un dossier
    `media\Tracks`, quel que soit son nom.
 4. Un **dossier de piste** est tout dossier sous `media\Tracks` qui contient un
@@ -48,7 +52,7 @@ automatiquement :
    nom que personne n'a encore vu est tout de même trouvée.
 
 Si le jeu est ailleurs, donnez le dossier de piste avec `--track` ; voir
-[Dépannage](https://holdi601.github.io/3DHeat-GameFiles/fr/troubleshooting.html#finding-the-game) (« no installed Forza track found »).
+[Dépannage](https://holdi601.github.io/3DHeat-GameFiles/troubleshooting.html#finding-the-game) (« no installed Forza track found »).
 
 `--track <dossier>` saute toute cette recherche.
 
@@ -66,13 +70,40 @@ Un jeu livre plusieurs dossiers de piste (la carte en monde ouvert, un garage ou
 bonne est choisie **par coordonnées, pas par nom** :
 
 - La boîte englobante du tour, élargie de `--margin`, est la question.
-- Pour chaque dossier de piste, les quatre manifestes `ChunkContentsMiniZip*.txt` sont lus comme du texte, sans ouvrir d'archive. Chaque nom de tuile de terrain (`autoterrain_x<X>_z<Z>..._cluster<N>.i.modelbin`) porte sa position dans la grille. L'outil compte combien de tuiles distinctes tombent dans la boîte.
-- La piste qui a le plus de tuiles là l'emporte. Si aucune n'en a, l'export s'arrête avec "none of the installed tracks (...) has terrain at x ..., z .... Those are the game's own metres, as its telemetry reports them."
+- Pour chaque dossier de piste, les quatre manifestes `ChunkContentsMiniZip*.txt` sont lus comme du
+  texte, sans ouvrir d'archive. Chaque nom de tuile de terrain
+  (`autoterrain_x<X>_z<Z>..._cluster<N>.i.modelbin`) porte sa position dans la grille. L'outil
+  compte combien de tuiles distinctes tombent dans la boîte.
+- La piste qui a le plus de tuiles là l'emporte. Si aucune n'en a, l'export s'arrête avec « none
+  of the installed tracks (...) has terrain at x ..., z .... Those are the game's own metres, as
+  its telemetry reports them. »
 
 Une piste entière répond en bien moins d'une seconde. Une correspondance par nom pourrait
 choisir la mauvaise carte, et une mauvaise carte paraît aussi plausible que la bonne.
 
 La console affiche `on <track>, in <game folder>`.
+
+## Quelle course {#which-race}
+
+Le jeu livre chacune de ses courses comme une route portant un numéro, son **identifiant de
+route**. Deux fichiers appartiennent à chaque route :
+
+| Fichier | Ce qu'il contient |
+|---|---|
+| `media\OpenWorld\<map>\AITracks\Route<id>.owt` | la ligne de conduite IA de la course : un nœud de 56 octets à partir de l'octet `0x60`, le nombre de nœuds à `0x24`, chaque nœud commençant par sa position (x, y, z) en mètres du jeu |
+| `media\Stripped\gs\<map>\routedefinitions.zip` | un `route<id>_<map>.rtd` par course : du XML simple qui liste ce que la course ajoute au monde et ce qu'elle en retire (voir [La couche propre à la course](#the-races-own-layer)) |
+
+Le tour est associé à une route en le comparant à chaque ligne IA dont la boîte chevauche celle du tour :
+
+- Depuis chaque échantillon du tour, la distance au point le plus proche de la ligne ; et depuis
+  chaque point de la ligne, la distance au point le plus proche du tour.
+- Les deux médianes sont additionnées. La route dont la somme est la plus petite l'emporte, si
+  cette somme est inférieure à **30 m** (`MATCH`).
+- Les deux sens sont nécessaires : un court sprint se trouve le long d'une longue route qui utilise
+  la même voie, et un long tour couvre une route courte.
+
+La console affiche `the game's route <id> (driven line within <n> m of it)`, ou indique qu'aucune
+route ne correspond. Sans correspondance, seul le monde en roue libre est placé.
 
 ## Terrain {#terrain}
 
@@ -80,21 +111,32 @@ Comment le terrain est trouvé (dans `forzaterrain.py`) :
 
 - Les manifestes désignent le terrain par un index spatial :
   `scene\tbheightfield\autoterrain_x-2046_z1023_cluster012.i.modelbin`.
-- Les deux nombres sont des coordonnées de grille qui **avancent de 1023**, et chaque pas de grille est une tuile de **512 m**. La tuile `x-2046` vaut `-2046 / 1023 = -2`, qui commence à `-2 * 512 = -1024` m. Si l'on lit les noms comme des mètres, chaque recherche manque d'un facteur deux et renvoie tout de même du terrain, venu de la mauvaise partie de la carte.
-- Une tuile peut apparaître trois fois : simple, `_cb` et `_ul`. Les trois couvrent le même sol. On en prend une par tuile, dans cet ordre de préférence, car les fusionner triplerait la géométrie en surfaces confondues.
-- Une tuile n'est lue que si elle touche la boîte du tour **et** le couloir. Une tuile que le couloir ne touche pas n'est jamais décompressée.
-- Chaque `.modelbin` d'une tuile choisie est décodé au **niveau de détail 0 seulement**. Une tuile porte quatre niveaux sur le même sol, et tous les exporter mettrait le même mètre carré quatre fois dans le fichier.
-- Chaque maillage porte sa propre échelle et son propre décalage en coordonnées du monde, si bien qu'une tuile se pose là où le jeu la met, sans transformation d'instance. Les triangles dont l'emprise chevauche la boîte sont gardés, puis seulement ceux qui atteignent le couloir.
-- Un maillage dans un format que le lecteur refuse est sauté et compté (`N meshes could not be read`), pour qu'un résultat maigre dise pourquoi.
+- Les deux nombres sont des coordonnées de grille qui **avancent de 1023**, et chaque pas de grille
+  est une tuile de **512 m**. La tuile `x-2046` vaut `-2046 / 1023 = -2`, qui commence à
+  `-2 * 512 = -1024` m. Si l'on lit les noms comme des mètres, chaque recherche manque d'un facteur
+  deux et renvoie tout de même du terrain, venu de la mauvaise partie de la carte.
+- Une tuile peut apparaître trois fois : simple, `_cb` et `_ul`. Les trois couvrent le même sol. On
+  en prend une par tuile, dans cet ordre de préférence, car les fusionner triplerait la géométrie en
+  surfaces confondues.
+- Une tuile n'est lue que si elle touche la boîte du tour **et** le couloir. Une tuile que le couloir
+  ne touche pas n'est jamais décompressée.
+- Chaque `.modelbin` d'une tuile choisie est décodé au **niveau de détail 0 seulement**. Une tuile
+  porte quatre niveaux sur le même sol, et tous les exporter mettrait le même mètre carré quatre fois
+  dans le fichier.
+- Chaque maillage porte sa propre échelle et son propre décalage en coordonnées du monde, si bien
+  qu'une tuile se pose là où le jeu la met, sans transformation d'instance. Les triangles dont
+  l'emprise chevauche la boîte sont gardés, puis seulement ceux qui atteignent le couloir.
+- Un maillage dans un format que le lecteur refuse est sauté et compté (`N meshes could not be
+  read`), pour qu'un résultat maigre dise pourquoi.
 
-Le résumé du terrain affiche le nombre de sommets, de triangles, de maillages et de tuiles,
-et l'étendue x/y/z.
+Le résumé du terrain affiche le nombre de sommets, de triangles, de maillages et de tuiles, et
+l'étendue x/y/z.
 
 ### Route, bord, terrain, marquages, eau {#road-verge-terrain-markings-water}
 
-Les noms de matériaux ne disent pas où est la route. Autour d'un circuit, 94 % du sol utilise
-un matériau à shader de route, car le terrain près d'une route est dessiné avec lui, et le
-shader décide asphalte ou herbe pixel par pixel. Donc :
+Les noms de matériaux ne disent pas où est la route. Autour d'un circuit, 94 % du sol utilise un
+matériau à shader de route, car le terrain près d'une route est dessiné avec lui, et le shader
+décide asphalte ou herbe pixel par pixel. Donc :
 
 | Type | Décidé par |
 |---|---|
@@ -105,29 +147,28 @@ shader décide asphalte ou herbe pixel par pixel. Donc :
 | eau | le nom du matériau correspond à `water`, `lake`, `river`, `paddy`, `ocean` ou `sea` |
 | terrain | tout le reste |
 
-Mesuré sur les tours enregistrés du circuit d'essai, presque tous les échantillons tombent sur
-des triangles de bande de route, et la grande majorité sur la part asphalte une fois que le
-masque a séparé le bord.
+Mesuré sur les tours enregistrés du circuit d'essai, presque tous les échantillons tombent sur des
+triangles de bande de route, et la grande majorité sur la part asphalte une fois que le masque a
+séparé le bord.
 
-Le masque d'asphalte n'existe que si les textures de sol sont cuites. Avec `--no-textures`,
-ou pour une tuile dont les cartes manquent, les bandes de route restent entières en `road`, et
-aucun bord n'est séparé. Des cartes manquantes coûtent du détail, jamais de la géométrie.
+Le masque d'asphalte n'existe que si les textures de sol sont cuites. Avec `--no-textures`, ou pour
+une tuile dont les cartes manquent, les bandes de route restent entières en `road`, et aucun bord
+n'est séparé. Des cartes manquantes coûtent du détail, jamais de la géométrie.
 
 ### Les couches peintes sont relevées {#painted-layers-are-lifted}
 
-Les marquages de voie et les traces de pneus sont livrés comme leurs propres triangles,
-posés exactement sur la route. Le jeu les dessine avec un décalage de profondeur. Dessinés
-tels quels, la route et la peinture se disputeraient chaque pixel. L'export donne à chaque
-partie de marquage et de trace de pneus sa propre copie de sommets, relevée de **5 cm**
-(`DECAL_LIFT`) le long de la normale de surface, pour que la route dessous ne soit pas
-relevée aussi.
+Les marquages de voie et les traces de pneus sont livrés comme leurs propres triangles, posés
+exactement sur la route. Le jeu les dessine avec un décalage de profondeur. Dessinés tels quels, la
+route et la peinture se disputeraient chaque pixel. L'export donne à chaque partie de marquage et de
+trace de pneus sa propre copie de sommets, relevée de **5 cm** (`DECAL_LIFT`) le long de la normale
+de surface, pour que la route dessous ne soit pas relevée aussi.
 
 ### Normales {#normals}
 
-Les normales du terrain viennent de l'archive. La composante x de la normale est stockée
-comme le quatrième short de la position, et ses composantes y et z dans l'attribut `NORMAL`
-(voir [ForzaTech](reader-forzatech.md)). Si un sommet de l'extraction n'a pas de normale, les
-normales de tout le sol sont calculées à partir des triangles.
+Les normales du terrain viennent de l'archive. La composante x de la normale est stockée comme le
+quatrième short de la position, et ses composantes y et z dans l'attribut `NORMAL` (voir
+[ForzaTech](reader-forzatech.md)). Si un sommet de l'extraction n'a pas de normale, les normales de
+tout le sol sont calculées à partir des triangles.
 
 ## La texture de sol {#the-ground-texture}
 
@@ -141,9 +182,9 @@ Chaque tuile de terrain livre trois cartes couvrant son carré de 512 m, en cinq
 | brillance | `autoglossf0_x<X>_z<Z>_x<season>x_glos` | G : bas sur l'asphalte (147 contre 215). B : monte dans les bois |
 
 Aucune de ces cartes n'est une photographie en couleur. Ce sont les entrées avec lesquelles le
-shader de terrain du jeu mélange ses couches de matériaux, et ces couches ne sont pas
-décodées. La texture cuite est donc **une interprétation, pas une copie de l'apparence du jeu**.
-Elle garde *où* se trouve chaque type de sol, à 25 cm, et le peint en couleurs fixes :
+shader de terrain du jeu mélange ses couches de matériaux, et ces couches ne sont pas décodées. La
+texture cuite est donc **une interprétation, pas une copie de l'apparence du jeu**. Elle garde *où*
+se trouve chaque type de sol, à 25 cm, et le peint en couleurs fixes :
 
 | Sol | RVB linéaire | Poids |
 |---|---|---|
@@ -152,39 +193,53 @@ Elle garde *où* se trouve chaque type de sol, à 25 cm, et le peint en couleurs
 | bois | 0,13, 0,23, 0,10 | `smoothstep(4 -> 24, gloss.B)` |
 | asphalte | 0,20, 0,20, 0,21 | `smoothstep(188 -> 228, sub.B) * smoothstep(200 -> 168, gloss.G)` |
 
-Les deux cartes doivent être d'accord pour l'asphalte. L'une seule laisse un grain gris dans
-l'herbe là où la compression par blocs fait des anneaux. Le résultat est ombré par la normale
-de détail de la carte principale face à une lumière fixe (`0.55 + 0.6 * lambert`), si bien que
-les lèvres de bordure, les talus et les ornières se lisent comme du relief, et il est écrit en
-sRGB 8 bits.
+Les deux cartes doivent être d'accord pour l'asphalte. L'une seule laisse un grain gris dans l'herbe
+là où la compression par blocs fait des anneaux. Le résultat est ombré par la normale de détail de
+la carte principale face à une lumière fixe (`0.55 + 0.6 * lambert`), si bien que les lèvres de
+bordure, les talus et les ornières se lisent comme du relief, et il est écrit en sRGB 8 bits.
 
-Orientation : la ligne 0 de pixels est le bord **nord** de la tuile (z le plus grand), la colonne
-0 son bord **ouest** (x le plus petit). Cela a été trouvé en projetant les tours enregistrés sur
-le masque d'asphalte selon les huit façons dont un carré peut être retourné ou tourné. Une seule
-façon les pose sur l'asphalte. Les UV en découlent : `u = (x - x0) / 512`,
-`v = 1 - (z - z0) / 512`.
+Orientation : la ligne 0 de pixels est le bord **nord** de la tuile (z le plus grand), la colonne 0
+son bord **ouest** (x le plus petit). Cela a été trouvé en projetant les tours enregistrés sur le
+masque d'asphalte selon les huit façons dont un carré peut être retourné ou tourné. Une seule façon
+les pose sur l'asphalte. Les UV en découlent : `u = (x - x0) / 512`, `v = 1 - (z - z0) / 512`.
 
 Les cartes sont lues à la meilleure résolution disponible jusqu'à la qualité 5, puis rééchantillonnées
-à la taille de la carte principale. Si l'image de couleur est plus grande que `--texture-size`,
-elle est ensuite réduite à cette taille par filtre de Lanczos. Le masque d'asphalte est toujours
-gardé en pleine résolution, car il décide de la géométrie. `--season` choisit les cartes
-`x<season>x`. Une tuile sans cartes pour cette saison est dessinée en couleurs unies, et la
-console l'annonce par `N without maps`.
+à la taille de la carte principale. Si l'image de couleur est plus grande que `--texture-size`, elle
+est ensuite réduite à cette taille par filtre de Lanczos. Le masque d'asphalte est toujours gardé en
+pleine résolution, car il décide de la géométrie. `--season` choisit les cartes `x<season>x`. Une
+tuile sans cartes pour cette saison est dessinée en couleurs unies, et la console l'annonce par
+`N without maps`.
 
 ## Modèles placés {#placed-models}
 
-Le terrain porte sa propre position dans le monde. Rien d'autre ne le fait. L'endroit où se
-trouve chaque copie d'un modèle est consigné dans des fichiers de placement `.pgeo`, un par
-catégorie et par cellule spatiale :
+Le terrain porte sa propre position dans le monde. Rien d'autre ne le fait. L'endroit où se trouve
+chaque copie d'un modèle est consigné dans des fichiers de placement `.pgeo`, un par catégorie et
+par cellule spatiale :
 `scene\proc\cellsize\<size>\<x>_<z>\c<size>_<category>_....pgeo`. La disposition des
 enregistrements est décrite sur [ForzaTech](reader-forzatech.md#placement-files-pgeo).
 
 ### Ce qui est lu {#what-is-read}
 
-- Les fichiers de placement sont filtrés **par nom** : la taille de cellule et la position de la cellule dans le chemin donnent son carré (`x * size` à `(x + 1) * size`), et seules les cellules qui chevauchent la boîte du tour, dans une catégorie voulue, sont ouvertes.
-- Catégories par défaut : `barriers`, `props`, `signs`, `buildings`, `infrastructure`, `bridges`, `rocks`. `--trees` ajoute `trees`, `bushes` et `smashables`. Ceux-ci ne sont jamais lus : `grasstemplate`, `crowdtemplate` et `cwdspline` (herbe et spectateurs), et `evolving` (sites de festival qui changent avec la progression).
-- Une copie est gardée si sa position est dans la boîte et dans le couloir. Les répétitions exactes (même position et même orientation au millimètre, listées par deux cellules voisines) sont fusionnées.
-- Les **bordures** sont des accessoires dont le nom de modèle commence par `road_gen_rum` (bandes rugueuses). Elles sont écrites comme `ground:kerbs`, jamais simplifiées ni retirées, car un tour est mesuré par rapport à elles.
+- Les fichiers de placement sont filtrés **par nom** : la taille de cellule et la position de la
+  cellule dans le chemin donnent son carré (`x * size` à `(x + 1) * size`), et seules les cellules
+  qui chevauchent la boîte du tour, dans une catégorie voulue, sont ouvertes.
+- Catégories par défaut : `barriers`, `props`, `signs`, `buildings`, `infrastructure`, `bridges`,
+  `rocks`, `evolving`. `--trees` ajoute `trees`, `bushes` et `smashables`. Ceux-ci ne sont jamais
+  lus : `grasstemplate`, `crowdtemplate` et `cwdspline` (herbe et spectateurs : le jeu les dessine
+  comme des sprites animés, il n'y a pas de géométrie).
+- Chaque fichier appartient à une **couche**, lue dans son nom après `c<size>_<category>_`. Un mot
+  de niveau de détail (`do`, `so`, `ulc`, `ulp`, `cwd`) et un numéro de section facultatif désignent
+  le monde en roue libre. Tout le reste est une couche que le jeu allume : une couche d'exécution
+  (`rt_0`), une activité (`_tag_<name>_`), un objet à ramasser, tout ce qui est rangé sous
+  `evolving`. Une couche qui nomme des routes (`rt_x<id>`, par exemple `rt_x1023_x2201`) n'appartient
+  qu'à ces courses, et n'est lue que si le tour correspond à l'une d'elles. Voir
+  [Couches allumées](#switched-on-layers).
+- Une copie est gardée si sa position est dans la boîte et dans le couloir. Les répétitions exactes
+  (même position et même orientation au millimètre, listées par deux cellules voisines) sont
+  fusionnées.
+- Les **bordures** sont des accessoires dont le nom de modèle commence par `road_gen_rum` (bandes
+  rugueuses). Elles sont écrites comme `ground:kerbs`, jamais simplifiées ni retirées, car un tour
+  est mesuré par rapport à elles.
 
 | Catégorie | Partie | Couleur de repli (sans texture) |
 |---|---|---|
@@ -201,39 +256,46 @@ enregistrements est décrite sur [ForzaTech](reader-forzatech.md#placement-files
 
 ### La géométrie du modèle {#the-models-geometry}
 
-Un nom placé `<model>_3D` renvoie aux fichiers de modèle `<model>_cluster###.i.modelbin` (jusqu'à
-une douzaine). Chaque triangle porte un masque des niveaux de détail auxquels il appartient :
+Un nom placé `<model>_3D` renvoie aux fichiers de modèle `<model>_cluster###.i.modelbin` (jusqu'à une
+douzaine). Chaque triangle porte un masque des niveaux de détail auxquels il appartient :
 
-- Les niveaux d'un modèle sont ses triangles explicitement marqués pour ce niveau. Les niveaux se suivent à partir de 0, le plus fin en premier.
-- Les triangles marqués `0xFFFF` (tous les niveaux) sont les morceaux cassables, comme les poteaux d'une glissière ou les pneus uniques d'une pile de pneus. Ils recouvrent tout le modèle, et le jeu les dessine à sa place une fois qu'il est mis en pièces. Ils ne sont utilisés que par un modèle sans niveau explicitement marqué.
+- Les niveaux d'un modèle sont ses triangles explicitement marqués pour ce niveau. Les niveaux se
+  suivent à partir de 0, le plus fin en premier.
+- Les triangles marqués `0xFFFF` (tous les niveaux) sont les morceaux cassables, comme les poteaux
+  d'une glissière ou les pneus uniques d'une pile de pneus. Ils recouvrent tout le modèle, et le jeu
+  les dessine à sa place une fois qu'il est mis en pièces. Ils ne sont utilisés que par un modèle sans
+  niveau explicitement marqué.
 - Les sous-maillages dont le shader de matériau est une **décalcomanie** projetée sont retirés.
 
-Chaque copie est placée avec sa position, ses axes x et y tirés de l'enregistrement (z = x produit vectoriel y),
-et son échelle. Les normales sont transformées par l'inverse de l'échelle.
+Chaque copie est placée avec sa position, ses axes x et y tirés de l'enregistrement (z = x produit
+vectoriel y), et son échelle. Les normales sont transformées par l'inverse de l'échelle.
 
 ### Quelle texture {#which-texture}
 
 Un matériau ne nomme pas ses textures. Il les liste par hachages, et le `AssetManifest.xml` de la
 piste associe chaque hachage (`SourceHash`) à un nom de texture. Seule la section `<Textures>` est
-lue, la lecture s'arrêtant à `</Textures>` dans un fichier qui peut peser des dizaines de
-mégaoctets. Ensuite :
+lue, la lecture s'arrêtant à `</Textures>` dans un fichier qui peut peser des dizaines de mégaoctets.
+Ensuite :
 
-1. L'emplacement `0x88B483AA` est la couleur de base du shader d'environnement standard (tous les matériaux échantillonnés). Si le matériau y lie une texture, celle-ci est utilisée.
-2. Sinon, le type propre de la texture décide, d'après le mot qui précède son GUID : `_bclr_`, puis `_diff_`, puis `_colour_`.
-3. Les cartes de terrain (`mainmap`, `submap`, `autogloss`) et les palettes de teinte (`tint`, `worldtint`) ne colorent jamais un modèle.
+1. L'emplacement `0x88B483AA` est la couleur de base du shader d'environnement standard (tous les
+   matériaux échantillonnés). Si le matériau y lie une texture, celle-ci est utilisée.
+2. Sinon, le type propre de la texture décide, d'après le mot qui précède son GUID : `_bclr_`, puis
+   `_diff_`, puis `_colour_`.
+3. Les cartes de terrain (`mainmap`, `submap`, `autogloss`) et les palettes de teinte (`tint`,
+   `worldtint`) ne colorent jamais un modèle.
 
 Un modèle est donc coloré par ce que son matériau lie, et non par une texture qui porte le nom du
 modèle. Par exemple, `bar_rur_armco_crct_02_c` utilise la texture de `..._02_a`.
 
 La texture est lue dans les archives à la plus petite résolution dont le côté est d'au moins
 **256 px** (`MODEL_TEXTURE`), réduite à 256 si elle est plus grande, et stockée en JPEG RVB dans le
-`.glb`. La couleur d'une glissière à 256 px sur quatre mètres fait 1,6 cm par pixel, et environ 80
-de ces textures tiennent dans l'atlas de la visionneuse à côté des tuiles de sol.
+`.glb`. La couleur d'une glissière à 256 px sur quatre mètres fait 1,6 cm par pixel, et environ 80 de
+ces textures tiennent dans l'atlas du visualiseur à côté des tuiles de sol.
 
-**Saisons.** `--season` remplace une texture par sa jumelle saisonnière d'après le nom, le GUID
-étant ignoré (`..._xsummerx_bclr` devient `..._xwinterx_bclr`, ou `..._bclr` devient
-`..._winter_bclr`), quand la piste en a une. Avec `--season winter`, le matériau d'hiver d'un
-sous-maillage est aussi utilisé là où sa table de variantes en nomme un.
+**Saisons.** `--season` remplace une texture par sa jumelle saisonnière d'après le nom, le GUID étant
+ignoré (`..._xsummerx_bclr` devient `..._xwinterx_bclr`, ou `..._bclr` devient `..._winter_bclr`),
+quand la piste en a une. Avec `--season winter`, le matériau d'hiver d'un sous-maillage est aussi
+utilisé là où sa table de variantes en nomme un.
 
 **Variantes.** L'enregistrement d'un sous-maillage s'ouvre sur une table de matériaux `(été, hiver)`,
 un par apparence que peut porter une copie : cinq impressions pour un panneau, six couleurs de
@@ -253,12 +315,16 @@ matériau correspond à `alphatest`, `alphablend`, `transmissive`, `anim_flag`, 
 `bush` ou `tree` sont testées :
 
 - L'opacité de la texture est moyennée sur une grille de 32 x 32.
-- Pour chaque surface (chaque triangle découpé partageant une texture), quatre points par triangle sont échantillonnés dans l'espace UV et pondérés par l'aire UV du triangle.
-- Si l'opacité moyenne vaut au moins 0,05 et moins de **0,5**, toute la surface est retirée. En dessous de 0,05, l'alpha signifie clairement autre chose pour son shader (un panneau d'avertissement qui échantillonne 0,01), et la surface est gardée pleine.
-- Un modèle dont toutes les surfaces ont été retirées est signalé : `N models left out as see-through (mostly holes in their texture)`.
+- Pour chaque surface (chaque triangle découpé partageant une texture), quatre points par triangle
+  sont échantillonnés dans l'espace UV et pondérés par l'aire UV du triangle.
+- Si l'opacité moyenne vaut au moins 0,05 et moins de **0,5**, toute la surface est retirée. En
+  dessous de 0,05, l'alpha signifie clairement autre chose pour son shader (un panneau d'avertissement
+  qui échantillonne 0,01), et la surface est gardée pleine.
+- Un modèle dont toutes les surfaces ont été retirées est signalé : `N models left out as see-through
+  (mostly holes in their texture)`.
 
-L'outil juge la surface entière plutôt que triangle par triangle. Jugé triangle par triangle, la moitié de
-chaque quad survivait, et les grillages sortaient en rangées de dents.
+L'outil juge la surface entière plutôt que triangle par triangle. Jugé triangle par triangle, la moitié
+de chaque quad survivait, et les grillages sortaient en rangées de dents.
 
 ### Bâtiments dessinés en entier {#buildings-drawn-whole}
 
@@ -268,15 +334,60 @@ Retirer les pièces une à une laissait des dalles de mur isolées debout. Le je
 substituts de bâtiment entier dans `scene\hlod_tier_1\`, un maillage par bâtiment (préfixe
 `hlod_tier_1_*`), déjà en coordonnées du monde comme le terrain :
 
-- La boîte mondiale de chaque substitut est lue dans la boîte de position de son maillage (une lecture d'en-tête, non un décodage). Cela prend quelques secondes pour une carte entière.
+- La boîte mondiale de chaque substitut est lue dans la boîte de position de son maillage (une lecture
+  d'en-tête, non un décodage). Cela prend quelques secondes pour une carte entière.
 - Les substituts qui touchent la boîte du tour et le couloir sont utilisés.
-- Chaque pièce `buildings` dont la position tombe dans l'emprise d'un substitut (plus 0,5 m) est retirée, et le substitut est dessiné à sa place. Sa distance à la conduite est mesurée jusqu'au bord le plus proche du bâtiment.
-- Le résumé indique `N buildings drawn whole from the game's own stand-ins (which replace M modular pieces)`.
+- Chaque pièce `buildings` dont la position tombe dans l'emprise d'un substitut (plus 0,5 m) est
+  retirée, et le substitut est dessiné à sa place. Sa distance à la conduite est mesurée jusqu'au bord
+  le plus proche du bâtiment.
+- Le résumé indique `N buildings drawn whole from the game's own stand-ins (which replace M modular
+  pieces)`.
+
+### Couches allumées {#switched-on-layers}
+
+Ce qu'une couche allumée place est exporté, mais à part du monde en roue libre, pour que le
+visualiseur puisse l'afficher ou la masquer :
+
+| Couche | Partie |
+|---|---|
+| le monde en roue libre | `structure:<category>` (comme avant) |
+| une couche qui nomme la route de la course associée | `structure:event_<category>` |
+| toute autre couche allumée | `structure:layer_<category>` |
+
+Le résumé les compte : `switched-on layers: <n> copies in <m> (<layer names>)`.
+
+### Modèles déjà en coordonnées du monde {#models-already-in-world-coordinates}
+
+Quelques types de modèles ne figurent dans aucun fichier de placement. Leurs maillages portent leur
+propre position dans le monde, comme le terrain, si bien que rien n'a besoin de les placer :
+
+| Dossier sous `scene\models\` | Ce que c'est | Partie |
+|---|---|---|
+| `plots` | le sol propre d'un lieu : le sol et l'aire intérieure d'un stade, un site de festival, une place | `ground:venue` |
+| `plinths` (et tout modèle nommé `floor`, `ground` ou `road`) | le sol dont une rue est habillée : bacs à plantes, marches, pavage d'un parc | `ground:plinths` |
+| `hda_infrastructure` (ponts) | ponts construits par procédé | `structure:bridges` |
+
+- Un modèle est considéré comme étant en coordonnées du monde quand le milieu de sa boîte se trouve à
+  plus de **300 m** (`WORLD_REACH`) de sa propre origine. Les modèles placés par les fichiers de
+  placement se trouvent à quelques centaines de mètres de leur origine au plus.
+- Non dessinés : les occluders, les câbles tendus le long des routes, le décor de fond de la mer, les
+  toits et occluders des bâtiments modulaires (les substituts dessinent ces bâtiments), les volumes de
+  collision et d'eau.
+- Chacun est lu d'après la boîte de ses maillages (une lecture d'en-tête), quelques secondes pour une
+  carte entière, une fois par exécution.
+- Les pièces de sol ne sont jamais dessinées plus grossières, ni retirées pour tenir dans le budget,
+  comme les bordures.
+
+**Un lieu est découpé en entier.** Quand la conduite touche le sol propre d'un lieu (`ground:venue`),
+le couloir est élargi à toute l'emprise de ce sol plus `--margin`, si bien que les tribunes, murs et
+barrières autour d'un stade viennent avec lui, et non seulement la bande que les tours ont utilisée.
+La console affiche `through a venue (<model names>): cutting all of its ground, <n> km2`. Les plinthes
+n'élargissent pas la découpe.
 
 ### Détail et budget {#detail-and-the-budget}
 
 Les bandes de distance, le budget, et les copies qui partent quand le budget est trop petit sont
-décrits dans [Niveaux de détail et budget](https://holdi601.github.io/3DHeat-GameFiles/fr/detail-budget.html).
+décrits dans [Niveaux de détail et budget](https://holdi601.github.io/3DHeat-GameFiles/detail-budget.html).
 
 ### Résumé du placement {#placement-summary}
 
@@ -289,14 +400,75 @@ décrits dans [Niveaux de détail et budget](https://holdi601.github.io/3DHeat-G
     120,000 of 125,000 copies left out to fit the budget, the smallest and furthest from the driving first (--detail-budget raises it)
     2 models left out as see-through (mostly holes in their texture): fence_a, net_b
     3 placed names have no model in the archives: ...
+    venue: the driving passes through 2 pieces of a site's own ground (plt_example_floor_a, plt_example_lawn_a)
+    1 models drawn where the game builds them in place (plinths, bridges)
+    event layer (route 1234): 1,200 copies in barriers, decals, infrastructure, props
+    40 free-roam objects left out: the race takes them away
+    switched-on layers: 12 copies in 2 (rt_0, tag_example)
 ```
+
+## La couche propre à la course {#the-races-own-layer}
+
+Plusieurs courses mettent à disposition des choses qui n'existent pas en roue libre : des murs et des
+clôtures en béton qui ferment des routes annexes, des piles de pneus, des tentes, un portique de
+départ, des tribunes, des drapeaux, des banderoles. Chaque course les liste dans sa définition de
+route (`route<id>_<map>.rtd` dans `routedefinitions.zip`, du XML simple dans un zip ordinaire) :
+
+```
+<Route>
+  <HiddenAssets>
+    <Transform guid="..." value="16 numbers" />        free-roam objects the race removes
+  </HiddenAssets>
+  <RouteAssets>
+    <Instance>
+      <Model value="tracks\<map>\scene\models\<kind>\...\<model>.model" />
+      <Transform value="16 numbers" />                  what the race adds
+      <Material value="n" />
+    </Instance>
+  </RouteAssets>
+</Route>
+```
+
+- **Ce qui est ajouté.** Chaque instance est placée comme une copie d'un fichier de placement. Les
+  16 nombres de la transformation forment quatre lignes : les axes x, y et z du modèle (chacun mis à
+  l'échelle) et sa position en mètres du jeu. La troisième ligne est le produit vectoriel des deux
+  premières. `Material` est la variante que porte la copie. La partie est `structure:event_<kind>`,
+  `<kind>` étant le dossier sous `scene\models\` (barriers, props, infrastructure, signs ; tout autre
+  compte comme props), et le nœud porte les extras glTF `{"layer": "event", "route": <id>}`.
+- **Ce qui est retiré.** Une copie de roue libre située à moins de **0,1 m** de la position d'un
+  élément caché est retirée. Un élément caché posé à l'origine est un modèle en coordonnées du monde ;
+  son GUID d'instance est recherché dans le `AssetManifest.xml` de la piste (la liste `<Models>` : la
+  source d'un modèle, puis les GUID de ses copies) pour le nommer.
+- **Le sol que la course cache est gardé.** Une course qui cache le sol d'un lieu y pose sa propre
+  surface. Quand cette surface ne fait pas partie des modèles que livre la piste, le sol caché est
+  conservé, comme ce qui se rapproche le plus de la surface roulée, et le résumé le dit
+  (`kept <model>: the race hides it for a surface of its own that the track does not ship`).
+- **Non dessiné, mais compté.** Les marqueurs de spectateurs (`crowd_proxies` : le jeu dessine la foule
+  en sprites à partir d'eux) et les splines de collision (`.splinecol`). La console les liste :
+  `its own layer: <n> copies of <m> models, <k> free-roam objects hidden; not drawn: ...`.
+- Les éléments de route pour lesquels la piste ne livre aucun modèle (halos de lumière, certains
+  panneaux, contenu que le jeu charge en flux) sont nommés dans `placed names have no model in the
+  archives`.
+
+Seules les copies situées dans le couloir sont placées, comme pour tout le reste.
 
 ## Écrire le fichier {#writing-the-file}
 
-Les parties sont écrites dans cet ordre : par tuile `terrain`, `verge`, `road` (chacune avec
-l'image de la tuile), puis `water`, `tyre marks`, `markings` (à plat, les deux dernières relevées),
-puis chaque partie placée triée par nom. Les coordonnées sont celles du jeu (mètres, Y vers le
-haut). Voir [Format de sortie](https://holdi601.github.io/3DHeat-GameFiles/fr/output-format.html).
+Les parties sont écrites dans cet ordre : par tuile `terrain`, `verge`, `road` (chacune avec l'image
+de la tuile), puis `water`, `tyre marks`, `markings` (à plat, les deux dernières relevées), puis chaque
+partie placée triée par nom. Les coordonnées sont celles du jeu (mètres, Y vers le haut). Voir
+[Format de sortie](https://holdi601.github.io/3DHeat-GameFiles/output-format.html).
+
+Le fichier indique ce qu'il contient dans ses `asset.extras` glTF :
+
+| Champ | Signification |
+|---|---|
+| `course_format` | `2` : la couche propre à la course, les lieux et les modèles en coordonnées du monde y figurent. [`courses`](commands.md#courses) exporte de nouveau un fichier au numéro inférieur (ou sans numéro) |
+| `route` | l'identifiant de la route associée, ou `null` |
+| `event_copies`, `event_kinds` | combien de copies de la couche propre à la course ont été placées, et leurs types |
+| `hidden` | copies de roue libre non retenues, parce que la course les retire |
+| `venue` | les modèles de sol de lieu que la conduite traverse |
+| `layers` | les couches allumées placées |
 
 ## Ce que cela coûte {#what-it-costs}
 
@@ -312,17 +484,24 @@ Un kilomètre carré de terrain en monde ouvert fait environ un million de trian
 
 ## Vérifications {#checks-behind-it}
 
-Ce sont des mesures faites pendant l'écriture du lecteur, comme indiqué dans la source. Elles ne
-sont pas relancées par les tests, sauf si le jeu est installé.
+Ce sont des mesures faites pendant l'écriture du lecteur, comme indiqué dans la source. Elles ne sont
+pas relancées par les tests, sauf si le jeu est installé.
 
-- Sur le circuit d'essai, la voiture se trouve à peu près à sa hauteur de roulage au-dessus du sol extrait (médiane inférieure à 0,2 m).
+- Sur le circuit d'essai, la voiture se trouve à peu près à sa hauteur de roulage au-dessus du sol
+  extrait (médiane inférieure à 0,2 m).
 - Chaque tuile échantillonnée tombe dans le carré de 512 m que son nom annonce.
-- Des placements de glissière consécutifs sont exactement à 4 m l'un de l'autre, et la plupart des extrémités de glissière tombent à moins de 5 cm du début de la suivante.
-- Les bordures reposent à quelques centimètres au-dessus du sol extrait, face vers le haut, à moins de 5 m de la conduite (aussi un test sur jeu installé, voir [Développement](../maintaining.md)).
+- Des placements de glissière consécutifs sont exactement à 4 m l'un de l'autre, et la plupart des
+  extrémités de glissière tombent à moins de 5 cm du début de la suivante.
+- Les bordures reposent à quelques centimètres au-dessus du sol extrait, face vers le haut, à moins de
+  5 m de la conduite (aussi un test sur jeu installé, voir [Maintenance](maintaining.md#tests)).
 
 ## Non dessiné {#not-drawn}
 
-- Les arbres et buissons, sauf avec `--trees`. L'herbe, les foules et les sites de festival, jamais.
+- Les arbres et buissons, sauf avec `--trees`. L'herbe et les foules, jamais (le jeu les dessine comme
+  des sprites).
+- Les éléments propres à une course que la piste ne livre pas (voir
+  [La couche propre à la course](#the-races-own-layer)).
 - Les matériaux de décalcomanie projetés sur les modèles.
 - Les impressions de panneaux mélangées par alpha sur leur support sortent opaques.
-- La couleur du sol est une reconstruction de l'emplacement de l'asphalte, de l'herbe et des bois, et non les matériaux de terrain du jeu.
+- La couleur du sol est une reconstruction de l'emplacement de l'asphalte, de l'herbe et des bois, et
+  non les matériaux de terrain du jeu.

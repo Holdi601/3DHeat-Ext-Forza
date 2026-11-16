@@ -1,0 +1,97 @@
+---
+title: Startseite
+nav_order: 1
+lang: "de"
+source: index.md
+source_hash: "31d4f6f53242"
+nav_exclude: true
+search_exclude: true
+permalink: /de/
+---
+# 3DHeat Forza {#dheat-forza}
+
+**Was ist das?** Ein Werkzeug, das aus dem Forza, das du bereits installiert hast, ein 3D-Modell einer Forza-Rennstrecke baut. Du gibst ihm eine Runde, die du gefahren bist, und es schreibt die Straße, den Randstreifen und das Gras, die Bordsteine, Leitplanken, Reifenwände, Schilder und Gebäude rundherum als eine einzige 3D-Datei.
+
+**Wozu brauche ich es?** Der [3DHeat](https://github.com/Holdi601/3DHeat)-Viewer ([Doku](https://holdi601.github.io/3DHeat/)) malt, wo du gefahren bist, als Hitze, und sein Tab Rennanalyse vergleicht Runden Kurve für Kurve. Mit diesem Werkzeug malt er sie auf die echte Strecke statt auf leeren Raum, und zeichnet jedes aufgenommene Auto in seiner eigenen Form.
+
+**Beispiel:** `heat3d-forza-maps course "Example Circuit"` findet das Spiel, die Strecke und das Rennen, auf dem die Runden gefahren wurden, und schreibt `example_circuit.glb`:
+
+![Eine Runde geht hinein, die Strecke um sie herum kommt heraus](../assets/img/de/lap-to-course.svg)
+
+Es liest Forza Horizon und Forza Motorsport, die Spiele auf ForzaTech, der Engine von Turn 10, aus Steam oder dem Microsoft Store. Python-Paket: `heat3d_ext_forza`. Repository: [Holdi601/3DHeat-Ext-Forza](https://github.com/Holdi601/3DHeat-Ext-Forza). Lizenz: MIT.
+
+Dieses Werkzeug ist absichtlich von den anderen 3DHeat-Werkzeugen getrennt: Es liest die Spieldateien von Microsoft. Müsste es jemals weg, geht nichts anderes mit. Was es schreibt, bleibt auf deinem Rechner ([Regeln und Lizenzen](terms.md)).
+
+## Schnellstart {#quick-start}
+
+Du kennst die Kommandozeile noch nicht? Lies zuerst [Bevor du anfängst](before-you-start.md). Du brauchst Python 3.10 oder neuer und ein Forza, das über Steam oder den Microsoft Store installiert ist.
+
+```
+git clone https://github.com/Holdi601/3DHeat-Ext-Forza.git
+cd 3DHeat-Ext-Forza
+python -m pip install -e .                      # the heat3d-forza-maps command, and 3DHeat GameFiles
+heat3d-forza-maps course "Example Circuit"      # a course from the FH Companion lap library, by name
+heat3d-forza-maps cars                          # every car, for the Race analysis tab
+```
+
+`course` endet mit `wrote example_circuit.glb (... bytes)`. Lade die Datei im Viewer im Bereich **Hintergrund / Level** mit **3D-Modell…**. Lade die Autodatei mit **Autodatei laden…** in den Ansichtseinstellungen des Tabs Rennanalyse.
+
+## Was es tut {#what-it-does}
+
+| Befehl | Tut | Seite |
+|---|---|---|
+| `course <lap>` | die Strecke um eine Runde: Boden, bei dem Fahrbahn und Randstreifen getrennt sind, eine Bodentextur, jedes platzierte Modell in seiner eigenen Textur, die eigene Schicht des Rennens | [Streckenexport](course-export.md), [Wie eine Forza-Strecke entsteht](course-forza-horizon.md) |
+| `courses` | `course` für jede Strecke in einer aufgezeichneten Rundenbibliothek | [Befehle](commands.md#courses) |
+| `races` | jedes Rennen, das das Spiel festlegt, und ob deine Exporte davon aktuell sind | [Befehle](commands.md#races) |
+| `terrain <track>` | ein Stück Strecke nach Weltkoordinaten, ohne Runde | [Befehle](commands.md#terrain) |
+| `cars` | jedes Auto in niedriger Detailstufe, in einer Datei für den Viewer | [Forza-Autos](forza-cars.md) |
+| `identify`, `list`, `extract` | was eine Forza-Datei ist, was eine `.minizip` enthält, ein Eintrag herausgeholt | [Forza-Dateien untersuchen](inspecting-files.md) |
+
+So werden die Dateien des Spiels gelesen, Byte für Byte: [ForzaTech](reader-forzatech.md). Jede Option: [Befehlsreferenz](../cli-reference.md).
+
+Es baut auf [3DHeat GameFiles](https://holdi601.github.io/3DHeat-GameFiles/) auf. Das liefert den glTF-Schreiber, die Rundenleser, den Korridor und das Detailbudget. Außerdem startet GameFiles dieses Werkzeug für seine eigenen Befehle `course`, `courses`, `races`, `cars` und `terrain` bei einer Forza-Runde. Seiten dort, die auch hier gelten:
+[Rundeneingaben](https://holdi601.github.io/3DHeat-GameFiles/lap-inputs.html),
+[Detailstufen und Budget](https://holdi601.github.io/3DHeat-GameFiles/detail-budget.html),
+[Ausgabeformat](https://holdi601.github.io/3DHeat-GameFiles/output-format.html),
+[Grenzen und bekannte Lücken](https://holdi601.github.io/3DHeat-GameFiles/limits-and-known-gaps.html).
+
+## Seiten {#pages}
+
+| Seite | Was sie behandelt |
+|---|---|
+| [Bevor du anfängst](before-you-start.md) | Python, ein Terminal, Installieren, ein erster Lauf |
+| [Befehle](commands.md) | jeder Befehl, seine Optionen, Exit-Codes |
+| [Streckenexport](course-export.md) | `course` Schritt für Schritt: der Korridor, der Boden, was darauf steht |
+| [Wie eine Forza-Strecke entsteht](course-forza-horizon.md) | das Spiel, die Strecke und das Rennen finden; Gelände, Texturen, platzierte Modelle |
+| [Forza-Autos](forza-cars.md) | `cars` und die Autodatei |
+| [Forza-Dateien untersuchen](inspecting-files.md) | `identify`, `list`, `extract` |
+| [ForzaTech](reader-forzatech.md) | die Dateiformate |
+| [Regeln und Lizenzen](terms.md) | die Spieldateien, was du mit der Ausgabe tun darfst |
+| [Befehlsreferenz](../cli-reference.md) | jede Option, aus dem Code erzeugt |
+| [Diese Doku pflegen](maintaining.md) | Tests und die Checkliste für Veröffentlichungen |
+
+## Die 3DHeat-Werkzeuge {#the-3dheat-tools}
+
+| Werkzeug | Was es tut | Code | Doku |
+|---|---|---|---|
+| 3DHeat-Viewer | zeigt die Daten: Heatmaps, Rennanalyse, Matchauswertung | [3DHeat](https://github.com/Holdi601/3DHeat) | [Doku](https://holdi601.github.io/3DHeat/) |
+| GameFiles | Level und Strecken aus den eigenen Dateien eines Spiels | [3DHeat-GameFiles](https://github.com/Holdi601/3DHeat-GameFiles) | [Doku](https://holdi601.github.io/3DHeat-GameFiles/) |
+| GameCapture | Rundentelemetrie und Level, die aus Gameplay-Video nachgebaut werden | [3DHeat-GameCapture](https://github.com/Holdi601/3DHeat-GameCapture) | [Doku](https://holdi601.github.io/3DHeat-GameCapture/) |
+| Unreal Exporter | ein Plugin für den Unreal Editor: ein Level als eine `.glb` | [3DHeat-UnrealExporter](https://github.com/Holdi601/3DHeat-UnrealExporter) | [Doku](https://holdi601.github.io/3DHeat-UnrealExporter/) |
+| CS2 | Counter-Strike-2-Demos und -Karten | [3DHeat-CS2](https://github.com/Holdi601/3DHeat-CS2) | [Doku](https://holdi601.github.io/3DHeat-CS2/) |
+| Watcher | zeichnet auf, was Spiele veröffentlichen, während du spielst | [3DHeat-Watcher](https://github.com/Holdi601/3DHeat-Watcher) | [Doku](https://holdi601.github.io/3DHeat-Watcher/) |
+| Ext-WarThunder | War-Thunder-Wiederholungen | [3DHeat-Ext-WarThunder](https://github.com/Holdi601/3DHeat-Ext-WarThunder) | [Doku](https://holdi601.github.io/3DHeat-Ext-WarThunder/) |
+| Ext-WoT | World-of-Tanks-Wiederholungen | [3DHeat-Ext-WoT](https://github.com/Holdi601/3DHeat-Ext-WoT) | [Doku](https://holdi601.github.io/3DHeat-Ext-WoT/) |
+| Ext-WoWs | World-of-Warships-Wiederholungen | [3DHeat-Ext-WoWs](https://github.com/Holdi601/3DHeat-Ext-WoWs) | [Doku](https://holdi601.github.io/3DHeat-Ext-WoWs/) |
+| Ext-Squad | Squad-Server-Demos | [3DHeat-Ext-Squad](https://github.com/Holdi601/3DHeat-Ext-Squad) | [Doku](https://holdi601.github.io/3DHeat-Ext-Squad/) |
+| Ext-DCS | DCS-World-Karten als 3D-Level | [3DHeat-Ext-DCS](https://github.com/Holdi601/3DHeat-Ext-DCS) | [Doku](https://holdi601.github.io/3DHeat-Ext-DCS/) |
+| Ext-IL2 | IL-2-Sturmovik-Karten als 3D-Level | [3DHeat-Ext-IL2](https://github.com/Holdi601/3DHeat-Ext-IL2) | [Doku](https://holdi601.github.io/3DHeat-Ext-IL2/) |
+| Ext-Dota | die Dota-2-Karte als 3D-Level | [3DHeat-Ext-Dota](https://github.com/Holdi601/3DHeat-Ext-Dota) | [Doku](https://holdi601.github.io/3DHeat-Ext-Dota/) |
+| Ext-DotaReplay | Dota-2-Wiederholungen | [3DHeat-Ext-DotaReplay](https://github.com/Holdi601/3DHeat-Ext-DotaReplay) | [Doku](https://holdi601.github.io/3DHeat-Ext-DotaReplay/) |
+| Ext-Riot | League-of-Legends- und Valorant-Wiederholungen | [3DHeat-Ext-Riot](https://github.com/Holdi601/3DHeat-Ext-Riot) | [Doku](https://holdi601.github.io/3DHeat-Ext-Riot/) |
+| **Ext-Forza** | **Forza-Strecken, -Rennen und -Autos aus deiner eigenen Installation** | [3DHeat-Ext-Forza](https://github.com/Holdi601/3DHeat-Ext-Forza) | [Doku](https://holdi601.github.io/3DHeat-Ext-Forza/) |
+| Ext-Battlefield | Battlefield-6-Level aus deiner eigenen Installation | [3DHeat-Ext-Battlefield](https://github.com/Holdi601/3DHeat-Ext-Battlefield) | [Doku](https://holdi601.github.io/3DHeat-Ext-Battlefield/) |
+| Ext-BeamNG | BeamNG.drive-Strecken aus deiner eigenen Installation | [3DHeat-Ext-BeamNG](https://github.com/Holdi601/3DHeat-Ext-BeamNG) | [Doku](https://holdi601.github.io/3DHeat-Ext-BeamNG/) |
+| Ext-ACRally | Assetto-Corsa-Rally-Etappen aus deiner eigenen Installation | [3DHeat-Ext-ACRally](https://github.com/Holdi601/3DHeat-Ext-ACRally) | [Doku](https://holdi601.github.io/3DHeat-Ext-ACRally/) |
+| Ext-Reforger | Arma-Reforger-Welten aus deiner eigenen Installation | [3DHeat-Ext-Reforger](https://github.com/Holdi601/3DHeat-Ext-Reforger) | [Doku](https://holdi601.github.io/3DHeat-Ext-Reforger/) |
+| Ext-R6 | Rainbow-Six-Siege-Match-Wiederholungen | [3DHeat-Ext-R6](https://github.com/Holdi601/3DHeat-Ext-R6) | [Doku](https://holdi601.github.io/3DHeat-Ext-R6/) |

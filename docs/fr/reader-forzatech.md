@@ -1,6 +1,6 @@
 ---
 title: "ForzaTech"
-nav_order: 7
+nav_order: 8
 lang: "fr"
 source: reader-forzatech.md
 source_hash: "d6c6780626c5"
@@ -45,7 +45,7 @@ padding to an 8-byte boundary
 segments x:  u64 segment base (absolute), then (u32 offset, u32 size, u32 flags) x up to 512
 ```
 
-Trois détails de l'index produisent encore une sortie quand on les lit mal. Le lecteur les gère tous les trois :
+Trois détails de l'index donnent des résultats faux quand on les lit mal. Le lecteur les gère tous les trois :
 
 | Détail | Ce que fait un lecteur négligent | À quoi cela ressemble |
 |---|---|---|
