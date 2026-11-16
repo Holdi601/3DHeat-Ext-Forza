@@ -20,9 +20,12 @@ command with step-by-step use and example output, in the 3DHeat viewer's
 languages. Part of [3DHeat](https://github.com/Holdi601/3DHeat)
 ([documentation](https://holdi601.github.io/3DHeat/)).
 
-This tool is kept outside the other 3DHeat tools on purpose: it reads
-Microsoft's game files. If it ever has to go, nothing else goes with it. What it
-writes stays on your machine.
+Each game reader is its own small project with its own licence file, releases
+and issue tracker, so it can be installed, updated, maintained - or withdrawn
+on a rights holder's request - on its own, without affecting the viewer or the
+other tools.
+
+What it writes stays on your machine.
 
 ## Install
 
@@ -87,11 +90,16 @@ baked ground texture), `ground:kerbs`, `ground:markings`, `water:water`,
 
 ## Terms
 
-Forza Horizon and Forza Motorsport belong to Microsoft, who do not endorse this
-project. Nothing of the games is in this repository or downloaded by it; the
-courses and cars come out of your own install, and what the tool writes is
-yours to view, not to share
+3DHeat Forza is not affiliated with or endorsed by Microsoft, Playground Games
+or Turn 10 Studios. Forza and related names and trademarks belong to their
+owners. Nothing of the games is in this repository or downloaded by it - no
+game assets, no game code, no DLLs; the courses and cars come out of your own
+install, and what the tool writes stays on your machine
 ([Terms and licence](https://holdi601.github.io/3DHeat-Ext-Forza/terms.html)).
+
+Rights holders: open an issue at
+[github.com/Holdi601/3DHeat-Ext-Forza/issues](https://github.com/Holdi601/3DHeat-Ext-Forza/issues)
+- we respond quickly and remove anything on request.
 
 ## Tests
 

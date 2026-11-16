@@ -3,7 +3,7 @@ title: Startseite
 nav_order: 1
 lang: "de"
 source: index.md
-source_hash: "31d4f6f53242"
+source_hash: "ff0660edeaac"
 nav_exclude: true
 search_exclude: true
 permalink: /de/
@@ -20,7 +20,9 @@ permalink: /de/
 
 Es liest Forza Horizon und Forza Motorsport, die Spiele auf ForzaTech, der Engine von Turn 10, aus Steam oder dem Microsoft Store. Python-Paket: `heat3d_ext_forza`. Repository: [Holdi601/3DHeat-Ext-Forza](https://github.com/Holdi601/3DHeat-Ext-Forza). Lizenz: MIT.
 
-Dieses Werkzeug ist absichtlich von den anderen 3DHeat-Werkzeugen getrennt: Es liest die Spieldateien von Microsoft. Müsste es jemals weg, geht nichts anderes mit. Was es schreibt, bleibt auf deinem Rechner ([Regeln und Lizenzen](terms.md)).
+Jeder Spiele-Leser ist ein eigenes kleines Projekt mit eigener Lizenzdatei, eigenen Releases und eigenem Issue-Tracker. So lässt er sich für sich allein installieren, aktualisieren und pflegen - oder auf Wunsch eines Rechteinhabers zurückziehen -, ohne dass der Viewer oder die anderen Werkzeuge davon berührt werden.
+
+Was es schreibt, bleibt auf deinem Rechner ([Regeln und Lizenzen](terms.md)).
 
 ## Schnellstart {#quick-start}
 

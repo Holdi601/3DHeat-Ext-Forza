@@ -26,9 +26,12 @@ engine, from Steam or the Microsoft Store. Python package: `heat3d_ext_forza`.
 Repository: [Holdi601/3DHeat-Ext-Forza](https://github.com/Holdi601/3DHeat-Ext-Forza).
 Licence: MIT.
 
-This tool is kept apart from the other 3DHeat tools on purpose: it reads
-Microsoft's game files. If it ever has to go, nothing else goes with it. What it
-writes stays on your machine ([Terms](terms.md)).
+Each game reader is its own small project with its own licence file, releases
+and issue tracker, so it can be installed, updated, maintained - or withdrawn
+on a rights holder's request - on its own, without affecting the viewer or the
+other tools.
+
+What it writes stays on your machine ([Terms](terms.md)).
 
 ## Quick start
 

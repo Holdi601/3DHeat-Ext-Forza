@@ -3,30 +3,26 @@ title: Termini e licenza
 nav_order: 12
 lang: "it"
 source: terms.md
-source_hash: "6c61ae2ba60f"
+source_hash: "e6bd7ab93f27"
 nav_exclude: true
 search_exclude: true
 ---
 # Termini e licenza {#terms-and-licence}
 
-Questa pagina è una registrazione di ciò che dicono le licenze, non una consulenza legale.
-
 ## Il gioco è di Microsoft {#the-game-is-microsofts}
 
 Forza Horizon e Forza Motorsport, i loro tracciati, le auto e le texture appartengono a
-Microsoft (Playground Games e Turn 10 Studios), che non approva questo progetto. Questo
-repository non contiene **nessun file dei giochi** né alcun percorso o auto o texture
-ricavati da essi, e lo strumento **non scarica mai contenuti di gioco**: legge la copia
-**installata sulla tua macchina**.
+Microsoft (Playground Games e Turn 10 Studios). 3DHeat Forza non è affiliato a Microsoft,
+Playground Games o Turn 10 Studios né da essi approvato. Forza e i nomi e marchi correlati
+appartengono ai rispettivi proprietari.
 
-Ciò a cui lo punti resta sotto la tua responsabilità. I giochi hanno propri termini di
-licenza, e i contratti di licenza d'uso (EULA) spesso vietano il reverse engineering. Sono
-contratti applicabili, e l'obbligo ricade su chi esegue lo strumento. Nessuna scelta di
-progetto qui lo cancella.
+Questo repository non contiene **nessun file dei giochi** né alcun percorso o auto o texture
+ricavati da essi - niente risorse del gioco, niente codice del gioco, nessuna DLL - e lo
+strumento **non scarica mai contenuti di gioco**: legge la copia **installata sulla tua
+macchina**.
 
 ## Nessuna chiave: nessuna distribuita, nessuna recuperata {#no-keys-none-shipped-none-recovered}
 
-**Legge dei contenitori.** Leggere un formato d'archivio è un normale trattamento di file.
 Gli archivi `.minizip` di ForzaTech e i loro modelli, texture e file di posizionamento non
 sono cifrati, e lo strumento non contiene chiavi, non ne recupera, non legge la memoria di
 altri processi e non inietta nulla nel gioco. I giri vengono dalla telemetria che il gioco
@@ -35,8 +31,7 @@ pubblica da sé.
 ## L'output non è da ridistribuire {#output-is-not-for-redistribution}
 
 Ciò che esce è geometria per il **contesto spaziale**: il suolo, la strada e ciò che le sta
-accanto, ridotti a un budget, così i giri si possono analizzare sul posto. È la parte meno
-importante di ciò che contengono gli archivi, ed è comunque contenuto dell'editore.
+accanto, ridotti a un budget, così i giri si possono analizzare sul posto. Resta sulla tua macchina.
 
 - Tieni i `.glb` esportati dei percorsi, il file auto (`.h3dcars`) e le texture al loro
   interno per la tua analisi, sulla macchina su cui sono stati creati.
@@ -47,18 +42,19 @@ importante di ciò che contengono gli archivi, ed è comunque contenuto dell'edi
 
 ## I formati {#the-formats}
 
-I formati di ForzaTech non sono documentati. Leggerli è reverse engineering di un contenitore.
+I formati di ForzaTech non sono documentati.
 Nessuno dei lettori qui è derivato dal codice sorgente di un altro progetto: ogni offset è
 stato misurato sui file, e il modo in cui ciascuno è stato stabilito è scritto in
 [ForzaTech](reader-forzatech.md).
 
 ## Perché è uno strumento separato {#why-this-is-a-separate-tool}
 
-I lettori dei giochi di ogni azienda vivono nel proprio repository, così una questione di
-licenza o una richiesta di rimozione riguardo a un gioco arriva solo allo strumento di quel
-gioco. [3DHeat GameFiles](https://holdi601.github.io/3DHeat-GameFiles/) tiene i lettori
+Ogni lettore di gioco è un piccolo progetto a sé, con il proprio file di licenza, le proprie release e il proprio issue tracker: può essere installato, aggiornato, mantenuto - o ritirato su richiesta di un titolare dei diritti - da solo, senza toccare il visualizzatore o gli altri strumenti.
+
+[3DHeat GameFiles](https://holdi601.github.io/3DHeat-GameFiles/) tiene i lettori
 generici dei formati dei motori e le parti comuni; questo strumento tiene quelli di Forza.
-Se questo repository dovesse sparire, nient'altro sparisce con esso.
+
+Titolari dei diritti: aprite una issue su [github.com/Holdi601/3DHeat-Ext-Forza/issues](https://github.com/Holdi601/3DHeat-Ext-Forza/issues) - rispondiamo rapidamente e rimuoviamo qualsiasi cosa su richiesta.
 
 ## La licenza di questo strumento {#this-tools-licence}
 

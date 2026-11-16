@@ -3,28 +3,25 @@ title: "Règles et licences"
 nav_order: 12
 lang: "fr"
 source: terms.md
-source_hash: "6c61ae2ba60f"
+source_hash: "e6bd7ab93f27"
 nav_exclude: true
 search_exclude: true
 ---
 # Règles et licences {#terms-and-licence}
 
-Cette page consigne ce que disent les licences, sans valoir conseil juridique.
-
 ## Le jeu appartient à Microsoft {#the-game-is-microsofts}
 
 Forza Horizon et Forza Motorsport, leurs pistes, voitures et textures appartiennent à Microsoft
-(Playground Games et Turn 10 Studios), qui n'approuvent pas ce projet. Ce dépôt ne contient **aucun
-fichier des jeux**, ni aucun parcours, aucune voiture ni aucune texture qui en soit tirés, et l'outil
-ne **télécharge jamais de contenu de jeu** : il lit la copie **installée sur votre machine**.
+(Playground Games et Turn 10 Studios). 3DHeat Forza n'est ni affilié à Microsoft, Playground Games
+ou Turn 10 Studios, ni soutenu par eux. Forza ainsi que les noms et marques associés appartiennent
+à leurs propriétaires.
 
-Ce que vous lui donnez reste sous votre responsabilité. Les jeux ont leurs propres conditions de
-licence, et les CLUF interdisent souvent la rétro-ingénierie. Ce sont des contrats applicables, et
-l'obligation pèse sur celui qui fait tourner l'outil. Aucun choix de conception ici ne la dégage.
+Ce dépôt ne contient **aucun fichier des jeux**, ni aucun parcours, aucune voiture ni aucune texture
+qui en soit tirés - ni ressources du jeu, ni code du jeu, ni DLL -, et l'outil ne **télécharge
+jamais de contenu de jeu** : il lit la copie **installée sur votre machine**.
 
 ## Pas de clés : aucune fournie, aucune récupérée {#no-keys-none-shipped-none-recovered}
 
-**L'outil lit des conteneurs.** Lire un format d'archive relève de la gestion ordinaire de fichiers.
 Les archives `.minizip` de ForzaTech, et leurs modèles, textures et fichiers de placement, ne sont
 pas chiffrés ; l'outil ne contient aucune clé, n'en récupère aucune, ne lit la mémoire d'aucun autre
 processus et n'injecte rien dans le jeu. Les tours viennent de la télémétrie que le jeu publie
@@ -33,8 +30,7 @@ lui-même.
 ## La sortie n'est pas à redistribuer {#output-is-not-for-redistribution}
 
 Ce qui sort est une géométrie pour le **contexte spatial** : le sol, la route et ce qui se trouve à
-côté, simplifiés à un budget, pour pouvoir analyser les tours sur place. C'est la part la plus
-modeste de ce que contiennent les archives, et c'est tout de même le contenu de l'éditeur.
+côté, simplifiés à un budget, pour pouvoir analyser les tours sur place. Elle reste sur votre machine.
 
 - Gardez les parcours `.glb` exportés, le fichier de voitures (`.h3dcars`) et les textures qu'ils
   contiennent pour votre propre analyse, sur la machine où ils ont été faits.
@@ -45,18 +41,18 @@ modeste de ce que contiennent les archives, et c'est tout de même le contenu de
 
 ## Les formats {#the-formats}
 
-Les formats de ForzaTech ne sont pas documentés. Les lire revient à faire de la rétro-ingénierie
-d'un conteneur. Aucun des lecteurs ici n'est dérivé du code source d'un autre projet : chaque
+Les formats de ForzaTech ne sont pas documentés. Aucun des lecteurs ici n'est dérivé du code source d'un autre projet : chaque
 décalage a été mesuré sur les fichiers, et la façon dont chacun a été établi est noté sur
 [ForzaTech](reader-forzatech.md).
 
 ## Pourquoi c'est un outil à part {#why-this-is-a-separate-tool}
 
-Les lecteurs des jeux de chaque éditeur vivent dans leur propre dépôt : une question de licence ou
-une demande de retrait concernant un jeu n'atteint que l'outil de ce jeu.
+Chaque lecteur de jeu est un petit projet à part, avec son propre fichier de licence, ses propres versions et son propre suivi des tickets : il peut être installé, mis à jour, maintenu - ou retiré à la demande d'un ayant droit - seul, sans toucher au visualiseur ni aux autres outils.
+
 [3DHeat GameFiles](https://holdi601.github.io/3DHeat-GameFiles/) garde les lecteurs génériques de
-formats de moteur et la tuyauterie commune ; cet outil garde celui de Forza. Si ce dépôt doit
-disparaître, rien d'autre ne disparaît avec lui.
+formats de moteur et la tuyauterie commune ; cet outil garde ceux de Forza.
+
+Ayants droit : ouvrez un ticket sur [github.com/Holdi601/3DHeat-Ext-Forza/issues](https://github.com/Holdi601/3DHeat-Ext-Forza/issues) - nous répondons rapidement et retirons tout ce qui est demandé.
 
 ## La licence de cet outil {#this-tools-licence}
 

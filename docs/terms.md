@@ -5,24 +5,19 @@ nav_order: 12
 
 # Terms and licence
 
-This page is a record of what the licences say, not legal advice.
-
 ## The game is Microsoft's
 
 Forza Horizon and Forza Motorsport, their tracks, cars and textures belong to
-Microsoft (Playground Games and Turn 10 Studios), who do not endorse this
-project. This repository holds **no file of the games** and no course, car or
-texture made from one, and the tool **never downloads game content**: it reads
-the copy **installed on your machine**.
+Microsoft (Playground Games and Turn 10 Studios). 3DHeat Forza is not
+affiliated with or endorsed by Microsoft, Playground Games or Turn 10 Studios.
+Forza and related names and trademarks belong to their owners.
 
-What you point it at stays your responsibility. Games carry their own licence
-terms, and EULAs commonly prohibit reverse engineering. Those are enforceable
-contracts, and the obligation sits with whoever runs the tool. No design choice
-here discharges it.
+This repository holds **no file of the games** and no course, car or texture
+made from one - no game assets, no game code, no DLLs - and the tool **never
+downloads game content**: it reads the copy **installed on your machine**.
 
 ## No keys: none shipped, none recovered
 
-**It reads containers.** Parsing an archive format is ordinary file handling.
 ForzaTech's `.minizip` archives and their models, textures and placement files
 are not encrypted, and the tool contains no key, recovers no key, reads no
 other process's memory and injects nothing into the game. Laps come from the
@@ -32,8 +27,7 @@ telemetry the game publishes itself.
 
 What comes out is geometry for **spatial context**: the ground, the road and
 what stands beside it, decimated to a budget, so laps can be analysed in place.
-It is the least of what the archives hold, and it is still the publisher's
-content.
+It stays on your machine.
 
 - Keep exported `.glb` courses, the car file (`.h3dcars`) and the textures
   inside them for your own analysis, on the machine they were made on.
@@ -44,18 +38,23 @@ content.
 
 ## The formats
 
-ForzaTech's formats are undocumented. Reading them is reverse engineering of a
-container. None of the readers here is derived from another project's source:
+ForzaTech's formats are undocumented. None of the readers here is derived from another project's source:
 every offset was measured on the files, and how each was decided is written down
 on [ForzaTech](reader-forzatech.md).
 
 ## Why this is a separate tool
 
-The readers of each company's games live in their own repository, so a licensing
-question or a takedown request about one game reaches only that game's tool.
-[3DHeat GameFiles](https://holdi601.github.io/3DHeat-GameFiles/) keeps the
-generic engine-format readers and the shared plumbing; this tool keeps Forza's.
-If this repository has to go, nothing else goes with it.
+Each game reader is its own small project with its own licence file, releases
+and issue tracker, so it can be installed, updated, maintained - or withdrawn
+on a rights holder's request - on its own, without affecting the viewer or the
+other tools.
+
+[3DHeat GameFiles](https://holdi601.github.io/3DHeat-GameFiles/) keeps the generic engine-format readers and the shared
+plumbing; this tool keeps Forza's.
+
+Rights holders: open an issue at
+[github.com/Holdi601/3DHeat-Ext-Forza/issues](https://github.com/Holdi601/3DHeat-Ext-Forza/issues)
+- we respond quickly and remove anything on request.
 
 ## This tool's licence
 

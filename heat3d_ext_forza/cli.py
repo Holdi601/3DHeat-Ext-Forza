@@ -913,8 +913,8 @@ def _parser() -> argparse.ArgumentParser:
             "the ForzaTech engine) for the 3DHeat viewer."
         ),
         epilog=(
-            "What you point it at is subject to the game's own licence; what it "
-            "writes stays on your machine."
+            "It reads the files of your own install; what it writes stays on "
+            "your machine."
         ),
     )
     parser.add_argument("--version", action="version", version=__version__)
