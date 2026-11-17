@@ -35,21 +35,38 @@ What it writes stays on your machine ([Terms](terms.md)).
 
 ## Quick start
 
-New to the command line? Read [Before you start](before-you-start.md) first.
-You need Python 3.10 or later and a Forza installed through Steam or the
-Microsoft Store.
+You need Windows, Python 3.10 or later ("Add python.exe to PATH" ticked in its
+installer), a Forza Horizon or Forza Motorsport installed through Steam or the
+Microsoft Store (found by itself) and a lap you drove; no Git. New to the
+command line? Read [Before you start](before-you-start.md) first.
 
-```
-git clone https://github.com/Holdi601/3DHeat-Ext-Forza.git
-cd 3DHeat-Ext-Forza
-python -m pip install -e .                      # the heat3d-forza-maps command, and 3DHeat GameFiles
-heat3d-forza-maps course "Example Circuit"      # a course from the FH Companion lap library, by name
-heat3d-forza-maps cars                          # every car, for the Race analysis tab
+```bash
+python -m pip install https://github.com/Holdi601/3DHeat-Ext-Forza/archive/refs/tags/v1.0.0.zip
+heat3d-forza-maps course laps\<lap>.lap.json -o my_course.glb    # the track around a recorded lap
+heat3d-forza-maps course "<course name>"                         # or a course of the FH Companion library, by name
+heat3d-forza-maps cars                                           # every car, for the Race analysis tab
 ```
 
-`course` ends with `wrote example_circuit.glb (... bytes)`. Load the file in
-the viewer's **Background / level** panel with **3D model…**; load the car file
-with **Load car file...** in the race tab's view settings.
+The install brings [3DHeat GameFiles](https://holdi601.github.io/3DHeat-GameFiles/),
+the library it reads with. A lap comes from
+[3DHeat GameCapture](https://github.com/Holdi601/3DHeat-GameCapture) (turn on
+the game's Data Out to `127.0.0.1`, port `5300`, then
+`python -m heat3d_capture telemetry -o laps`), or from the FH Companion lap
+library (`%LOCALAPPDATA%\FHCompanion\laps`, found by itself). `course` says
+which track and race it found and ends with `wrote my_course.glb (... bytes)`;
+without `-o` the file is named after the course (`"Example Circuit"` ->
+`example_circuit.glb`). `cars` writes `forza.h3dcars` (about 5 MB, in seconds).
+Both land in the folder you ran them in.
+
+Then open them in the [3DHeat viewer](https://github.com/Holdi601/3DHeat#quick-start):
+download it (**Code -> Download ZIP**, unpack), double-click `start.bat` (it
+offers to install Node.js when it is missing and opens `http://127.0.0.1:5273`),
+then **Background / level -> 3D model...** and pick the `.glb`; in the
+**Race analysis** tab **Load lap files...** and pick your laps, and
+**Load car file...** (in the tab's view settings) and pick `forza.h3dcars`.
+
+When a new release is out, the tool says so when it starts and offers to
+update itself.
 
 ## What it does
 

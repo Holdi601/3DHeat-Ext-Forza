@@ -3,7 +3,7 @@ title: Startseite
 nav_order: 1
 lang: "de"
 source: index.md
-source_hash: "ff0660edeaac"
+source_hash: "ea7225041509"
 nav_exclude: true
 search_exclude: true
 permalink: /de/
@@ -26,17 +26,40 @@ Was es schreibt, bleibt auf deinem Rechner ([Regeln und Lizenzen](terms.md)).
 
 ## Schnellstart {#quick-start}
 
-Du kennst die Kommandozeile noch nicht? Lies zuerst [Bevor du anfängst](before-you-start.md). Du brauchst Python 3.10 oder neuer und ein Forza, das über Steam oder den Microsoft Store installiert ist.
+Du brauchst Windows, Python 3.10 oder neuer (im Installer "Add python.exe to PATH"
+ankreuzen), ein Forza Horizon oder Forza Motorsport, über Steam oder den Microsoft
+Store installiert (wird von selbst gefunden), und eine Runde, die du gefahren bist;
+Git ist nicht nötig. Du kennst die Kommandozeile noch nicht? Lies zuerst
+[Bevor du anfängst](before-you-start.md).
 
-```
-git clone https://github.com/Holdi601/3DHeat-Ext-Forza.git
-cd 3DHeat-Ext-Forza
-python -m pip install -e .                      # the heat3d-forza-maps command, and 3DHeat GameFiles
-heat3d-forza-maps course "Example Circuit"      # a course from the FH Companion lap library, by name
-heat3d-forza-maps cars                          # every car, for the Race analysis tab
+```bash
+python -m pip install https://github.com/Holdi601/3DHeat-Ext-Forza/archive/refs/tags/v1.0.0.zip
+heat3d-forza-maps course laps\<lap>.lap.json -o my_course.glb    # die Strecke um eine aufgenommene Runde
+heat3d-forza-maps course "<course name>"                         # oder eine Strecke der FH-Companion-Bibliothek, nach Namen
+heat3d-forza-maps cars                                           # jedes Auto, für den Tab Rennanalyse
 ```
 
-`course` endet mit `wrote example_circuit.glb (... bytes)`. Lade die Datei im Viewer im Bereich **Hintergrund / Level** mit **3D-Modell…**. Lade die Autodatei mit **Autodatei laden…** in den Ansichtseinstellungen des Tabs Rennanalyse.
+Die Installation bringt [3DHeat GameFiles](https://holdi601.github.io/3DHeat-GameFiles/)
+mit, die Bibliothek, mit der es liest. Eine Runde kommt von
+[3DHeat GameCapture](https://github.com/Holdi601/3DHeat-GameCapture) (im Spiel Data Out
+auf `127.0.0.1`, Port `5300` einschalten, dann
+`python -m heat3d_capture telemetry -o laps`) oder aus der FH-Companion-Rundenbibliothek
+(`%LOCALAPPDATA%\FHCompanion\laps`, wird von selbst gefunden). `course` sagt, welche
+Strecke und welches Rennen es gefunden hat, und endet mit
+`wrote my_course.glb (... bytes)`; ohne `-o` heißt die Datei nach der Strecke
+(`"Example Circuit"` -> `example_circuit.glb`). `cars` schreibt `forza.h3dcars`
+(etwa 5 MB, in Sekunden). Beide landen in dem Ordner, in dem du den Befehl ausgeführt
+hast.
+
+Dann öffne sie im [3DHeat-Viewer](https://github.com/Holdi601/3DHeat#quick-start):
+herunterladen (**Code -> Download ZIP**, entpacken), `start.bat` doppelklicken (es bietet
+an, Node.js zu installieren, wenn es fehlt, und öffnet `http://127.0.0.1:5273`), dann
+**Hintergrund / Level -> 3D-Modell...** und die `.glb` wählen; im Tab **Rennanalyse**
+mit **Rundendateien laden...** deine Runden wählen und mit **Autodatei laden...** (in den
+Ansichtseinstellungen des Tabs) `forza.h3dcars`.
+
+Wenn ein neues Release erscheint, sagt das Werkzeug es beim Start und bietet an, sich
+selbst zu aktualisieren.
 
 ## Was es tut {#what-it-does}
 

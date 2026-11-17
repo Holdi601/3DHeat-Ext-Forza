@@ -27,7 +27,51 @@ other tools.
 
 What it writes stays on your machine.
 
-## Install
+## Quick start for new users
+
+You need: Windows, [Python](https://www.python.org/downloads/) 3.10 or later
+("Add python.exe to PATH" ticked in its installer), a Forza Horizon or Forza
+Motorsport installed through Steam or the Microsoft Store (found by itself),
+and a lap you drove: one recorded with
+[3DHeat GameCapture](https://github.com/Holdi601/3DHeat-GameCapture) (turn on
+the game's Data Out to `127.0.0.1`, port `5300`, then
+`python -m heat3d_capture telemetry -o laps`), or a course in the FH Companion
+lap library (`%LOCALAPPDATA%\FHCompanion\laps`, found by itself). No Git is
+needed.
+
+1. Install the tool (one line, in PowerShell or a command prompt); it brings
+   [3DHeat GameFiles](https://github.com/Holdi601/3DHeat-GameFiles), the
+   library it reads with:
+
+   ```bash
+   python -m pip install https://github.com/Holdi601/3DHeat-Ext-Forza/archive/refs/tags/v1.0.0.zip
+   ```
+
+2. Export the track around your lap, and once every car:
+
+   ```bash
+   heat3d-forza-maps course laps\<lap>.lap.json -o my_course.glb
+   heat3d-forza-maps course "<course name>"         # or a course of the FH Companion library, by name
+   heat3d-forza-maps cars
+   ```
+
+3. `course` says which track and race it found and ends with
+   `wrote my_course.glb (... bytes)`; without `-o` the file is named after the
+   course (`"Example Circuit"` -> `example_circuit.glb`). `cars` writes
+   `forza.h3dcars` (about 5 MB, in seconds). Both land in the folder you ran
+   them in.
+4. Open them in the [3DHeat viewer](https://github.com/Holdi601/3DHeat#quick-start):
+   download the viewer (**Code -> Download ZIP**, unpack) and double-click
+   `start.bat`; it offers to install [Node.js](https://nodejs.org/) when it is
+   missing and opens Chrome or Edge at `http://127.0.0.1:5273`. There,
+   **Background / level -> 3D model...** and pick the `.glb`; in the
+   **Race analysis** tab, **Load lap files...** and pick your laps, and
+   **Load car file...** (in the tab's view settings) and pick `forza.h3dcars`.
+
+When a new release is out, the tool says so when it starts and offers to
+update itself (`python -m heat3d_ext_forza.update` does the same).
+
+## Install from a checkout
 
 New to the command line? Read [Before you start](https://holdi601.github.io/3DHeat-Ext-Forza/before-you-start.html) first.
 

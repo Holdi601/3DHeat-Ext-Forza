@@ -18,6 +18,8 @@
 - No installed Forza, no lap library, a missing dependency: exit code 2 and one
   line saying what to do.
 - A Microsoft Store install is named by its game folder, not `Content`.
+- Installs with one pip line from the release zip, no Git needed (GameFiles comes from its own release zip); a pip install knows its version and updates itself with pip when a newer release is out.
+- README: a quick start for new users.
 
 ## Docs
 
