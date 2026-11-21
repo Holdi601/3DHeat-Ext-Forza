@@ -77,6 +77,7 @@ update itself.
 | `races` | every race the game defines, and whether your exports of it are current | [Commands](commands.md#races) |
 | `terrain <track>` | a piece of track by world coordinates, no lap needed | [Commands](commands.md#terrain) |
 | `cars` | every car at low detail, in one file for the viewer | [Forza cars](forza-cars.md) |
+| `catalog` | the car list with classes, index and drivetrain | [Car catalogue](forza-catalog.md) |
 | `identify`, `list`, `extract` | what a Forza file is, what a `.minizip` holds, one entry out | [Inspecting Forza files](inspecting-files.md) |
 
 How the game's files are read, byte by byte: [ForzaTech](reader-forzatech.md).

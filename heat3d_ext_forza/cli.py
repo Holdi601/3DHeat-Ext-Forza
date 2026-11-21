@@ -6,6 +6,7 @@ ForzaTech engine).
     heat3d-forza-maps courses  [-o folder] [--only name ...]
     heat3d-forza-maps races    [--markdown table.md]
     heat3d-forza-maps cars     [-o forza.h3dcars]
+    heat3d-forza-maps catalog  [-o catalog.json]
     heat3d-forza-maps terrain  <forza track folder> -o map.glb
                                (--box x0 z0 x1 z1 | --route route.json)
     heat3d-forza-maps identify <path>
@@ -559,6 +560,46 @@ def _cars(args) -> int:
     return 1 if failed else 0
 
 
+def _catalog(args) -> int:
+    """
+    The car catalogue of an installed Forza, for the viewer's naming, grouping
+    and filters: every car with its number, make, year, and, when this machine
+    has them, its class, index, type and country (FH Companion's car list) and
+    its drivetrain (the laps).
+    """
+    from heat3d_gamefiles import levelshome
+
+    from .forzacars import cars_of_game
+    from .forzacatalog import build_catalog, companion_home, game_build, read_car_list, read_lap_heads
+    from .forzainstall import game_folders
+
+    games = [Path(args.game)] if args.game else [g for g in game_folders() if cars_of_game(g)]
+    if not games:
+        print("no installed Forza with cars found; name its folder with --game", file=sys.stderr)
+        return 2
+    game = games[-1]
+    archives = cars_of_game(game)
+    car_list_path = Path(args.car_list) if args.car_list else companion_home() / "cars" / "fh6_car_availability.json"
+    library = Path(args.library) if args.library else companion_home() / "laps"
+    car_list = read_car_list(car_list_path)
+    laps = read_lap_heads(library)
+    if not car_list:
+        print(f"no car list at {car_list_path}: names come from the archive names, no class or index", file=sys.stderr)
+    if not laps:
+        print(f"no laps at {library}: no drivetrain", file=sys.stderr)
+    catalog = build_catalog(archives, car_list, laps, game_build=game_build(game),
+                            source=f"heat3d-forza-maps {__version__}")
+    out = args.out or levelshome.default("catalog.json", "forza")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    import json
+
+    out.write_text(json.dumps(catalog, indent=1, ensure_ascii=False), encoding="utf-8")
+    items = catalog["items"]
+    print(f"{out}: {len(items)} cars from {game.name}, {sum(1 for i in items if i['class'])} with class and index, "
+          f"{sum(1 for i in items if i.get('drivetrainDriven'))} with a driven drivetrain")
+    return 0
+
+
 def _courses(args) -> int:
     """
     Every course in a recorded lap library, one file each.
@@ -1017,6 +1058,15 @@ def _parser() -> argparse.ArgumentParser:
     )
     p.add_argument("--game", type=Path, default=None, help="the game's folder, if not the installed one found")
 
+    p = sub.add_parser("catalog", help="the car catalogue: numbers, names, classes, index, drivetrain")
+    p.add_argument(
+        "-o", "--out", type=Path, default=None,
+        help="the file to write (default $HEAT3D_LEVELS/forza/catalog.json, else ./catalog.json)",
+    )
+    p.add_argument("--game", type=Path, default=None, help="the game's folder, if not the installed one found")
+    p.add_argument("--car-list", default=None, help="an FH Companion car list (default: its own, under %%LOCALAPPDATA%%)")
+    p.add_argument("--library", default=None, help="the lap library (default: FH Companion's, under %%LOCALAPPDATA%%)")
+
     p = sub.add_parser(
         "terrain", help="cut a piece of Forza terrain out, by world coordinates"
     )
@@ -1086,6 +1136,8 @@ def _run(args) -> int:
         return _races(args)
     if args.verb == "cars":
         return _cars(args)
+    if args.verb == "catalog":
+        return _catalog(args)
 
     if not args.path.exists():
         print(f"no such file: {args.path}", file=sys.stderr)

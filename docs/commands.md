@@ -15,6 +15,7 @@ folder without installing it, `python -m heat3d_ext_forza <command> ...`).
 | [`races`](#races) | an installed Forza | lists every race the game defines: what it adds, what it hides, venues, the state of its export |
 | [`terrain`](#terrain) | a Forza track folder | cuts a region by world coordinates |
 | [`cars`](#cars) | an installed Forza | every car at low detail, in one file for the viewer's Race analysis tab |
+| [`catalog`](#catalog) | an installed Forza | the car list: numbers, names, classes, index, drivetrain |
 | [`identify`](#identify) | a file | says whether it is a Forza `.minizip` or ForzaTech model, and what is in it |
 | [`list`](#list) | a `.minizip` | lists its entries |
 | [`extract`](#extract) | a `.minizip` | writes one entry to disk |
@@ -300,3 +301,11 @@ heat3d-forza-maps extract <.minizip> <entry> [--out FILE]
 | `HEAT3D_NO_UPDATE` | any value other than empty, `0`, `false`, `no` turns the update check off |
 | `LOCALAPPDATA` | where the FH Companion library and the update cache are looked for |
 | `HEAT3D_COURSE` | tests only: the course the installed-game kerb test uses; see [Maintaining](maintaining.md#tests) |
+
+## catalog
+
+```
+heat3d-forza-maps catalog [-o FILE] [--game FOLDER] [--car-list FILE] [--library FOLDER]
+```
+
+The car catalogue for the viewer's naming and filters. See [Car catalogue](forza-catalog.md).

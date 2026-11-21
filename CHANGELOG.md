@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- `catalog`: the car catalogue for the viewer (`catalog.json`, format
+  `3dheat-catalog`): every car archive's number, make, model and year, joined
+  with FH Companion's car list (name, stock class and index, type, country) and
+  the lap headers (drivetrain, cylinders, power and class as driven).
+
 ## 1.0.0
 
 - First version of its own, moved out of 3DHeat GameFiles with its history
