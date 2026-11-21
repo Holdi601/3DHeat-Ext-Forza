@@ -36,3 +36,6 @@ courses/
 *.npz
 *.lap.json
 *.parquet
+
+# Standalone builds.
+dist-standalone/

@@ -1,0 +1,9 @@
+{
+  "spec": "heat3d_ext_forza.standalone_spec",
+  "collect": ["heat3d_gamefiles"],
+  "collect_submodules": ["numpy", "PIL", "lz4"],
+  "platforms": {
+    "windows-x64": {"build": true, "tested": true, "note": "courses, cars and catalogue; CI builds and smoke-runs, courses checked on a real install; courses come from laps recorded with FH Companion"},
+    "linux-x64": {"build": true, "tested": false, "note": "Steam/Proton installs found (Steam Deck too); CI builds and smoke-runs; a lap file exports as on Windows, a lap library is looked for under LOCALAPPDATA"}
+  }
+}

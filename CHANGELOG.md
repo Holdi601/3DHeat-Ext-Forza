@@ -1,7 +1,19 @@
 # Changelog
 
-## Unreleased
+## 1.1.0
 
+- A standalone program for Windows and Linux (no Python needed), built by CI with a `SHA256SUMS` file. Without
+  arguments it opens a window: what is found and what is missing (install, recorded laps, disk space), the levels
+  folder, the recorded courses as new / with new laps or a game update / exported by an older version / up to
+  date, export of the picked ones one at a time (`forza/courses/<course>.glb`, each from its laps alone), a single
+  lap's export, the cars, the catalogue, and updates.
+- Each exported course is recorded in `<levels>/forza/.heat3d-extract.json` (extractor version, game build, size
+  and SHA-256 of its laps and of the tracks' entry lists), so new courses, new laps and game updates are found
+  and only those exported: `status --json`, `extract --new` / `--changed` / `--outdated` / `<course>...`,
+  `--progress-json`.
+- Updates ask first (update now / later / skip this version) unless automatic updates were chosen
+  (`--auto-update`, the window's checkbox, or `HEAT3D_AUTO_UPDATE=1`).
+- The install is also found in Steam libraries on Linux (native, flatpak, Steam Deck).
 - `catalog`: the car catalogue for the viewer (`catalog.json`, format
   `3dheat-catalog`): every car archive's number, make, model and year, joined
   with FH Companion's car list (name, stock class and index, type, country) and

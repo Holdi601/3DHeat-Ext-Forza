@@ -33,6 +33,36 @@ other tools.
 
 What it writes stays on your machine ([Terms](terms.md)).
 
+## The standalone program (no Python needed)
+
+Each [release](https://github.com/Holdi601/3DHeat-Ext-Forza/releases/latest)
+has a ready-to-run program for Windows (`heat3d-forza-<version>-windows-x64.zip`)
+and Linux (`...-linux-x64.tar.gz`, for Steam installs through Proton, Steam Deck
+too), with a `SHA256SUMS` file to check the download. Unpack it anywhere and
+start `heat3d-forza`.
+
+Started without arguments it opens a window that:
+
+- finds your Forza install (Steam on Windows and Linux, the Microsoft Store),
+  or lets you choose its folder;
+- says what is missing: the game, the recorded laps, free disk space;
+- lists the courses of your recorded lap library (FH Companion's) as new, with
+  new laps or a game update since the last export, exported by an older
+  version, or up to date, and exports the ones you pick, one at a time, into
+  the 3DHeat levels folder (`HEAT3D_LEVELS`, by default
+  `%LOCALAPPDATA%\3DHeat\levels` on Windows and `~/.local/share/3dheat/levels`
+  elsewhere), as `forza/courses/<course>.glb` - each from its laps alone, as
+  `course` does;
+- exports a single lap file, and writes the cars and the car catalogue;
+- checks for updates and asks before installing one, unless you tick
+  *Update automatically*.
+
+The same program runs every command below: `heat3d-forza course <lap>`,
+`heat3d-forza cars`. For scripts: `heat3d-forza status --json` reports the
+courses' state, `heat3d-forza extract --new` exports only the new and
+`heat3d-forza --check --json` what is found and missing.
+The 3DHeat app's Extractors panel installs, updates and starts it for you.
+
 ## Quick start
 
 You need Windows, Python 3.10 or later ("Add python.exe to PATH" ticked in its

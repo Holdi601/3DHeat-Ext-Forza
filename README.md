@@ -27,6 +27,18 @@ other tools.
 
 What it writes stays on your machine.
 
+## The standalone program
+
+No Python needed: download the file for your system (Windows, Linux incl. Steam Deck) from the
+[latest release](https://github.com/Holdi601/3DHeat-Ext-Forza/releases/latest), check it against `SHA256SUMS`,
+unpack it and start `heat3d-forza`. Its window finds your Forza install, says what is missing, lists the
+recorded courses that are new, have new laps or need exporting again after a game update, and exports the ones
+you pick into the 3DHeat levels folder (`forza/courses/<course>.glb`), exports a single lap, writes the cars and
+the catalogue, and asks before it updates itself. `heat3d-forza --help` lists its commands (every command below
+runs through it too, e.g. `heat3d-forza course <lap>`). The 3DHeat app's Extractors panel can install and update
+it for you. See the
+[documentation](https://holdi601.github.io/3DHeat-Ext-Forza/#the-standalone-program-no-python-needed).
+
 ## Quick start for new users
 
 You need: Windows, [Python](https://www.python.org/downloads/) 3.10 or later

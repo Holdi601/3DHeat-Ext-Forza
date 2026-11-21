@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "heat3d-ext-forza"
-version = "1.0.0"
+version = "1.1.0"
 description = "Courses, races and cars out of an installed Forza (Horizon or Motorsport, the ForzaTech engine) for the 3DHeat viewer"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -23,4 +23,4 @@ test = ["pytest>=8.0"]
 heat3d-forza-maps = "heat3d_ext_forza.cli:main"
 
 [tool.setuptools]
-packages = ["heat3d_ext_forza"]
+packages = ["heat3d_ext_forza", "heat3d_ext_forza.app"]
