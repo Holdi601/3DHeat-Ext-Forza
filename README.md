@@ -39,6 +39,8 @@ runs through it too, e.g. `heat3d-forza course <lap>`). The 3DHeat app's Extract
 it for you. See the
 [documentation](https://holdi601.github.io/3DHeat-Ext-Forza/#the-standalone-program-no-python-needed).
 
+The window walks through four steps (find the game, choose, work, done) in the 3DHeat look, dark or light. On Windows the program opens only its window, with no console window; in a terminal it prints as usual, and `heat3d-forza-cli.cmd` in the same folder makes the terminal wait for it and pass on its exit code.
+
 ## Quick start for new users
 
 You need: Windows, [Python](https://www.python.org/downloads/) 3.10 or later

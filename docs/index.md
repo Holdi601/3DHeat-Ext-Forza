@@ -63,6 +63,8 @@ courses' state, `heat3d-forza extract --new` exports only the new and
 `heat3d-forza --check --json` what is found and missing.
 The 3DHeat app's Extractors panel installs, updates and starts it for you.
 
+The window walks through four steps (find the game, choose, work, done) in the 3DHeat look, dark or light. On Windows the program opens only its window, with no console window; in a terminal it prints as usual, and `heat3d-forza-cli.cmd` in the same folder makes the terminal wait for it and pass on its exit code.
+
 ## Quick start
 
 You need Windows, Python 3.10 or later ("Add python.exe to PATH" ticked in its
